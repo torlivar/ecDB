@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.4.9
 -- http://www.phpmyadmin.net
 --
--- Värd: localhost
--- Skapad: 04 nov 2012 kl 15:17
--- Serverversion: 5.5.16
--- PHP-version: 5.2.17
+-- Host: localhost
+-- Generation Time: May 11, 2013 at 11:42 PM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,22 +17,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databas: `ecdb`
+-- Database: `ecdb_database`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `category_head`
+-- Table structure for table `category_head`
 --
 
+DROP TABLE IF EXISTS `category_head`;
 CREATE TABLE IF NOT EXISTS `category_head` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `category_head`
+-- Dumping data for table `category_head`
 --
 
 INSERT INTO `category_head` (`id`, `name`) VALUES
@@ -57,16 +58,17 @@ INSERT INTO `category_head` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `category_sub`
+-- Table structure for table `category_sub`
 --
 
+DROP TABLE IF EXISTS `category_sub`;
 CREATE TABLE IF NOT EXISTS `category_sub` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `category_sub`
+-- Dumping data for table `category_sub`
 --
 
 INSERT INTO `category_sub` (`id`, `name`) VALUES
@@ -206,9 +208,10 @@ INSERT INTO `category_sub` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `data`
+-- Table structure for table `data`
 --
 
+DROP TABLE IF EXISTS `data`;
 CREATE TABLE IF NOT EXISTS `data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` int(11) NOT NULL,
@@ -239,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `data` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumpning av Data i tabell `data`
+-- Dumping data for table `data`
 --
 
 INSERT INTO `data` (`id`, `owner`, `name`, `manufacturer`, `package`, `pins`, `smd`, `quantity`, `order_quantity`, `location`, `scrap`, `width`, `height`, `depth`, `weight`, `datasheet`, `comment`, `category`, `public`, `url1`, `url2`, `url3`, `url4`, `price`) VALUES
@@ -248,9 +251,10 @@ INSERT INTO `data` (`id`, `owner`, `name`, `manufacturer`, `package`, `pins`, `s
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `members`
+-- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `member_id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(32) NOT NULL,
@@ -266,18 +270,19 @@ CREATE TABLE IF NOT EXISTS `members` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1800 ;
 
 --
--- Dumpning av Data i tabell `members`
+-- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`member_id`, `firstname`, `lastname`, `login`, `mail`, `passwd`, `admin`, `measurement`, `currency`) VALUES
-(4, 'Demo', 'Demo', 'demo', 'mail@mailen.com', 'fe01ce2a7fbac8fafaed7c982a04e229', 0, 1, 'USD');
+INSERT INTO `members` (`member_id`, `firstname`, `lastname`, `login`, `mail`, `passwd`, `admin`, `measurement`, `currency`, `reg_date`) VALUES
+(4, 'Demo', 'Demo', 'demo', 'mail@mailen.com', 'fe01ce2a7fbac8fafaed7c982a04e229', 0, 1, 'USD', '2013-05-11 23:34:32');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `members_stats`
+-- Table structure for table `members_stats`
 --
 
+DROP TABLE IF EXISTS `members_stats`;
 CREATE TABLE IF NOT EXISTS `members_stats` (
   `members_stats_id` int(11) NOT NULL AUTO_INCREMENT,
   `members_stats_member` int(11) NOT NULL,
@@ -286,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `members_stats` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumpning av Data i tabell `members_stats`
+-- Dumping data for table `members_stats`
 --
 
 INSERT INTO `members_stats` (`members_stats_id`, `members_stats_member`, `members_stats_time`) VALUES
@@ -295,9 +300,10 @@ INSERT INTO `members_stats` (`members_stats_id`, `members_stats_member`, `member
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `projects`
+-- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `project_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_owner` int(11) NOT NULL,
@@ -307,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumpning av Data i tabell `projects`
+-- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`project_id`, `project_owner`, `project_name`) VALUES
@@ -316,9 +322,10 @@ INSERT INTO `projects` (`project_id`, `project_owner`, `project_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `projects_data`
+-- Table structure for table `projects_data`
 --
 
+DROP TABLE IF EXISTS `projects_data`;
 CREATE TABLE IF NOT EXISTS `projects_data` (
   `projects_data_id` int(11) NOT NULL AUTO_INCREMENT,
   `projects_data_owner_id` int(11) NOT NULL,
@@ -332,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `projects_data` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumpning av Data i tabell `projects_data`
+-- Dumping data for table `projects_data`
 --
 
 INSERT INTO `projects_data` (`projects_data_id`, `projects_data_owner_id`, `projects_data_project_id`, `projects_data_component_id`, `projects_data_quantity`) VALUES
