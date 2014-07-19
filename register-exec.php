@@ -121,10 +121,21 @@
 	$result = @mysql_query($qry);
 
 	//Check whether the query was successful or not
-	if($result) {
-		header("location: register-success.php");
-		exit();
-	}else {
+	if($result)
+	{
+		if(isset($_SESSION['SESS_IS_ADMIN'])==true && intval($_SESSION['SESS_IS_ADMIN']) == 1)
+		{
+			header("location: admin.php?user_add=1");
+			exit();
+		}
+		else
+		{
+			header("location: register-success.php");
+			exit();
+		}
+	}
+	else
+	{
 		die("Query failed");
 	}
 ?>

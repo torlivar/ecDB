@@ -31,6 +31,14 @@
 			{
 				$opt_register_tab_show = intval($row['admin_value']);
 			}
+			if($row['admin_key'] == 'pubcomponents_tab_show')
+			{
+				$opt_pubcomponent_tab_show = intval($row['admin_value']);
+			}
+			if($row['admin_key'] == 'donate_tab_show')
+			{
+				$opt_donate_tab_show = intval($row['admin_value']);
+			}
 		}
 
 		mysql_free_result($result);

@@ -16,6 +16,9 @@
 	$executesql['opt_blog_tab_title'] = $opt_blog_tab_title;
 	$executesql['opt_blog_tab_url'] = $opt_blog_tab_url;
 	$executesql['opt_register_tab_show'] = $opt_register_tab_show;
+	$executesql['opt_pubcomponent_tab_show'] = $opt_pubcomponent_tab_show;
+	$executesql['opt_donate_tab_show'] = $opt_donate_tab_show;
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -41,6 +44,15 @@
 			<div id="content">
 				<div class="subMenu">
 					<ul>
+
+						<?php if(isset($_GET['user_add']) && intval($_GET['user_add']) == 1)
+						{
+						?>
+						<div class="message blue">
+							User added succesfully.
+						</div>
+						<?php } ?>
+
 						<div class="buttons">
 							<div class="input">
 								<form action="register.php" method="get">
@@ -141,6 +153,70 @@
 											echo 'selected';
 										}
 										if(isset($_POST['submit']) && $_POST['opt_register_tab_show'] == '1') {
+											echo 'selected';
+										}
+									?>
+									>Yes</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr><td colspan=2 class='boldText'>Public Components</td></tr>
+						<tr>
+							<td>&nbsp;&nbsp;</td>
+							<td class="boldText">
+								Enable Public Components tab
+							</td>
+							<td>
+								<select name="opt_pubcomponent_tab_show">
+									<option value="0"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['opt_pubcomponent_tab_show'] == '0') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['opt_pubcomponent_tab_show'] == '0') {
+											echo 'selected';
+										}
+									?>
+									>No</option>
+									<option value="1"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['opt_pubcomponent_tab_show'] == '1') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['opt_pubcomponent_tab_show'] == '1') {
+											echo 'selected';
+										}
+									?>
+									>Yes</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr><td colspan=2 class='boldText'>Donate Tab</td></tr>
+						<tr>
+							<td>&nbsp;&nbsp;</td>
+							<td class="boldText">
+								Enable Donation tab
+							</td>
+							<td>
+								<select name="opt_donate_tab_show">
+									<option value="0"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['opt_donate_tab_show'] == '0') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['opt_donate_tab_show'] == '0') {
+											echo 'selected';
+										}
+									?>
+									>No</option>
+									<option value="1"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['opt_donate_tab_show'] == '1') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['opt_donate_tab_show'] == '1') {
 											echo 'selected';
 										}
 									?>

@@ -15,6 +15,8 @@ class Admin {
 			$opt_blog_tab_url = strip_tags(mysql_real_escape_string($_POST['opt_blog_tab_url']));
 
 			$opt_register_tab_show = intval(strip_tags(mysql_real_escape_string($_POST['opt_register_tab_show'])));
+			$opt_pubcomponent_tab_show = intval(strip_tags(mysql_real_escape_string($_POST['opt_pubcomponent_tab_show'])));
+			$opt_donate_tab_show = intval(strip_tags(mysql_real_escape_string($_POST['opt_donate_tab_show'])));
 
 			while ($row = mysql_fetch_assoc($result))
 			{
@@ -33,6 +35,14 @@ class Admin {
 				if($row['admin_key'] == 'register_tab_show')
 				{
 					$opt_register_tab_show = intval($row['admin_value']);
+				}
+				if($row['admin_key'] == 'pubcomponents_tab_show')
+				{
+					$opt_pubcomponent_tab_show = intval($row['admin_value']);
+				}
+				if($row['admin_key'] == 'donate_tab_show')
+				{
+					$opt_donate_tab_show = intval($row['admin_value']);
 				}
 			}
 
@@ -58,6 +68,8 @@ class Admin {
 				$sql="UPDATE admin_options SET admin_value = '$opt_blog_tab_title' WHERE admin_key = 'blog_tab_title'"; $sql_exec = mysql_query($sql);
 				$sql="UPDATE admin_options SET admin_value = '$opt_blog_tab_url' WHERE admin_key = 'blog_tab_url'"; $sql_exec = mysql_query($sql);
 				$sql="UPDATE admin_options SET admin_value = '$opt_register_tab_show' WHERE admin_key = 'register_tab_show'"; $sql_exec = mysql_query($sql);
+				$sql="UPDATE admin_options SET admin_value = '$opt_pubcomponent_tab_show' WHERE admin_key = 'pubcomponents_tab_show'"; $sql_exec = mysql_query($sql);
+				$sql="UPDATE admin_options SET admin_value = '$opt_donate_tab_show' WHERE admin_key = 'donate_tab_show'"; $sql_exec = mysql_query($sql);
 
 				echo '<div class="message green center">';
 				echo 'Settings updated!';

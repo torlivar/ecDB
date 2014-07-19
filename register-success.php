@@ -1,4 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+	require_once('include/debug.php');
+
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
@@ -8,42 +13,23 @@
 		<title>Login - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
-			<!-- Header -->
-			<div id="header">
-				<span class="loggo">
-					<span class="ec">ec</span><span class="db">DB</span>
-				</span>
-				<span class="beta">beta</span>
-				<span class="slogan">
-					Electronic<br>
-					Components<br>
-					DataBase
-				</span>
-			</div>
-			<!-- END -->
-			
+
+			<?php require_once("include/logo_wrapper.php"); ?>
+
 			<!-- Main menu -->
-			<div id="menu">
-				<ul>
-					<li><a href="."><span class="icon medium key"></span> Login</a></li>
-					<li><a href="register.php" class="selected"><span class="icon medium user"></span> Register</a></li>
-					<li><a href="about.php"><span class="icon medium document"></span> About</a></li>
-					<li><a href="/blog"><span class="icon medium docLinesStright"></span> Blog</a></li>
-				</ul>
-			</div>
+			<?php $selected_menu = "Login"; include_once('include/include_main_menu.php'); ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
-				
+
 				<h1>Registration success</h1>
-				
+
 				<b>Please login</b><br /><br />
-				
+
 				<form id="loginForm" name="loginForm" method="post" action="login-exec.php">
 					<table width="300" border="0" align="center" cellpadding="2" cellspacing="0">
 						<tr>
@@ -62,11 +48,11 @@
 				</form>
 			</div>
 			<!-- END -->
-			
+
 			<!-- Text outside the main content -->
 				<?php include 'include/footer.php'; ?>
 			<!-- END -->
-			
+
 		</div>
 	</body>
 </html>
