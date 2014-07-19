@@ -47,7 +47,7 @@
 		$errmsg_arr[] = 'First name missing';
 		$errflag = true;
 	}
-	if (strlen($fname) <= 2){
+	if (strlen($fname) < 2){
 		$errmsg_arr[] = 'Minimum of 2 chars in first name.';
 		$errflag = true;
 	}
@@ -63,7 +63,7 @@
 		$errmsg_arr[] = 'Last name missing';
 		$errflag = true;
 	}
-	if (strlen($lname) <= 2){
+	if (strlen($lname) < 2){
 		$errmsg_arr[] = 'Minimum of 2 chars in last name.';
 		$errflag = true;
 	}
@@ -71,7 +71,7 @@
 		$errmsg_arr[] = 'Username missing';
 		$errflag = true;
 	}
-	if (strlen($login) <= 2){
+	if (strlen($login) < 2){
 		$errmsg_arr[] = 'Minimum of 2 chars in username.';
 		$errflag = true;
 	}
@@ -83,7 +83,7 @@
 		$errmsg_arr[] = 'Confirm password missing';
 		$errflag = true;
 	}
-	if (strlen($password) <= 5){
+	if (strlen($password) < 5){
 		$errmsg_arr[] = 'Minimum of 5 chars in password.';
 		$errflag = true;
 	}
