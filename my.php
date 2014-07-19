@@ -2,37 +2,37 @@
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
 	include('include/mysql_connect.php');
-	
+
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 
 	$GetDataComponent = mysql_query("SELECT * FROM members WHERE member_id = ".$owner."");
 	$executesql = mysql_fetch_assoc($GetDataComponent);
 ?>
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="View your account and settings."/>
-		<meta name="keywords" content="electronics, components, database, project, inventory"/> 
+		<meta name="keywords" content="electronics, components, database, project, inventory"/>
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Home - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
-		
+
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
+
 			<!-- Header -->
 				<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main menu -->
 				<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
 				<h1>Settings</h1>
@@ -90,19 +90,19 @@
 									<?php
 										if(!isset($_POST['submit']) && $executesql['measurement'] == 1) {
 											echo '<input type="radio" name="measurement" value="1" checked="checked" /> Metric ';
-											echo '<input type="radio" name="measurement" value="0" /> Retarded American System (Imperial)';
+											echo '<input type="radio" name="measurement" value="0" /> American System (Imperial)';
 										}
 										if(!isset($_POST['submit']) && $executesql['measurement'] == 0) {
 											echo '<input type="radio" name="measurement" value="1" /> Metric ';
-											echo '<input type="radio" name="measurement" value="0" checked="checked" /> Retarded American System (Imperial)';
+											echo '<input type="radio" name="measurement" value="0" checked="checked" /> American System (Imperial)';
 										}
 										if(isset($_POST['submit']) && $_POST['measurement'] == 1) {
 											echo '<input type="radio" name="measurement" value="1" checked="checked" /> Metric ';
-											echo '<input type="radio" name="measurement" value="0" /> Retarded American System (Imperial)';
+											echo '<input type="radio" name="measurement" value="0" /> American System (Imperial)';
 										}
 										if(isset($_POST['submit']) && $_POST['measurement'] == 0) {
 											echo '<input type="radio" name="measurement" value="1" /> Metric ';
-											echo '<input type="radio" name="measurement" value="0" checked="checked" /> Retarded American System (Imperial)';
+											echo '<input type="radio" name="measurement" value="0" checked="checked" /> American System (Imperial)';
 										}
 									?>
 								</td>
@@ -113,7 +113,7 @@
 								</td>
 								<td>
 									<select name="currency">
-										<option value="SEK" 
+										<option value="SEK"
 										<?php
 											if(!isset($_POST['submit']) && $executesql['currency'] == 'SEK') {
 												echo 'selected';
@@ -123,8 +123,8 @@
 											}
 										?>
 										>SEK</option>
-										
-										<option value="USD" 
+
+										<option value="USD"
 										<?php
 											if(!isset($_POST['submit']) && $executesql['currency'] == 'USD') {
 												echo 'selected';
@@ -134,8 +134,8 @@
 											}
 										?>
 										>USD</option>
-										
-										<option value="EUR" 
+
+										<option value="EUR"
 										<?php
 											if(!isset($_POST['submit']) && $executesql['currency'] == 'EUR') {
 												echo 'selected';
@@ -144,9 +144,9 @@
 												echo 'selected';
 											}
 										?>
-										>EUR</option>	
+										>EUR</option>
 
-										<option value="GBP" 
+										<option value="GBP"
 										<?php
 											if(!isset($_POST['submit']) && $executesql['currency'] == 'GBP') {
 												echo 'selected';
@@ -155,7 +155,7 @@
 												echo 'selected';
 											}
 										?>
-										>GBP</option>	
+										>GBP</option>
 									</select>
 								</td>
 							</tr>
