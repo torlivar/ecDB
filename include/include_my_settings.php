@@ -1,32 +1,32 @@
 <?php
 class My {
 	public function Settings() {
-		
+
 		require_once('include/login/auth.php');
 		include('include/mysql_connect.php');
-		
+
 		if(isset($_POST['submit'])) {
 			$owner				=	$_SESSION['SESS_MEMBER_ID'];
-			
+
 			$GetDataComponent = mysql_query("SELECT passwd FROM members WHERE member_id = ".$owner."");
 			$executesql = mysql_fetch_assoc($GetDataComponent);
-			
+
 			$firstname			=	strip_tags(mysql_real_escape_string($_POST['firstname']));
 			$lastname			=	strip_tags(mysql_real_escape_string($_POST['lastname']));
-			
+
 			$mail				=	strip_tags(mysql_real_escape_string($_POST['mail']));
 			$oldpass			=	strip_tags(mysql_real_escape_string($_POST['oldpass']));
 			$newpass			=	strip_tags(mysql_real_escape_string($_POST['newpass']));
-			
+
 			$measurement		=	strip_tags(mysql_real_escape_string($_POST['measurement']));
-			$currency			=	strip_tags(mysql_real_escape_string($_POST['currency']));			
+			$currency			=	strip_tags(mysql_real_escape_string($_POST['currency']));
 
 			if ($firstname == '') {
 				echo '<div class="message red">';
 				echo 'First name missing';
 				echo '</div>';
 			}
-			elseif (strlen($firstname) <= 2) {
+			elseif (strlen($firstname) < 2) {
 				echo '<div class="message red">';
 				echo 'Minimum of 2 chars in first name.';
 				echo '</div>';
@@ -36,7 +36,7 @@ class My {
 				echo 'Last name missing';
 				echo '</div>';
 			}
-			elseif (strlen($lastname) <= 2) {
+			elseif (strlen($lastname) < 2) {
 				echo '<div class="message red">';
 				echo 'Minimum of 2 chars in last name.';
 				echo '</div>';
@@ -51,11 +51,6 @@ class My {
 				echo 'Invalid e-mail address';
 				echo '</div>';
 			}
-			elseif (!empty($oldpass) && !empty($newpass) && $owner == 4) {
-				echo '<div class="message red">';
-				echo 'Y NO CHANGE PASSWORD FOR THE DEMO ACCOUNT!!11';
-				echo '</div>';
-			}
 			elseif (!empty($oldpass) && !empty($newpass) && $oldpass == '') {
 				echo '<div class="message red">';
 				echo 'Password missing';
@@ -66,7 +61,7 @@ class My {
 				echo 'Confirm password missing';
 				echo '</div>';
 			}
-			elseif (!empty($oldpass) && !empty($newpass) && strlen($newpass) <= 5) {
+			elseif (!empty($oldpass) && !empty($newpass) && strlen($newpass) < 5) {
 				echo '<div class="message red">';
 				echo 'Minimum of 5 chars in password.';
 				echo '</div>';
