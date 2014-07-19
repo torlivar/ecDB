@@ -56,6 +56,11 @@
 
 				<div class="loginWrapper">
 					<div class="left">
+
+						<div class="message blue">
+							Welcome to a modified version of ecDB!
+						</div>
+
 						<div class="aboutECDB">
 							You want to build something and need some components for your project.
 							You don't know if you have those components, or where they are.

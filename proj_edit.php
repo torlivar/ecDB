@@ -2,13 +2,13 @@
 	require_once('include/login/auth.php');
 	include('include/mysql_connect.php');
 	require_once('include/debug.php');
-	
+
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['proj_id'];
-	
+
 	$GetDataProjectName = mysql_query("SELECT * FROM projects WHERE project_id = ".$id." AND project_owner = ".$owner."");
 	$executesql = mysql_fetch_assoc($GetDataProjectName);
-	
+
 	if(isset($_POST['delete'])) {
 		$sqlDeleteProject = "DELETE FROM projects WHERE project_id = ".$id." ";
 		$sql_exec_component_delete = mysql_query($sqlDeleteProject);
@@ -28,34 +28,61 @@
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Your Projects - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
-		
+
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
+
 			<!-- Header -->
 				<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main menu -->
 				<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 				<div id="content">
 					<h1>Edit Project</h1>
-					
+
 					<?php
 						include('include/include_proj_update.php');
 						$AddProj = new ProjAdd;
 						$AddProj->AddProj();
 					?>
-					
+
 					<form class="globalForms" method="post" action="">
 						<div class="textInput">
 							<label class="keyWord">Project name</label>
 							<div class="input"><input name="name" type="text" class="medium" value="<?php echo $executesql['project_name']; ?>" /></div>
+						</div>
+						<div class="textInput">
+							<label class="keyWord" >Project is public?</label>
+							<div class="input">
+								<select class="input" name="project_public">
+									<option value="0"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['project_public'] == '0') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['project_public'] == '0') {
+											echo 'selected';
+										}
+									?>
+									>No</option>
+									<option value="1"
+									<?php
+										if(!isset($_POST['submit']) && $executesql['project_public'] == '1') {
+											echo 'selected';
+										}
+										if(isset($_POST['submit']) && $_POST['project_public'] == '1') {
+											echo 'selected';
+										}
+									?>
+									>Yes</option>
+								</select>
+							</div>
 						</div>
 						<div class="buttons">
 							<div class="input">

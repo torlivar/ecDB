@@ -122,7 +122,7 @@
 					?>
 				</a> / <?php echo $executesql['name']; ?>
 				</h1>
-				
+
 				<div class="aboutComponentHeader">
 					<div class="componentGallery">
 						<div class="bigImage">
@@ -182,12 +182,12 @@
 							</ul>
 						</div>
 					</div>
-	
+
 					<div class="componentComment">
 						<?php echo nl2br($executesql['comment']); ?>
 					</div>
 				</div>
-				
+
 				<div class="componetInfo">
 					<table class="globalTables leftAlign noHover" cellpadding="0" cellspacing="0">
 						<tbody>

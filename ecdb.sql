@@ -241,13 +241,6 @@ CREATE TABLE IF NOT EXISTS `data` (
   KEY `owner` (`owner`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `data`
---
-
-INSERT INTO `data` (`id`, `owner`, `name`, `manufacturer`, `package`, `pins`, `smd`, `quantity`, `order_quantity`, `location`, `scrap`, `width`, `height`, `depth`, `weight`, `datasheet`, `comment`, `category`, `public`, `url1`, `url2`, `url3`, `url4`, `price`) VALUES
-(1, 4, '1N4148', 'ST', 'SOT-21', '2', 'No', '100', '20', 'Drawer', 'No', '', '', '', '', '', '', '401', 'Yes', '', '', '', '', '0.001');
-
 -- --------------------------------------------------------
 
 --
@@ -303,6 +296,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `project_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_owner` int(11) NOT NULL,
   `project_name` varchar(64) NOT NULL,
+  `project_public` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`project_id`),
   KEY `project_owner` (`project_owner`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

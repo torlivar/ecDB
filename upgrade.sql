@@ -16,4 +16,6 @@ INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_url',
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('register_tab_show', '1');
 
 
+alter table `projects`
+add column `project_public` tinyint(1) NOT NULL DEFAULT 0;
 

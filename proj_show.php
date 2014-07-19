@@ -1,7 +1,7 @@
 <?php
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
-	
+
 	if (!isset($_GET["proj_id"])) {
 		header("Location: error.php?id=3");
 	}
@@ -15,25 +15,21 @@
 							// Visar projektets namn.
 							include('include/mysql_connect.php');
 							$project_id = mysql_real_escape_string($_GET["proj_id"]);
-							$owner = $_SESSION['SESS_MEMBER_ID'];
-							
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_owner = ".$owner." AND project_id = ".$project_id."");
+							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
 							while($row = mysql_fetch_array($result))
 							{
 								echo $row['project_name'];
 							}
 						?>"/>
-		<meta name="keywords" content="electronics, components, database, project, inventory"/> 
+		<meta name="keywords" content="electronics, components, database, project, inventory"/>
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Viewing project - <?php
 							// Visar projektets namn.
 							include('include/mysql_connect.php');
 							$project_id = mysql_real_escape_string($_GET["proj_id"]);
-							$owner = $_SESSION['SESS_MEMBER_ID'];
-							
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_owner = ".$owner." AND project_id = ".$project_id."");
+							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
 							while($row = mysql_fetch_array($result))
 							{
@@ -41,26 +37,42 @@
 							}
 						?> - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
-		
+
 	</head>
 	<body>
 		<div id="wrapper">
+<?php
+if(isset($_SESSION['SESS_MEMBER_ID'])==true)
+{
+?>
 			<!-- Header -->
-				<?php include 'include/header.php'; ?>
+			<?php include 'include/header.php'; ?>
 			<!-- END -->
 			<!-- Main menu -->
-				<?php include 'include/menu.php'; ?>
+			<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			<!-- Main content -->
+<?php
+}
+else
+{
+?>
+			<?php require_once("include/logo_wrapper.php"); ?>
+
+			<!-- Main menu -->
+			<?php $selected_menu = "PublicProject"; include_once('include/include_main_menu.php'); ?>
+			<!-- END -->
+<?php
+}
+?>
 				<div id="content">
-					<h1>Viewing project 
+					<h1>Viewing project
 						<?php
 							// Visar projektets namn.
 							include('include/mysql_connect.php');
 							$project_id = mysql_real_escape_string($_GET["proj_id"]);
 							$owner = $_SESSION['SESS_MEMBER_ID'];
-							
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_owner = ".$owner." AND project_id = ".$project_id."");
+
+							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
 							while($row = mysql_fetch_array($result))
 							{
@@ -70,13 +82,13 @@
 							}
 						?>
 					</h1>
-					
+
 					<table class="globalTables" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
 								<th></th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=name&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=name&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -92,7 +104,7 @@
 									?>">Name</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=category&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=category&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -108,7 +120,7 @@
 									?>">Category</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=manufacturer&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=manufacturer&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -124,7 +136,7 @@
 									?>">Manufacturer</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=package&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=package&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -140,7 +152,7 @@
 									?>">Package</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=smd&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=smd&order=<?php
 										if(isset($_GET['order'])){
 											if ($order == 'asc'){
 												echo 'desc';
@@ -155,7 +167,7 @@
 									?>">SMD</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=price&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=price&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -171,7 +183,7 @@
 									?>">Price</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -187,7 +199,7 @@
 									?>">Quantity in stock</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php 
+									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){
@@ -207,20 +219,20 @@
 						<tbody>
 							<?php
 								include('include/include_proj_show.php');
-	
+
 								$ProjectShowComponents = new ProjectShow;
 								$ProjectShowComponents->ProjectShowComponents();
 							?>
 						</tbody>
 					</table>
-					
+
 					<div class="totalSumWrapper">
-						<?php 
+						<?php
 							include('include/include_proj_show_price.php');
 
 							$ProjectSumTotal = new ProjectShowPrice;
 							$ProjectSumTotal->ProjectSumTotal();
-						?> 
+						?>
 					</div>
 				</div>
 			<!-- END -->

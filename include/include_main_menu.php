@@ -9,6 +9,7 @@
 <?php
 	}
 ?>
+		<li><a href="proj_list.php" class="<?php echo $selected_menu == "PublicProject" ? "selected" : "" ?>"><span class="icon medium document"></span> Public Projects</a></li>
 		<li><a href="about.php" class="<?php echo $selected_menu == "About" ? "selected" : "" ?>"><span class="icon medium document"></span> About</a></li>
 <?php
 	if($opt_blog_tab_show == 1)
