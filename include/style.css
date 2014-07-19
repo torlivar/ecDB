@@ -150,23 +150,23 @@ div#menu{width:870px;padding:0 8px;margin:auto;}
 			}
 				div#menu ul li.admin a:hover{background-image:none;background-color:#FFA500;}
 				div#menu ul li.admin a.selected{background-image:none;background-color:#fff;border-bottom:1px solid #fff;}
-div.subMenu{text-align: left;border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;}
+div.subMenu{text-align: left;border-bottom:3px dotted #565656;margin:0 0 10px 0;}
 	div.subMenu ul{list-style:none;margin:0;padding:0 0 10px 0;}
 		div.subMenu ul li{list-style:none;display:inline-block;margin-bottom: 5px;}
-			div.subMenu ul li a{border:1px solid #beee9b;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#daf5c5;color:#fff;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-				div.subMenu ul li a.selected{background-color:#468617;border:1px solid #468617;color:#fff;}
+			div.subMenu ul li a{border:1px solid #565656;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#909090;color:#000000;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
+				div.subMenu ul li a.selected{background-color:#BFBFBF;border:1px solid #565656;color:#000000;}
 				div.subMenu ul li a:hover{cursor:default;}
-				div.subMenu ul li a.isComponents{border:1px solid #4f971a;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#5fb61f;color:#fff;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-					div.subMenu ul li a.isComponents:hover{cursor:pointer;background-color:#4a8d18;border:1px solid #3f7814;}
+				div.subMenu ul li a.isComponents{border:1px solid #565656;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#909090;color:#000000;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
+					div.subMenu ul li a.isComponents:hover{cursor:pointer;background-color:#909090;border:1px solid #565656;}
 
-div.subSubMenu{border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;}
+div.subSubMenu{border-bottom:3px dotted #565656;margin:0 0 10px 0;}
 	div.subSubMenu ul{list-style:none;margin:0;padding:0 0 7px 0;text-align: left;}
 		div.subSubMenu ul li{list-style:none;display:inline-block;margin-bottom: 8px;margin-top: 8px;}
-			div.subSubMenu ul li a{border:1px solid #efefef;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#f9f9f9;color:#dddddd;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-				div.subSubMenu ul li a.selected{background-color:#d1d1d1;border:1px solid #c1c1c1;color:#000;}
+			div.subSubMenu ul li a{border:1px solid #565656;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#909090;color:#000000;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
+				div.subSubMenu ul li a.selected{background-color:#BFBFBF;border:1px solid #c1c1c1;color:#000;}
 				div.subSubMenu ul li a:hover{cursor:default;}
-				div.subSubMenu ul li a.isComponents{border:1px solid #dbdbdb;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#ebebeb;color:#626262;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
-					div.subSubMenu ul li a.isComponents:hover{cursor:pointer;background-color:#E0E0E0;}
+				div.subSubMenu ul li a.isComponents{border:1px solid #565656;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#909090;color:#000000;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
+					div.subSubMenu ul li a.isComponents:hover{cursor:pointer;background-color:#909090;}
 
 .message{padding:15px;margin:0 0 20px;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;border:1px solid #fff;}
 	/* Colors ---------- */
