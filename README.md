@@ -1,5 +1,28 @@
-﻿README
+README
 ====
+Welcome, this is a fork of Nils' original ecDB project. 
+
+# Changes
+* Fixed mysql connection
+* Removed Demo user, demo parts and project from new installs
+* Added some admin options
+* Added default admin user
+* Registration now optional tab. Can close off registration to public
+* Removed old non-working twitter unauthenticated api
+
+# Upgrading
+To upgrade an existing ecDB;
+
+* Apply upgrade.sql
+* Change Admin password in database
+* Backup include/mysql_connect.php
+* Copy all files to destination
+* Restore include/mysql_connect.php
+  
+Be sure to login as admin and set/change any options.
+
+
+<hr>
 
 ## What is ecDB
 

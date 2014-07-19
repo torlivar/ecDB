@@ -59,20 +59,26 @@
 	$result=mysql_query($qry);
 
 	//Check whether the query was successful or not
-	if($result) {
-		if(mysql_num_rows($result) == 1) {
+	if($result)
+	{
+		if(mysql_num_rows($result) == 1)
+		{
 			//Login Successful
 			session_regenerate_id();
 			$member = mysql_fetch_assoc($result);
 			$_SESSION['SESS_MEMBER_ID'] = $member['member_id'];
 			$_SESSION['SESS_FIRST_NAME'] = $member['firstname'];
 			$_SESSION['SESS_LAST_NAME'] = $member['lastname'];
+			$_SESSION['SESS_IS_ADMIN'] = intval($member['admin']);
+
 			session_write_close();
 			$member_id = $_SESSION['SESS_MEMBER_ID'];
 			mysql_query("INSERT INTO members_stats (members_stats_member) VALUES ('$member_id')");
 			header("location: index.php");
 			exit();
-		}else {
+		}
+		else
+		{
 			//Login failed
 			header("location: login-failed.php");
 			exit();

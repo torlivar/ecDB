@@ -267,14 +267,15 @@ CREATE TABLE IF NOT EXISTS `members` (
   `currency` varchar(3) NOT NULL DEFAULT 'USD',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`member_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1800 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 
 --
 -- Dumping data for table `members`
 --
 
 INSERT INTO `members` (`member_id`, `firstname`, `lastname`, `login`, `mail`, `passwd`, `admin`, `measurement`, `currency`, `reg_date`) VALUES
-(4, 'Demo', 'Demo', 'demo', 'mail@mailen.com', 'fe01ce2a7fbac8fafaed7c982a04e229', 0, 1, 'USD', '2013-05-11 23:34:32');
+(1, 'Admin', 'Admin', 'admin', 'admin@127.0.0.1', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 'USD', '2014-07-18 23:34:32');
+
 
 -- --------------------------------------------------------
 
@@ -288,14 +289,8 @@ CREATE TABLE IF NOT EXISTS `members_stats` (
   `members_stats_member` int(11) NOT NULL,
   `members_stats_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`members_stats_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `members_stats`
---
-
-INSERT INTO `members_stats` (`members_stats_id`, `members_stats_member`, `members_stats_time`) VALUES
-(1, 4, '2012-11-04 14:14:36');
 
 -- --------------------------------------------------------
 
@@ -310,14 +305,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `project_name` varchar(64) NOT NULL,
   PRIMARY KEY (`project_id`),
   KEY `project_owner` (`project_owner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`project_id`, `project_owner`, `project_name`) VALUES
-(1, 4, 'Robot');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -336,14 +324,34 @@ CREATE TABLE IF NOT EXISTS `projects_data` (
   KEY `owner_id` (`projects_data_owner_id`),
   KEY `project_id` (`projects_data_project_id`),
   KEY `component_id` (`projects_data_component_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `projects_data`
+-- Table structure for table `admin_options`
 --
 
-INSERT INTO `projects_data` (`projects_data_id`, `projects_data_owner_id`, `projects_data_project_id`, `projects_data_component_id`, `projects_data_quantity`) VALUES
-(1, 4, 1, 1, 10);
+DROP TABLE IF EXISTS `admin_options`;
+CREATE TABLE IF NOT EXISTS `admin_options` (
+  `admin_options_id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_key` varchar(64) NOT NULL,
+  `admin_value` varchar(256),
+  PRIMARY KEY (`admin_options_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- blog tab details
+INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_show', '1');
+INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_title', 'The ecDB Blog');
+INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_url', 'http://ecdb.net');
+
+-- enable register button as public or not
+INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('register_tab_show', '1');
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -142,6 +142,14 @@ div#menu{width:870px;padding:0 8px;margin:auto;}
 			}
 				div#menu ul li.donate a:hover{background-image:none;background-color:#c9f5bc;}
 				div#menu ul li.donate a.selected{background-image:none;background-color:#fff;border-bottom:1px solid #fff;}
+			div#menu ul li.admin a{
+				border-bottom:1px solid #FF6300;
+				background-color:#FFA500;
+				background-image:-moz-linear-gradient(100% 100% 90deg, #FFA500, #f8f8f8);
+				background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#FFA500));
+			}
+				div#menu ul li.admin a:hover{background-image:none;background-color:#FFA500;}
+				div#menu ul li.admin a.selected{background-image:none;background-color:#fff;border-bottom:1px solid #fff;}
 div.subMenu{text-align: left;border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;}
 	div.subMenu ul{list-style:none;margin:0;padding:0 0 10px 0;}
 		div.subMenu ul li{list-style:none;display:inline-block;margin-bottom: 5px;}
@@ -150,7 +158,7 @@ div.subMenu{text-align: left;border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;
 				div.subMenu ul li a:hover{cursor:default;}
 				div.subMenu ul li a.isComponents{border:1px solid #4f971a;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#5fb61f;color:#fff;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
 					div.subMenu ul li a.isComponents:hover{cursor:pointer;background-color:#4a8d18;border:1px solid #3f7814;}
-				
+
 div.subSubMenu{border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;}
 	div.subSubMenu ul{list-style:none;margin:0;padding:0 0 7px 0;text-align: left;}
 		div.subSubMenu ul li{list-style:none;display:inline-block;margin-bottom: 8px;margin-top: 8px;}
@@ -159,7 +167,7 @@ div.subSubMenu{border-bottom:3px dotted #f2f2f2;margin:0 0 10px 0;}
 				div.subSubMenu ul li a:hover{cursor:default;}
 				div.subSubMenu ul li a.isComponents{border:1px solid #dbdbdb;display:inline-block;font-size:12px;padding:3px 8px 3px 8px;background-color:#ebebeb;color:#626262;margin:0;text-decoration:none;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}
 					div.subSubMenu ul li a.isComponents:hover{cursor:pointer;background-color:#E0E0E0;}
-				
+
 .message{padding:15px;margin:0 0 20px;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;border:1px solid #fff;}
 	/* Colors ---------- */
 	.green.message{background-color:#c0f48c;border:1px solid #9fee51;}
@@ -201,7 +209,7 @@ table.viewComponent{padding:10px 0 10px 0;}
 
 div.aboutComponentHeader{overflow:auto;}
 	div.componentComment{max-height:223px;width:420px;color:#444;overflow-x:hidden;overflow-y:auto;}
-	
+
 	div.componentGallery{float:right;width:430px;}
 		div.componentGallery div.bigImage{overflow:auto;float:right;text-align:right;overflow:auto;}
 			div.componentGallery div.bigImage img{border:2px solid #f2f2f2;max-width:158px;min-height:158px;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;}

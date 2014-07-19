@@ -7,5 +7,13 @@
 		<li><a href="my.php" class="<?php if ($_SERVER["REQUEST_URI"] == '/my.php'){echo 'selected';}?>"><span class="icon medium user"></span> My account</a></li>
 		<li class="public"><a href="public.php" class="<?php if ($_SERVER["REQUEST_URI"] == '/public.php'){echo 'selected';}?>"><span class="icon medium shre"></span> Public components</a></li>
 		<li class="donate"><a href="donate.php" class="<?php if ($_SERVER["REQUEST_URI"] == '/donate.php'){echo 'selected';}?>"><span class="icon medium curDollar"></span> Donate</a></li>
+<?php
+	if($_SESSION['SESS_IS_ADMIN'] == 1)
+	{
+?>
+		<li class="admin"><a href="admin.php" class="<?php if ($_SERVER["REQUEST_URI"] == '/admin.php'){echo 'selected';}?>"><span class="icon medium user"></span> Administration</a></li>
+<?php
+	}
+?>
 	</ul>
 </div>

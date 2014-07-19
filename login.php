@@ -6,7 +6,11 @@
 	unset($_SESSION['SESS_MEMBER_ID']);
 	unset($_SESSION['SESS_FIRST_NAME']);
 	unset($_SESSION['SESS_LAST_NAME']);
+	unset($_SESSION['SESS_IS_ADMIN']);
 	require_once('include/debug.php');
+
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -19,32 +23,18 @@
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>ecDB - electronics component DataBase</title>
 
-		<link href="include/jquery.tweet.css" rel="stylesheet">
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-		<script src="include/jquery.tweet.js" charset="utf-8"></script>
+
 		<?php include_once("include/analytics.php") ?>
 
 	</head>
 	<body>
 		<div id="wrapper">
 
-			<!-- Header -->
-			<div id="header">
-				<div class="logoWrapper">
-					<a href ="."><span class="logoImage"></span></a>
-				</div>
-			</div>
-			<!-- END -->
+			<?php require_once("include/logo_wrapper.php"); ?>
 
 			<!-- Main menu -->
-			<div id="menu">
-				<ul>
-					<li><a href="." class="selected"><span class="icon medium key"></span> Login</a></li>
-					<li><a href="register.php"><span class="icon medium user"></span> Register</a></li>
-					<li><a href="about.php"><span class="icon medium document"></span> About</a></li>
-					<li><a href="/blog"><span class="icon medium docLinesStright"></span> Blog</a></li>
-				</ul>
-			</div>
+			<?php $selected_menu = "Login"; include_once('include/include_main_menu.php'); ?>
 			<!-- END -->
 
 			<!-- Main content -->
@@ -66,19 +56,6 @@
 
 				<div class="loginWrapper">
 					<div class="left">
-						<div class="message blue">
-							<script type="text/javascript">
-								jQuery(function ($) {
-								    $(".tweet").tweet({
-								        username: "ecdbnet",
-								        avatar_size: 40,
-								        count: 1,
-								        loading_text: "loading tweets..."
-								    });
-								});
-							</script>
-							<div class="tweet query" style="width:100%;"></div>
-						</div>
 						<div class="aboutECDB">
 							You want to build something and need some components for your project.
 							You don't know if you have those components, or where they are.
@@ -90,7 +67,7 @@
 						<form class="globalForms" name="loginForm" method="post" action="login-exec.php">
 							<div class="textInput">
 								<label class="keyWord">Username</label>
-								<div class="input">To try ecDB, login with demo:demo<br /><input name="login" class="medium" type="text" id="login"/></div>
+								<div class="input"><input name="login" class="medium" type="text" id="login"/></div>
 							</div>
 							<div class="textInput">
 								<label class="keyWord">Password</label>

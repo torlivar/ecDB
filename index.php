@@ -42,7 +42,7 @@
 							<th>
 							</th>
 							<th>
-								<a href="?by=name&order=<?php 
+								<a href="?by=name&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){
@@ -58,7 +58,7 @@
 								?>">Name</a>
 							</th>
 							<th>
-								<a href="?by=category&order=<?php 
+								<a href="?by=category&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){
@@ -74,7 +74,7 @@
 								?>">Category</a>
 							</th>
 							<th>
-								<a href="?by=package&order=<?php 
+								<a href="?by=package&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){
@@ -90,7 +90,7 @@
 								?>">Package</a>
 							</th>
 							<th>
-								<a href="?by=pins&order=<?php 
+								<a href="?by=pins&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){
@@ -112,7 +112,7 @@
 								Datasheet
 							</th>
 							<th>
-								<a href="?by=smd&order=<?php 
+								<a href="?by=smd&order=<?php
 								if(isset($_GET['order'])){
 									if ($order == 'asc'){
 										echo 'desc';
@@ -127,7 +127,7 @@
 								?>">SMD</a>
 							</th>
 							<th>
-								<a href="?by=price&order=<?php 
+								<a href="?by=price&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){
@@ -143,7 +143,7 @@
 								?>">Price</a>
 							</th>
 							<th>
-								<a href="?by=quantity&order=<?php 
+								<a href="?by=quantity&order=<?php
 								if(isset($_GET['order'])){
 									$order = $_GET['order'];
 									if ($order == 'asc'){

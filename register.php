@@ -1,8 +1,21 @@
 <?php
 	session_start();
 	require_once('include/debug.php');
+
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
+
+	// we do not allow public registration. users must be created by admin
+	if($_SESSION['SESS_IS_ADMIN'] == 0)
+	{
+		if( $opt_register_tab_show == 0)
+		{
+			header("location: index.php");
+			exit();
+		}
+	}
 ?>
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
@@ -11,40 +24,44 @@
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Register - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
-		
+
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
+
+<?php
+if(isset($_SESSION['SESS_MEMBER_ID'])==true)
+{
+?>
 			<!-- Header -->
-			<div id="header">
-				<div class="logoWrapper">
-					<a href ="."><span class="logoImage"></span></a>
-				</div>
-			</div>
+			<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
 			<!-- Main menu -->
-			<div id="menu">
-				<ul>
-					<li><a href="index.php"><span class="icon medium key"></span> Login</a></li>
-					<li><a class="selected"><span class="icon medium user"></span> Register</a></li>
-					<li><a href="about.php"><span class="icon medium document"></span> About</a></li>
-					<li><a href="/blog"><span class="icon medium docLinesStright"></span> Blog</a></li>
-				</ul>
-			</div>
+			<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+<?php
+}
+else
+{
+?>
+			<?php require_once("include/logo_wrapper.php"); ?>
+
+			<!-- Main menu -->
+			<?php $selected_menu = "Register"; include_once('include/include_main_menu.php'); ?>
+			<!-- END -->
+<?php
+}
+?>
 			<!-- Main content -->
 			<div id="content">
-				
+
 				<?php
 					if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
 						echo '<div class="message red">';
 						echo '<ul class="error">';
 						foreach($_SESSION['ERRMSG_ARR'] as $msg) {
-							echo '<li>',$msg,'</li>'; 
+							echo '<li>',$msg,'</li>';
 						}
 						echo '</ul>';
 						echo '</div>';
@@ -54,10 +71,10 @@
 				<div class="loginWrapper">
 					<div class="left">
 						<div class="aboutECDB">
-							You want to build something and need some components for your project. 
+							You want to build something and need some components for your project.
 							You don't know if you have those components, or where they are.
-							This is a problem many of us recognise. 
-							We want to change that for you by making a online inventory system for your electronic components that is easy to use. 
+							This is a problem many of us recognise.
+							We want to change that for you by making a online inventory system for your electronic components that is easy to use.
 							Add your components. Search to find it, and then use it!
 						</div>
 						<form class="globalForms" name="loginForm" method="post" action="register-exec.php">
@@ -97,11 +114,11 @@
 				</div>
 			</div>
 			<!-- END -->
-			
+
 			<!-- Text outside the main content -->
 				<?php include 'include/footer.php'; ?>
 			<!-- END -->
-			
+
 		</div>
 	</body>
 </html>
