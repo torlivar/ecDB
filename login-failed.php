@@ -6,42 +6,38 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Login - ecDB</title>
-		<?php include_once("include/analytics.php") ?>
-		
+<?php 	//Unset the variables stored in session
+	unset($_SESSION['SESS_MEMBER_ID']);
+	unset($_SESSION['SESS_FIRST_NAME']);
+	unset($_SESSION['SESS_LAST_NAME']);
+	unset($_SESSION['SESS_IS_ADMIN']);
+	require_once('include/debug.php');
+
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
+?>
+
 	</head>
 	<body>
 		<div id="wrapper">
-			
-			<!-- Header -->
-			<div id="header">
-				<div class="logoWrapper">
-					<a href ="."><span class="logoImage"></span></a>
-				</div>
-			</div>
-			<!-- END -->
-			
+
+			<?php require_once("include/logo_wrapper.php"); ?>
+
 			<!-- Main menu -->
-			<div id="menu">
-				<ul>
-					<li><a href="."><span class="icon medium key" class="selected"></span> Login</a></li>
-					<li><a href="register.php"><span class="icon medium user"></span> Register</a></li>
-					<li><a href="about.php"><span class="icon medium document"></span> About</a></li>
-					<li><a href="/blog"><span class="icon medium docLinesStright"></span> Blog</a></li>
-				</ul>
-			</div>
+			<?php $selected_menu = "Login"; include_once('include/include_main_menu.php'); ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
-				
+
 				<div class="message red">
 					Login failed, please try again.
 				</div>
-				
+
 				<div class="loginWrapper">
 					<div class="left">
 						<div class="aboutECDB"></div>
-						
+
 						<form class="globalForms" name="loginForm" method="post" action="login-exec.php">
 							<div class="textInput">
 								<label class="keyWord">Username</label>
@@ -62,11 +58,11 @@
 				</div>
 			</div>
 			<!-- END -->
-			
+
 			<!-- Text outside the main content -->
 				<?php include 'include/footer.php'; ?>
 			<!-- END -->
-			
+
 		</div>
 	</body>
 </html>
