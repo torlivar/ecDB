@@ -9,6 +9,7 @@ Welcome, this is a fork of Nils' original ecDB project.
 * Added default admin user
 * Registration now optional tab. Can close off registration to public
 * Removed old non-working twitter unauthenticated api
+* Public viewable projects, login not required.
 
 # Upgrading
 To upgrade an existing ecDB;
