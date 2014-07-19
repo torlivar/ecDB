@@ -159,6 +159,22 @@
 									</select>
 								</td>
 							</tr>
+
+<?php
+if($_SESSION['SESS_IS_ADMIN'] == 1)
+{
+?>
+							<tr>
+								<td class="boldText">
+									Administrative User
+								</td>
+								<td>
+									<?php echo intval($executesql['admin']) == 1 ? 'Yes' : 'No'; ?>
+								</td>
+							</tr>
+<?php
+}
+?>
 						</tbody>
 					</table>
 					<div class="buttons">
