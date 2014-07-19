@@ -1,28 +1,28 @@
 <?php
 	//Start session
 	session_start();
-	
+
 	//Include database connection details
-	require_once('include/login/config.php');
-	
+	require_once('include/mysql_connect.php');
+
 	//Array to store validation errors
 	$errmsg_arr = array();
-	
+
 	//Validation error flag
 	$errflag = false;
-	
+
 	//Connect to mysql server
-	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	$link = mysql_connect($db_host, $db_username, $db_pass);
 	if(!$link) {
 		die('Failed to connect to server: ' . mysql_error());
 	}
-	
+
 	//Select database
-	$db = mysql_select_db(DB_DATABASE);
+	$db = mysql_select_db($db_name);
 	if(!$db) {
 		die("Unable to select database");
 	}
-	
+
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
@@ -31,11 +31,11 @@
 		}
 		return mysql_real_escape_string($str);
 	}
-	
+
 	//Sanitize the POST values
 	$login = clean($_POST['login']);
 	$password = clean($_POST['password']);
-	
+
 	//Input Validations
 	if($login == '') {
 		$errmsg_arr[] = 'Login ID missing';
@@ -45,7 +45,7 @@
 		$errmsg_arr[] = 'Password missing';
 		$errflag = true;
 	}
-	
+
 	//If there are input validations, redirect back to the login form
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
@@ -53,11 +53,11 @@
 		header("location: login.php");
 		exit();
 	}
-	
+
 	//Create query
 	$qry="SELECT * FROM members WHERE login='$login' AND passwd='".md5($_POST['password'])."'";
 	$result=mysql_query($qry);
-	
+
 	//Check whether the query was successful or not
 	if($result) {
 		if(mysql_num_rows($result) == 1) {

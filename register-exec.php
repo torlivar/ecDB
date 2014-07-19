@@ -1,30 +1,30 @@
 <?php
 	//Start session
 	session_start();
-	
+
 	//Include database connection details
-	require_once('include/login/config.php');
-	
+	require_once('include/mysql_connect.php');
+
 	//Array to store validation errors
 	$errmsg_arr = array();
-	
+
 	//Validation error flag
 	$errflag = false;
-	
+
 	//Connect to mysql server
-	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	$link = mysql_connect($db_host, $db_username, $db_pass);
 	if(!$link) {
 		die('Failed to connect to server: ' . mysql_error());
 	}
-	
+
 	//Select database
-	$db = mysql_select_db(DB_DATABASE);
+	$db = mysql_select_db($db_name);
 	if(!$db) {
 		die("Unable to select database");
 	}
-	
+
 	mysql_set_charset('utf8');
-	
+
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
@@ -33,7 +33,7 @@
 		}
 		return mysql_real_escape_string($str);
 	}
-	
+
 	//Sanitize the POST values
 	$fname = clean($_POST['fname']);
 	$lname = clean($_POST['lname']);
@@ -41,7 +41,7 @@
 	$mail = clean($_POST['mail']);
 	$password = clean($_POST['password']);
 	$cpassword = clean($_POST['cpassword']);
-	
+
 	//Input Validations
 	if($fname == '') {
 		$errmsg_arr[] = 'First name missing';
@@ -91,7 +91,7 @@
 		$errmsg_arr[] = 'Passwords do not match';
 		$errflag = true;
 	}
-	
+
 	//Check for duplicate login ID
 	if($login != '') {
 		$qry = "SELECT * FROM members WHERE login='$login'";
@@ -107,7 +107,7 @@
 			die("Query failed");
 		}
 	}
-	
+
 	//If there are input validations, redirect back to the registration form
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
@@ -119,7 +119,7 @@
 	//Create INSERT query
 	$qry = "INSERT INTO members(firstname, lastname, login, mail, passwd) VALUES('$fname','$lname','$login','$mail','".md5($_POST['password'])."')";
 	$result = @mysql_query($qry);
-	
+
 	//Check whether the query was successful or not
 	if($result) {
 		header("location: register-success.php");
