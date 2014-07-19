@@ -15,9 +15,15 @@
 			$GetName = mysql_query("SELECT firstname, lastname FROM members WHERE member_id = ".$owner."");
 			$headername = mysql_fetch_assoc($GetName);
 
-			if(isset($_POST['submit']) && $_SERVER["REQUEST_URI"] == '/ecdb/my.php') { echo $_POST['firstname']; } else { echo $headername['firstname']; }
+			if(isset($_POST['submit']) && $script_name == 'my.php') { echo $_POST['firstname']; } else { echo $headername['firstname']; }
 			echo ' ';
-			if(isset($_POST['submit']) && $_SERVER["REQUEST_URI"] == '/ecdb/my.php') { echo $_POST['lastname']; } else { echo $headername['lastname']; }
+			if(isset($_POST['submit']) && $script_name == 'my.php') { echo $_POST['lastname']; } else { echo $headername['lastname']; }
+
+
+			if($_SESSION['SESS_IS_ADMIN'] == 1)
+			{
+				echo " (Administrator)";
+			}
 		?>
 		</a> - <a href="logout.php"> Sign out</a>
 	</span>
