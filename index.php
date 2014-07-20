@@ -1,6 +1,7 @@
 <?php
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
+	require_once('include/mysql_connect.php');
 ?>
 <!DOCTYPE HTML>
 <html>

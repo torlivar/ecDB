@@ -12,7 +12,7 @@
 	}
 
 	$executesql = array();
-	$executesql['opt_show_blog_tab'] = $opt_show_blog_tab;
+	$executesql['opt_show_blog_tab'] = $opt_blog_tab_show;
 	$executesql['opt_blog_tab_title'] = $opt_blog_tab_title;
 	$executesql['opt_blog_tab_url'] = $opt_blog_tab_url;
 	$executesql['opt_register_tab_show'] = $opt_register_tab_show;

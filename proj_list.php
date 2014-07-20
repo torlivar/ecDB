@@ -1,6 +1,7 @@
 <?php
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
+	require_once('include/mysql_connect.php');
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -33,8 +34,10 @@ if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 }
 else
 {
-?>
-			<?php require_once("include/logo_wrapper.php"); ?>
+
+			include_once("include/include_parse_admin_options.php");
+			require_once("include/logo_wrapper.php");
+			?>
 
 			<!-- Main menu -->
 			<?php $selected_menu = "PublicProject"; include_once('include/include_main_menu.php'); ?>

@@ -1,9 +1,11 @@
 <?php
 	include_once("include/version.php");
+	include_once("include/include_parse_admin_options.php");
 ?>
 <div id="header">
 
 	<?php require_once("include/logo_wrapper.php"); ?>
+
 
 	<span class="userInfo">
 		Logged in as <a href="my.php">

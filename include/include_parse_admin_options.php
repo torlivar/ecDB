@@ -8,7 +8,9 @@
 	$opt_blog_tab_title = "Blog Title";
 	$opt_blog_tab_url = "/Blog";
 
-	$opt_register_tab_show = 0;
+	$opt_register_tab_show = 1;
+	$opt_pubcomponent_tab_show = 0;
+	$opt_donate_tab_show = 1;
 
 	//Check whether the query was successful or not
 	if($result)

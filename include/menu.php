@@ -8,22 +8,26 @@
 <?php
 		if($opt_pubcomponent_tab_show == 1)
 		{?>
-		<li class="public"><a href="public.php" class="<?php if ($script_name == 'public.php'){echo 'selected';}?>"><span class="icon medium shre"></span> Public components</a></li>
+			<li class="public"><a href="public.php" class="<?php if ($script_name == 'public.php'){echo 'selected';}?>"><span class="icon medium shre"></span> Public components</a></li>
 <?php
 		}?>
-	<?php
-		if($opt_pubcomponent_tab_show == 1)
+<?php
+		if($opt_blog_tab_show == 1)
 		{?>
-		<li class="donate"><a href="donate.php" class="<?php if ($script_name == 'donate.php'){echo 'selected';}?>"><span class="icon medium curDollar"></span> Donate</a></li>
+			<li><a href="<?php echo $opt_blog_tab_url; ?>"><span class="icon medium docLinesStright"></span> <?php echo $opt_blog_tab_title; ?></a></li>
 <?php
 		}?>
 <?php
-	if($_SESSION['SESS_IS_ADMIN'] == 1)
-	{
-?>
-		<li class="admin"><a href="admin.php" class="<?php if ($script_name == 'admin.php'){echo 'selected';}?>"><span class="icon medium user"></span> Administration</a></li>
+		if($opt_donate_tab_show == 1)
+		{?>
+			<li class="donate"><a href="donate.php" class="<?php if ($script_name == 'donate.php'){echo 'selected';}?>"><span class="icon medium curDollar"></span> Donate</a></li>
 <?php
-	}
-?>
+		}?>
+<?php
+		if($_SESSION['SESS_IS_ADMIN'] == 1)
+		{?>
+			<li class="admin"><a href="admin.php" class="<?php if ($script_name == 'admin.php'){echo 'selected';}?>"><span class="icon medium user"></span> Administration</a></li>
+<?php
+		}?>
 	</ul>
 </div>
