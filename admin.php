@@ -116,7 +116,7 @@
 								Blog Tab Title
 							</td>
 							<td>
-								<input name="opt_blog_tab_title" class="medium" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['opt_blog_tab_title']; } else { echo $executesql['opt_blog_tab_title']; } ?>" />
+								<input name="opt_blog_tab_title" class="big" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['opt_blog_tab_title']; } else { echo $executesql['opt_blog_tab_title']; } ?>" />
 							</td>
 						</tr>
 						<tr>
@@ -125,7 +125,7 @@
 								Blog URL
 							</td>
 							<td>
-								<input name="opt_blog_tab_url" class="medium" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['opt_blog_tab_url']; } else { echo $executesql['opt_blog_tab_url']; } ?>" />
+								<input name="opt_blog_tab_url" class="big" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['opt_blog_tab_url']; } else { echo $executesql['opt_blog_tab_url']; } ?>" />
 							</td>
 						</tr>
 

@@ -17,13 +17,21 @@ I need help from the community to make [ecDB.net](http://www.ecdb.net) better!
 
 
 # Changes
+
+### v0.2
 * Fixed mysql connection
 * Removed Demo user, demo parts and project from new installs
 * Added some admin options
 * Added default admin user
 * Registration now optional tab. Can close off registration to public
+* Donation tab now optional (shown by default)
+* Public Components optional (hidden by default)
 * Removed old non-working twitter unauthenticated api
 * Public viewable projects, login not required.
+* Projects now have url and markdown description
+
+### v0.1
+Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1
 
 # Install or Upgrade
 
@@ -51,7 +59,13 @@ To upgrade an existing ecDB;
 * Restore include/mysql_connect.php
 * Login as admin and set/change any options.
 
+# TODO List
+* Category management
+* User management
+* Better project management
 
+# Acknowledgements
+We use the awesome [Parsedown](http://parsedown.org/) written by Emanuil Rusev
 
 # License
 ecDB is licensed under a Creative Commons [Attribution-NonCommercial-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/).

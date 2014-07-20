@@ -3,21 +3,24 @@
 	include('include/mysql_connect.php');
 	require_once('include/debug.php');
 
-	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
-	$id 	= 	(int)$_GET['proj_id'];
+	$id 	= 	intval($_GET['proj_id']);
 
-	$GetDataProjectName = mysql_query("SELECT * FROM projects WHERE project_id = ".$id." AND project_owner = ".$owner."");
+	$GetDataProjectName = mysql_query("SELECT * FROM projects WHERE project_id = ".$id."");
 	$executesql = mysql_fetch_assoc($GetDataProjectName);
 
-	if(isset($_POST['delete'])) {
-		$sqlDeleteProject = "DELETE FROM projects WHERE project_id = ".$id." ";
+	if(isset($_POST['delete']))
+	{
+		$sqlDeleteProject = "DELETE FROM projects WHERE project_id = ".$id."";
 		$sql_exec_component_delete = mysql_query($sqlDeleteProject);
 
-		$sqlDeleteProject = "DELETE FROM projects_data WHERE projects_data_project_id = ".$id." ";
+		$sqlDeleteProject = "DELETE FROM projects_data WHERE projects_data_project_id = ".$id."";
 		$sql_exec_project_delete = mysql_query($sqlDeleteProject);
 
-		header("Location: .");
+		header("Location: proj_list.php?proj_del=1");
+		exit();
 	}
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
@@ -55,7 +58,7 @@
 					<form class="globalForms" method="post" action="">
 						<div class="textInput">
 							<label class="keyWord">Project name</label>
-							<div class="input"><input name="name" type="text" class="medium" value="<?php echo $executesql['project_name']; ?>" /></div>
+							<div class="input"><input name="name" type="text" class="big" value="<?php echo $executesql['project_name']; ?>" /></div>
 						</div>
 						<div class="textInput">
 							<label class="keyWord" >Project is public?</label>
@@ -84,6 +87,19 @@
 								</select>
 							</div>
 						</div>
+
+						<div class="textInput">
+							<label class="keyWord">Project URL</label>
+							<div class="input"><input name="project_url" type="text" class="big" value="<?php echo $executesql['project_url']; ?>" /></div>
+						</div>
+
+						<div class="textBoxInput">
+							<label class="keyWord boldText">Project Description (Use Markdown for style)</label>
+							<div class="text">
+								<textarea name="project_desc" rows="12"><?php echo $executesql['project_desc']; ?></textarea>
+							</div>
+						</div>
+
 						<div class="buttons">
 							<div class="input">
 								<button class="button green" name="submit" type="submit"><span class="icon medium save"></span> Save</button>

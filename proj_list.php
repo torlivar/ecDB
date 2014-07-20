@@ -58,6 +58,17 @@ else
 								echo '<div class="message orange">To create a BOM-list (Bill Of Material) you have to first create a project. You will then be able to add your components to your project and automaticly create a BOM-list.</div>';
 							}
 ?>
+
+					<?php
+					if(isset($_GET['proj_del']) && intval($_GET['proj_del'])==1)
+					{
+					?>
+					<div class="message red">
+						Project Deleted
+					</div>
+					<?php
+					}
+					?>
 <form class="globalForms" method="post" action="">
 						<div class="textInput">
 							<label class="keyWord">Project name</label>

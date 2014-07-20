@@ -5,6 +5,9 @@
 	if (!isset($_GET["proj_id"])) {
 		header("Location: error.php?id=3");
 	}
+
+	require_once('include/Parsedown.php');
+	$Parsedown = new Parsedown();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
@@ -65,23 +68,35 @@ else
 }
 ?>
 				<div id="content">
-					<h1>Viewing project
-						<?php
-							// Visar projektets namn.
+					<?php
+							// Get project name/url and description
 							include('include/mysql_connect.php');
 							$project_id = mysql_real_escape_string($_GET["proj_id"]);
-							$owner = $_SESSION['SESS_MEMBER_ID'];
 
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
+							$result = mysql_query("SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id."");
 
 							while($row = mysql_fetch_array($result))
 							{
-								echo "<strong>";
-								echo $row['project_name'];
-								echo "</strong>";
+								echo "<h1>Viewing project <strong>";
+								if(is_null($row['project_url']) == false)
+								{
+									echo "<a href=".$row['project_url'].">".$row['project_name']."</a>";
+								}
+								else
+								{
+									echo $row['project_name'];
+								}
+								echo "</strong></h1>";
+
+								if(is_null($row['project_desc']) == false)
+								{
+									echo "<div id='projDesc'>";
+									echo $Parsedown->setBreaksEnabled(true)
+											->text($row['project_desc']);
+									echo "</div>";
+								}
 							}
 						?>
-					</h1>
 
 					<table class="globalTables" cellpadding="0" cellspacing="0">
 						<thead>

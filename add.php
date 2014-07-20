@@ -2,23 +2,23 @@
 	require_once('include/login/auth.php');
 	require_once('include/mysql_connect.php');
 	require_once('include/debug.php');
-	
+
 	// Get some personal data. ID, currency, measurement unit
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$GetPersonal = mysql_query("SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
 	$personal = mysql_fetch_assoc($GetPersonal);
 ?>
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="Add a component to your database."/>
-		<meta name="keywords" content="electronics, components, database, project, inventory"/> 
+		<meta name="keywords" content="electronics, components, database, project, inventory"/>
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Add component - ecDB</title>
-		
+
 		<script type="text/javascript" src="include/autocomplete/jquery.js"></script>
 		<script type="text/javascript" src="include/autocomplete/jquery.autocomplete.js"></script>
 		<link rel="stylesheet" type="text/css" href="include/autocomplete/jquery.autocomplete.css" />
@@ -58,26 +58,26 @@
 		</head>
 	<body  onLoad="document.forms.add.name.focus()">
 		<div id="wrapper">
-			
+
 			<!-- Header -->
 				<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main menu -->
 				<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
-				
-				
+
+
 				<?php
 					include('include/include.php');
 					$Add = new ShowComponents;
 					$Add->Add();
 				?>
-				
-				
+
+
 				<form class="globalForms noPadding" action="" method="post" id="add">
 					<div class="textBoxInput">
 						<label class="keyWord boldText">Comment</label>
@@ -92,7 +92,7 @@
 									Name
 								</td>
 								<td>
-									<input name="name" id="name" type="text" class="medium" value="<?php if(isset($_POST['submit'])) { echo $_POST['name']; } ?>" autofocus tabindex="0"/>
+									<input name="name" id="name" type="text" class="big" value="<?php if(isset($_POST['submit'])) { echo $_POST['name']; } ?>" autofocus tabindex="0"/>
 								</td>
 								<td class="boldText">
 									Category
@@ -250,7 +250,7 @@
 									Datasheet URL
 								</td>
 								<td>
-									<input name="datasheet" type="text" class="medium" value="<?php if(isset($_POST['submit'])) { echo $_POST['datasheet']; } ?>" /> 
+									<input name="datasheet" type="text" class="medium" value="<?php if(isset($_POST['submit'])) { echo $_POST['datasheet']; } ?>" />
 								</td>
 								<td class="boldText">
 									Height

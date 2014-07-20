@@ -70,7 +70,7 @@
 							</tr>
 							<tr>
 								<td class="boldText">
-									Password
+									Current Password
 								</td>
 								<td>
 									<input name="oldpass" class="medium" type="password" value="" />
