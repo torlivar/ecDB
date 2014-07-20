@@ -72,7 +72,7 @@ else
 					<?php
 					}
 					?>
-<form class="globalForms" method="post" action="">
+					<form class="globalForms" method="post" action="">
 						<div class="textInput">
 							<label class="keyWord">Project name</label>
 							<div class="input"><input name="name" id="name" type="text" class="medium" /></div>

@@ -2,7 +2,8 @@
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
 
-	if (!isset($_GET["proj_id"])) {
+	if (!isset($_GET["proj_id"]))
+	{
 		header("Location: error.php?id=3");
 	}
 
@@ -45,8 +46,10 @@
 	<body>
 		<div id="wrapper">
 <?php
+
 if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 {
+			$pub_proj = "";
 ?>
 			<!-- Header -->
 			<?php include 'include/header.php'; ?>
@@ -58,8 +61,10 @@ if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 }
 else
 {
-?>
-			<?php require_once("include/logo_wrapper.php"); ?>
+			$pub_proj = " and where project_public=1 ";
+
+			require_once("include/logo_wrapper.php");
+			?>
 
 			<!-- Main menu -->
 			<?php $selected_menu = "PublicProject"; include_once('include/include_main_menu.php'); ?>
@@ -73,7 +78,7 @@ else
 							include('include/mysql_connect.php');
 							$project_id = mysql_real_escape_string($_GET["proj_id"]);
 
-							$result = mysql_query("SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id."");
+							$result = mysql_query("SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
 
 							while($row = mysql_fetch_array($result))
 							{
