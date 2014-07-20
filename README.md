@@ -16,7 +16,7 @@ and my knowledge is not sufficient to develop [ecDB.net](http://www.ecdb.net) to
 I need help from the community to make [ecDB.net](http://www.ecdb.net) better!
 
 
-# Changes
+# Changes From the Original ecDB
 
 ### v0.2
 * Fixed mysql connection
@@ -29,6 +29,9 @@ I need help from the community to make [ecDB.net](http://www.ecdb.net) better!
 * Removed old non-working twitter unauthenticated api
 * Public viewable projects, login not required.
 * Projects now have url and markdown description
+* Project list now shows how many kits can be built from current component supply
+* Project detail now lists qty on order
+
 
 ### v0.1
 Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1

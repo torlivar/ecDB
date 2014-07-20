@@ -219,6 +219,23 @@ else
 									?>">Quantity in stock</a>
 								</th>
 								<th>
+									<a href="?proj_id=<?php echo $project_id; ?>&by=order_quantity&order=<?php
+										if(isset($_GET['order'])){
+											$order = $_GET['order'];
+											if ($order == 'asc'){
+												echo 'desc';
+											}
+											else {
+												echo 'asc';
+											}
+										}
+										else {
+											echo 'asc';
+										}
+									?>">Quantity on order</a>
+								</th>
+
+								<th>
 									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];

@@ -20,7 +20,7 @@ class ProjectShow {
 				$order = 'asc';
 			}
 
-			if($by == 'price' or $by == 'quantity') {
+			if($by == 'price' or $by == 'quantity' or $by == 'order_quantity') {
 				$GetDataComponentsAll = "SELECT * FROM projects_data, data WHERE projects_data.projects_data_component_id = data.id AND projects_data.projects_data_project_id = ".$project_id." ORDER by ".$by." +0 ".$order."";
 			}
 			elseif($by == 'name' or $by == 'category' or $by == 'manufacturer' or $by =='package' or $by =='smd') {
@@ -77,11 +77,11 @@ class ProjectShow {
 					$catname = $showDetailsCat['name'];
 				}
 
-			echo $catname;
+				echo $catname;
 			echo "</td>";
 
 			echo "<td>";
-			$manufacturer = $showDetails['manufacturer'];
+				$manufacturer = $showDetails['manufacturer'];
 				if ($manufacturer == ""){
 					echo "-";
 				}
@@ -91,7 +91,7 @@ class ProjectShow {
 			echo "</td>";
 
 			echo "<td>";
-			$package = $showDetails['package'];
+				$package = $showDetails['package'];
 				if ($package == ""){
 					echo "-";
 				}
@@ -101,7 +101,7 @@ class ProjectShow {
 			echo "</td>";
 
 			echo "<td>";
-			$smd = $showDetails['smd'];
+				$smd = $showDetails['smd'];
 				if ($smd == "No"){
 					echo '<span class="icon medium checkboxUnchecked"></span>';
 				}
@@ -111,7 +111,7 @@ class ProjectShow {
 			echo "</td>";
 
 			echo "<td>";
-			$price = $showDetails['price'];
+				$price = $showDetails['price'];
 				if ($price == ""){
 					echo "-";
 				}
@@ -121,7 +121,7 @@ class ProjectShow {
 			echo "</td>";
 
 			echo "<td>";
-			$quantity = $showDetails['quantity'];
+				$quantity = $showDetails['quantity'];
 				if ($quantity == ""){
 					echo "-";
 				}
@@ -129,6 +129,17 @@ class ProjectShow {
 					echo $quantity;
 				}
 			echo "</td>";
+
+			echo "<td>";
+				$quantity = $showDetails['order_quantity'];
+				if ($quantity == ""){
+					echo "-";
+				}
+				else{
+					echo $quantity;
+				}
+			echo "</td>";
+
 
 			echo "<td>";
 
