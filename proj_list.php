@@ -112,7 +112,9 @@ else
 								}
 								?>">Name</a>
 								</th>
-								<th>Number of components</th>
+								<th>Unique Components</th>
+								<th>Qty of components</th>
+								<th>Available Kits</th>
 								<th>Total cost</th>
 								<th>Public</th>
 								<th>Owner</th>

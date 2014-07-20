@@ -72,6 +72,7 @@ class Proj {
 				echo '</td>';
 
 				echo "<td>";
+					/*
 					$components = mysql_query("SELECT projects_data_project_id FROM projects_data WHERE projects_data_project_id = ".$showDetails['project_id']."");
 					$number_components = mysql_num_rows($components);
 					if ($number_components == 0){
@@ -79,8 +80,43 @@ class Proj {
 					}
 					else{
 						echo $number_components;
+					}*/
+
+					//$components = mysql_query("SELECT count(*) as c FROM projects_data WHERE projects_data_project_id = ".$showDetails['project_id']."");
+					$components = mysql_query("SELECT (SELECT count(*) FROM projects_data p WHERE p.projects_data_project_id = ".$showDetails['project_id'].") count, (SELECT sum(projects_data_quantity) FROM projects_data p WHERE p.projects_data_project_id = ".$showDetails['project_id'].") qty, min(d.quantity div p.projects_data_quantity) as kits FROM projects_data p, data d WHERE p.projects_data_project_id = ".$showDetails['project_id']." and d.id = p.projects_data_component_id");
+					$compDetails = mysql_fetch_array($components);
+					if($compDetails['count'] == 0)
+					{
+						echo '-';
+					}
+					else
+					{
+						echo $compDetails['count'];
 					}
 				echo "</td>";
+
+				echo "<td>";
+					if($compDetails['qty'] == 0)
+					{
+						echo '-';
+					}
+					else
+					{
+						echo $compDetails['qty'];
+					}
+				echo "</td>";
+
+				echo "<td>";
+					if($compDetails['kits'] == 0)
+					{
+						echo '-';
+					}
+					else
+					{
+						echo $compDetails['kits'];
+					}
+				echo "</td>";
+
 
 				echo '<td>';
 					$GetDataPrice = "SELECT SUM(total) FROM (SELECT projects_data_quantity * price AS total FROM projects_data JOIN `data` WHERE data.id = projects_data_component_id AND projects_data_project_id = ".$showDetails['project_id'].") AS project_total";
