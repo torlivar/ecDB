@@ -61,7 +61,7 @@ if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 }
 else
 {
-			$pub_proj = " and where project_public=1 ";
+			$pub_proj = " and project_public=1 ";
 
 			require_once("include/logo_wrapper.php");
 			?>
