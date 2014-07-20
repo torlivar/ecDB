@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `category_head`;
 CREATE TABLE IF NOT EXISTS `category_head` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_head`
@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS `category_sub`;
 CREATE TABLE IF NOT EXISTS `category_sub` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category_sub`
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `data` (
   `price` varchar(11) NOT NULL,
   KEY `Id` (`id`),
   KEY `owner` (`owner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `currency` varchar(3) NOT NULL DEFAULT 'USD',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`member_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 
 --
 -- Dumping data for table `members`
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `members_stats` (
   `members_stats_member` int(11) NOT NULL,
   `members_stats_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`members_stats_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -297,9 +297,12 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `project_owner` int(11) NOT NULL,
   `project_name` varchar(64) NOT NULL,
   `project_public` tinyint(1) NOT NULL DEFAULT 0,
+  `project_url` varchar(128) NULL,
+  `project_desc` varchar(16384) NULL,
+
   PRIMARY KEY (`project_id`),
   KEY `project_owner` (`project_owner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -318,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `projects_data` (
   KEY `owner_id` (`projects_data_owner_id`),
   KEY `project_id` (`projects_data_project_id`),
   KEY `component_id` (`projects_data_component_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -333,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `admin_options` (
   `admin_key` varchar(64) NOT NULL,
   `admin_value` varchar(256),
   PRIMARY KEY (`admin_options_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- blog tab details
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_show', '1');
