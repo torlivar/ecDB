@@ -61,20 +61,11 @@ class ProjectShow {
 
 
 			echo "<td>";
+				$sql_exec_catname = mysql_Query("select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$showDetails['category']."");
 
-				if ($showDetails['category'] < 999) {
-					$head_cat_id = substr($showDetails['category'], -3, 1);
-				}
-				else {
-					$head_cat_id = substr($showDetails['category'], -4, 2);
-				}
-				$subcatid = $showDetails['category'];
-
-				$CategoryName = "SELECT * FROM category_head WHERE id = ".$head_cat_id."";
-				$sql_exec_catname = mysql_Query($CategoryName);
-
-				while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
-					$catname = $showDetailsCat['name'];
+				while($showDetailsCat = mysql_fetch_array($sql_exec_catname))
+				{
+					$catname = $showDetailsCat['h'];
 				}
 
 				echo $catname;

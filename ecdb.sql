@@ -26,17 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `category_head`
 --
 
-DROP TABLE IF EXISTS `category_head`;
-CREATE TABLE IF NOT EXISTS `category_head` (
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `category_head`
---
-
-INSERT INTO `category_head` (`id`, `name`) VALUES
+INSERT INTO `category` (`id`, `name`) VALUES
 (1, 'Cable'),
 (2, 'Capacitor'),
 (3, 'Connector'),
@@ -46,6 +43,7 @@ INSERT INTO `category_head` (`id`, `name`) VALUES
 (7, 'Mechanic'),
 (16, 'Module'),
 (8, 'Opto'),
+(9, 'Clocks'),
 (18, 'Oscillator'),
 (13, 'Resistor'),
 (15, 'Sensor'),
@@ -62,148 +60,148 @@ INSERT INTO `category_head` (`id`, `name`) VALUES
 --
 
 DROP TABLE IF EXISTS `category_sub`;
-CREATE TABLE IF NOT EXISTS `category_sub` (
-  `id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `category_sub` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `subcategory` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_catid` (`category_id`),
+  CONSTRAINT `category_sub_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `category_sub`
---
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('1', '1', 'Ribbon');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('2', '1', 'Coax');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('3', '1', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('4', '2', 'Ceramic');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('5', '2', 'Electrolytic');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('6', '2', 'Polyester');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('7', '2', 'Tantalum');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('8', '2', 'Variable');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('9', '2', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('10', '3', 'Audio');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('11', '3', 'Coax');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('12', '3', 'DC');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('13', '3', 'D-Sub');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('14', '3', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('15', '4', 'Rectifier');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('16', '4', 'Schottky');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('17', '4', 'Small Signal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('18', '4', 'Zener');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('19', '4', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('20', '5', '4xxx');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('21', '5', '74xx');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('22', '5', 'Microcontroller');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('23', '5', 'Comparator');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('24', '5', 'Op. Amp.');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('25', '5', 'Temperature');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('26', '5', 'Timer & Osc.');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('27', '5', 'Voltage Ref.');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('28', '5', 'Voltage Reg.');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('29', '5', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('30', '6', 'Ferrite');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('31', '6', 'Filter');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('32', '6', 'Inductor');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('33', '6', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('34', '7', 'Box');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('35', '7', 'Distance');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('36', '7', 'Fuse');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('37', '7', 'Motor');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('38', '7', 'Screw');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('39', '7', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('40', '8', 'Reflex coupler');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('41', '8', 'Laser');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('42', '8', 'LED');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('43', '8', 'LED 3mm');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('44', '8', 'LED 5mm');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('45', '8', 'Optocoupler');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('46', '8', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('47', '9', 'Crystal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('48', '9', 'Resonator');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('49', '9', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('50', '10', 'Keypad');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('51', '10', 'Momentary');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('52', '10', 'PCB Mounted');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('53', '10', 'Rotary Encoder');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('54', '10', 'Toggle Switch');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('55', '10', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('56', '11', 'Power Supply');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('57', '11', 'Transformer');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('58', '11', 'Wall Adapter');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('59', '11', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('60', '12', 'BJT');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('61', '12', 'JFET');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('62', '12', 'MOSFET');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('63', '12', 'NPN');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('64', '12', 'PNP');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('65', '12', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('66', '13', '1/4W Carbon');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('67', '13', '1/4W Metal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('68', '13', '1/6W Carbon');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('69', '13', '1/6W Metal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('70', '13', '0603');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('71', '13', '0805');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('72', '13', '1206');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('73', '13', 'Effect');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('74', '13', 'Photo');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('75', '13', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('76', '16', 'GSM');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('77', '16', 'GPS');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('78', '16', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('79', '14', 'LCD');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('80', '14', 'VFD');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('81', '14', 'LED');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('82', '14', 'TFT');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('83', '8', 'IR LED');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('84', '14', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('85', '7', 'IC Socket');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('86', '7', 'Heat Sink');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('87', '5', 'Data Converter');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('88', '5', 'A/D Multiplexer');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('89', '5', 'Driver');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('90', '5', 'Opto Driver');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('91', '5', 'DC/DC Converter');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('92', '5', 'Audio/Video');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('93', '5', 'Memory');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('94', '13', 'Temperature');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('95', '13', 'Network');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('96', '3', 'HF');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('97', '7', 'Knob');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('98', '7', 'Meter');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('99', '1', 'Standard');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('100', '1', 'Mains');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('101', '1', 'Signal/Data');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('102', '1', 'Fiber optic');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('103', '3', 'PCB');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('104', '16', 'Bluetooth');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('105', '16', 'WLAN');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('106', '16', 'ZigBee');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('107', '16', 'RFID');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('108', '3', 'Mains');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('109', '15', 'Moisture');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('110', '15', 'Temperature');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('111', '15', 'Pressure');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('112', '15', 'Magnetic');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('113', '15', 'Hall Effect');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('114', '15', 'Gas');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('115', '15', 'Accelerometer');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('116', '15', 'Light');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('117', '15', 'Proximity');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('118', '15', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('119', '17', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('120', '5', 'Logic');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('121', '13', 'Potentiometer');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('122', '10', 'Relay');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('123', '3', 'Data');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('124', '18', 'Crystal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('125', '18', 'Resonator');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('126', '18', 'Misc');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('127', '10', 'DIP');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('128', '4', 'Bridge');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('129', '12', 'Triac');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('130', '13', '1/3W Carbon');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('131', '13', '1/3W Metal');
+INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('132', '13', 'Precision');
 
-INSERT INTO `category_sub` (`id`, `name`) VALUES
-(101, 'Ribbon'),
-(102, 'Coax'),
-(199, 'Misc'),
-(201, 'Ceramic'),
-(202, 'Electrolytic'),
-(203, 'Polyester'),
-(204, 'Tantalum'),
-(205, 'Variable'),
-(299, 'Misc'),
-(301, 'Audio'),
-(302, 'Coax'),
-(303, 'DC'),
-(304, 'D-Sub'),
-(399, 'Misc'),
-(401, 'Rectifier'),
-(402, 'Schottky'),
-(403, 'Small Signal'),
-(404, 'Zener'),
-(499, 'Misc'),
-(501, '4xxx'),
-(502, '74xx'),
-(503, 'Microcontroller'),
-(504, 'Comparator'),
-(505, 'Op. Amp.'),
-(506, 'Temperature'),
-(507, 'Timer & Osc.'),
-(508, 'Voltage Ref.'),
-(509, 'Voltage Reg.'),
-(599, 'Misc'),
-(601, 'Ferrite'),
-(602, 'Filter'),
-(603, 'Inductor'),
-(699, 'Misc'),
-(701, 'Box'),
-(702, 'Distance'),
-(703, 'Fuse'),
-(704, 'Motor'),
-(705, 'Screw'),
-(799, 'Misc'),
-(801, 'Reflex coupler'),
-(802, 'Laser'),
-(803, 'LED'),
-(804, 'LED 3mm'),
-(805, 'LED 5mm'),
-(806, 'Optocoupler'),
-(899, 'Misc'),
-(901, 'Crystal'),
-(902, 'Resonator'),
-(999, 'Misc'),
-(1001, 'Keypad'),
-(1002, 'Momentary'),
-(1003, 'PCB Mounted'),
-(1004, 'Rotary Encoder'),
-(1005, 'Toggle Switch'),
-(1099, 'Misc'),
-(1101, 'Power Supply'),
-(1102, 'Transformer'),
-(1103, 'Wall Adapter'),
-(1199, 'Misc'),
-(1201, 'BJT'),
-(1202, 'JFET'),
-(1203, 'MOSFET'),
-(1204, 'NPN'),
-(1205, 'PNP'),
-(1299, 'Misc'),
-(1301, '1/4W Carbon'),
-(1302, '1/4W Metal'),
-(1303, '1/6W Carbon'),
-(1304, '1/6W Metal'),
-(1305, '0603'),
-(1306, '0805'),
-(1307, '1206'),
-(1308, 'Effect'),
-(1309, 'Photo'),
-(1399, 'Misc'),
-(1601, 'GSM'),
-(1602, 'GPS'),
-(1699, 'Misc'),
-(1401, 'LCD'),
-(1402, 'VFD'),
-(1404, 'LED'),
-(1403, 'TFT'),
-(807, 'IR LED'),
-(1499, 'Misc'),
-(708, 'IC Socket'),
-(709, 'Heat Sink'),
-(510, 'Data Converter'),
-(511, 'A/D Multiplexer'),
-(512, 'Driver'),
-(513, 'Opto Driver'),
-(514, 'DC/DC Converter'),
-(515, 'Audio/Video'),
-(516, 'Memory'),
-(1311, 'Temperature'),
-(1310, 'Network'),
-(305, 'HF'),
-(710, 'Knob'),
-(711, 'Meter'),
-(103, 'Standard'),
-(104, 'Mains'),
-(105, 'Signal/Data'),
-(106, 'Fiber optic'),
-(306, 'PCB'),
-(1603, 'Bluetooth'),
-(1604, 'WLAN'),
-(1605, 'ZigBee'),
-(1606, 'RFID'),
-(307, 'Mains'),
-(1501, 'Moisture'),
-(1502, 'Temperature'),
-(1503, 'Pressure'),
-(1504, 'Magnetic'),
-(1505, 'Hall Effect'),
-(1506, 'Gas'),
-(1507, 'Accelerometer'),
-(1508, 'Light'),
-(1509, 'Proximity'),
-(1599, 'Misc'),
-(1799, 'Misc'),
-(517, 'Logic'),
-(1312, 'Potentiometer'),
-(1006, 'Relay'),
-(308, 'Data'),
-(1801, 'Crystal'),
-(1802, 'Resonator'),
-(1899, 'Misc'),
-(1007, 'DIP'),
-(406, 'Bridge'),
-(1206, 'Triac'),
-(1313, '1/3W Carbon'),
-(1314, '1/3W Metal'),
-(1315, 'Precision');
 
 -- --------------------------------------------------------
 

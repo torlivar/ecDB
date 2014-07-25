@@ -2,42 +2,33 @@
 	require_once('include/login/auth.php');
 	include('include/mysql_connect.php');
 	require_once('include/debug.php');
-	
+
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['based'];
 
 	// Get data from the old component to inherit.
-	$GetDataComponent = mysql_query("SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner.""); 
+	$GetDataComponent = mysql_query("SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner."");
 	$executesql = mysql_fetch_assoc($GetDataComponent);
-	
-	// Get some personal data. ID, currency, measurement unit
-	$GetPersonal = mysql_query("SELECT currency, measurement FROM members WHERE member_id = ".$owner.""); 
-	$personal = mysql_fetch_assoc($GetPersonal);
-	
+
 	// If the owner of component !== $owner. Show error.
-	if ($executesql['owner'] !== $owner) {
+	if ($executesql['owner'] !== $owner)
+	{
 		header("Location: error.php?id=2");
 	}
 
-	// Get the head category ID, based of the sub category, ($executesql['category']).
-	if ($executesql['category'] < 999) {
-		$head_cat_id = substr($executesql['category'], -3, 1);
-	}
-	else {
-		$head_cat_id = substr($executesql['category'], -4, 2);
-	}
+	// Get some personal data. ID, currency, measurement unit
+	$GetPersonal = mysql_query("SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
+	$personal = mysql_fetch_assoc($GetPersonal);
+
+	$head_cat_id = $executesql['category'];
 
 	// Get the head category name, based of the head category ID.
-	$GetHeadCatName = mysql_query("SELECT * FROM category_head WHERE id = ".$head_cat_id."");
+	$GetHeadCatName = mysql_query("select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."");
 	$executesql_head_catname = mysql_fetch_assoc($GetHeadCatName);
 
 	// Sub category == $sub_cat_id
-	$sub_cat_id = $executesql['category'];
-	
-	// Get the sub category name, based of the sub category ID.
-	$GetSubCatName = mysql_query("SELECT * FROM category_sub WHERE id = ".$sub_cat_id."");
-	$executesql_sub_catname = mysql_fetch_assoc($GetSubCatName);
-	
+	$sub_cat_id = $executesql_head_catname['cid'];
+
 	// Get ALL the sub categories.
 	$GetDataComponentsAll = "SELECT * FROM category_sub";
 	$sql_exec = mysql_Query($GetDataComponentsAll);
@@ -48,35 +39,35 @@
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="Add a new component based on <?php echo $executesql['name']; ?>."/>
-		<meta name="keywords" content="electronics, components, database, project, inventory"/> 
+		<meta name="keywords" content="electronics, components, database, project, inventory"/>
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Add component - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
+
 			<!-- Header -->
 				<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main menu -->
 				<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
-				
+
 				<h1>Add new component based on <a href="component.php?view=<?php echo $executesql['id']; ?>"><?php echo $executesql['name']; ?></a></h1>
-				
+
 				<?php
 					include('include/include.php');
 					$Add = new ShowComponents;
 					$Add->Add();
 				?>
-				
+
 				<form class="globalForms noPadding" action="" method="post">
 					<div class="textBoxInput">
 						<label class="keyWord boldText">Comment</label>
@@ -99,34 +90,32 @@
 								<td>
 									<select name="category">
 										<?php
-											$HeadCategoryNameQuery = "SELECT * FROM category_head ORDER by name ASC";
+											$HeadCategoryNameQuery = "SELECT id, name  FROM category ORDER by name ASC";
 											$sql_exec_headcat = mysql_Query($HeadCategoryNameQuery);
-		
+
 											while ($HeadCategory = mysql_fetch_array($sql_exec_headcat)) {
-												
+
 												echo '<option class="main_category" value="';
 												echo $HeadCategory['id'];
 												echo '" disabled>';
 												echo $HeadCategory['name'];
 												echo '</option>';
-												
-												$subcatfrom = $HeadCategory['id'] * 100;
-												$subcatto = $subcatfrom + 99;
-												
-												$SubCategoryNameQuery = "SELECT * FROM category_sub WHERE id BETWEEN ".$subcatfrom." AND ".$subcatto." ORDER by name ASC";
+
+												$SubCategoryNameQuery = "SELECT id, subcategory FROM category_sub WHERE category_id=".$HeadCategory['id']." ORDER by subcategory ASC";
 												$sql_exec_subcat = mysql_Query($SubCategoryNameQuery);
-												
+
 												while ($SubCategory = mysql_fetch_array($sql_exec_subcat)) {
 													echo '<option value="';
 													echo $SubCategory['id'];
 													echo '"';
-														if ($executesql_sub_catname['id'] == $SubCategory['id']) {
+														if ($head_cat_id == $SubCategory['id']) {
 															echo ' selected';
 														}
 													echo '>';
-													echo $SubCategory['name'];
+													echo $SubCategory['subcategory'];
 													echo '</option>';
 												}
+
 											}
 										?>
 									</select>

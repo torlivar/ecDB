@@ -16,20 +16,11 @@
 		header("Location: error.php?id=1");
 	}
 
-	if ($executesql['category'] < 999) {
-		$head_cat_id = substr($executesql['category'], -3, 1);
-	}
-	else {
-		$head_cat_id = substr($executesql['category'], -4, 2);
-	}
 
-	$GetHeadCatName = mysql_query("SELECT * FROM category_head WHERE id = ".$head_cat_id."");
+	$head_cat_id = $executesql['category'];
+
+	$GetHeadCatName = mysql_query("select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."");
 	$executesql_head_catname = mysql_fetch_assoc($GetHeadCatName);
-
-	$sub_cat_id = $executesql['category'];
-
-	$GetSubCatName = mysql_query("SELECT * FROM category_sub WHERE id = ".$sub_cat_id."");
-	$executesql_sub_catname = mysql_fetch_assoc($GetSubCatName);
 
 	if(isset($_POST['edit'])) {
 		header("Location: edit_component.php?edit=$id");
@@ -110,15 +101,15 @@
 				<h1>
 				<a href="category.php?cat=
 					<?php
-						echo $executesql_head_catname['id'];
+						echo $executesql_head_catname['cid'];
 						echo '"> ';
-						echo $executesql_head_catname['name'];
+						echo $executesql_head_catname['h'];
 						echo '</a> / ';
 
 						echo '<a href="category.php?subcat=';
-						echo $executesql_sub_catname['id'];
+						echo $executesql_head_catname['sid'];
 						echo '"> ';
-						echo $executesql_sub_catname['name'];
+						echo $executesql_head_catname['s'];
 					?>
 				</a> / <?php echo $executesql['name']; ?>
 				</h1>

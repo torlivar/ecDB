@@ -2,39 +2,29 @@
 	require_once('include/login/auth.php');
 	include('include/mysql_connect.php');
 	require_once('include/debug.php');
-	
+
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['edit'];
 
 	$GetDataComponent = mysql_query("SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner."");
 	$executesql = mysql_fetch_assoc($GetDataComponent);
-	
+
 	$GetPersonal = mysql_query("SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
 	$personal = mysql_fetch_assoc($GetPersonal);
-	
+
 	if ($executesql['owner'] !== $owner) {
 		header("Location: error.php?id=2");
 	}
 
-	if ($executesql['category'] < 999) {
-		$head_cat_id = substr($executesql['category'], -3, 1);
-	}
-	else {
-		$head_cat_id = substr($executesql['category'], -4, 2);
-	}
+	$cat_id = $executesql['category'];
 
-	$GetHeadCatName = mysql_query("SELECT * FROM category_head WHERE id = ".$head_cat_id."");
+	$GetHeadCatName = mysql_query("select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$cat_id."");
 	$executesql_head_catname = mysql_fetch_assoc($GetHeadCatName);
 
-	$sub_cat_id = $executesql['category'];
-	
-	$GetSubCatName = mysql_query("SELECT * FROM category_sub WHERE id = ".$sub_cat_id."");
-	$executesql_sub_catname = mysql_fetch_assoc($GetSubCatName);
-	
-	$GetDataComponentsAll = "SELECT * FROM category_sub";
 	$sql_exec = mysql_Query($GetDataComponentsAll);
-	
-	if(isset($_POST['delete'])) {
+
+	if(isset($_POST['delete']))
+	{
 		$sqlDeleteComopnent = "DELETE FROM data WHERE id = ".$id." ";
 		$sql_exec_component_delete = mysql_query($sqlDeleteComopnent);
 
@@ -43,97 +33,94 @@
 
 		header("Location: .");
 	}
-	
-	if(isset($_POST['based'])) {
+
+	if(isset($_POST['based']))
+	{
 		header("Location: add_based.php?based=$id");
 	}
-	
-	if (isset($_POST['quantity_increase'])) {
+
+	if (isset($_POST['quantity_increase']))
+	{
 		$quantity_before	=	$_POST['quantity'];
 		$quantity_after		= 	$quantity_before + 1;
-		
+
 		$sql = "UPDATE data SET quantity = '".$quantity_after."' WHERE id = ".$id." ";
 		$sql_exec = mysql_query($sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
-	
-	if (isset($_POST['quantity_decrease'])) {
+
+	if (isset($_POST['quantity_decrease']))
+	{
 		$quantity_before	=	$_POST['quantity'];
 		$quantity_after 	= 	$quantity_before - 1;
-		
+
 		$sql = "UPDATE data SET quantity = '".$quantity_after."' WHERE id = ".$id." ";
 		$sql_exec = mysql_query($sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
-	
-	if (isset($_POST['orderquant_increase'])) {
+
+	if (isset($_POST['orderquant_increase']))
+	{
 		$quantity_before	=	$_POST['orderquant'];
 		$quantity_after		= 	$quantity_before + 1;
-		
+
 		$sql = "UPDATE data SET order_quantity = '".$quantity_after."' WHERE id = ".$id." ";
 		$sql_exec = mysql_query($sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
-	
-	if (isset($_POST['orderquant_decrease'])) {
+
+	if (isset($_POST['orderquant_decrease']))
+	{
 		$quantity_before	=	$_POST['orderquant'];
 		$quantity_after 	= 	$quantity_before - 1;
-		
+
 		$sql = "UPDATE data SET order_quantity = '".$quantity_after."' WHERE id = ".$id." ";
 		$sql_exec = mysql_query($sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
 ?>
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="If you wany to edit something of the component, do it here."/>
-		<meta name="keywords" content="electronics, components, database, project, inventory"/> 
+		<meta name="keywords" content="electronics, components, database, project, inventory"/>
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Edit component - <?php echo $executesql['name']; ?> - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
 	</head>
-	
+
 	<body>
 		<div id="wrapper">
-			
+
 			<!-- Header -->
 				<?php include 'include/header.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main menu -->
 				<?php include 'include/menu.php'; ?>
 			<!-- END -->
-			
+
 			<!-- Main content -->
 			<div id="content">
 				<h1>
-				<a href="category.php?cat=
-					<?php 
-						echo $executesql_head_catname['id']; 
-						echo '"> ';
-						echo $executesql_head_catname['name']; 
-						echo '</a> / ';
-						
-						echo '<a href="category.php?subcat=';
-						echo $executesql_sub_catname['id']; 
-						echo '"> ';
-						echo $executesql_sub_catname['name']; 
+					<?php
+						echo '<a href="category.php?cat='.$executesql_head_catname['cid'].'"> '.$executesql_head_catname['h'].'</a> / ';
+						echo '<a href="category.php?subcat='.$executesql_head_catname['sid'].'"> '.$executesql_head_catname['s'].'</a> / ';
 					?>
-				</a> / <a href="component.php?view=<?php echo $executesql['id']; ?>"><?php echo $executesql['name']; ?></a></h1>
+				<a href="component.php?view=<?php echo $executesql['id']; ?>"><?php echo $executesql['name']; ?></a></h1>
 				</h1>
-				
-				
+
+
 				<?php
 					include('include/include.php');
 					$Add = new ShowComponents;
 					$Add->Add();
 				?>
-				
-				
+
+
 				<form class="globalForms noPadding" action="" method="post">
 					<div class="textBoxInput">
 						<label class="keyWord boldText">Comment</label>
@@ -156,32 +143,29 @@
 								<td>
 									<select name="category">
 										<?php
-											$HeadCategoryNameQuery = "SELECT * FROM category_head ORDER by name ASC";
+											$HeadCategoryNameQuery = "SELECT id, name  FROM category ORDER by name ASC";
 											$sql_exec_headcat = mysql_Query($HeadCategoryNameQuery);
-		
+
 											while ($HeadCategory = mysql_fetch_array($sql_exec_headcat)) {
-												
+
 												echo '<option class="main_category" value="';
 												echo $HeadCategory['id'];
 												echo '" disabled>';
 												echo $HeadCategory['name'];
 												echo '</option>';
-												
-												$subcatfrom = $HeadCategory['id'] * 100;
-												$subcatto = $subcatfrom + 99;
-												
-												$SubCategoryNameQuery = "SELECT * FROM category_sub WHERE id BETWEEN ".$subcatfrom." AND ".$subcatto." ORDER by name ASC";
+
+												$SubCategoryNameQuery = "SELECT id, subcategory FROM category_sub WHERE category_id=".$HeadCategory['id']." ORDER by subcategory ASC";
 												$sql_exec_subcat = mysql_Query($SubCategoryNameQuery);
-												
+
 												while ($SubCategory = mysql_fetch_array($sql_exec_subcat)) {
 													echo '<option value="';
 													echo $SubCategory['id'];
 													echo '"';
-														if ($executesql_sub_catname['id'] == $SubCategory['id']) {
+														if ($cat_id == $SubCategory['id']) {
 															echo ' selected';
 														}
 													echo '>';
-													echo $SubCategory['name'];
+													echo $SubCategory['subcategory'];
 													echo '</option>';
 												}
 											}
@@ -399,11 +383,11 @@
 								<td class="boldText">
 									Quantity
 								</td>
-								
+
 									<?php
 										$Echo = "SELECT projects_data_component_id FROM projects_data WHERE projects_data_component_id = ".(int)$_GET['edit']." ";
 										$sql_echo = mysql_query($Echo);
-										
+
 										if (mysql_num_rows($sql_echo) == 0) {
 											echo '<td></td>';
 											echo '<td></td>';
@@ -412,9 +396,9 @@
 										else {
 											echo '<td class="boldText">Project</td>';
 											echo '<td class="boldText">Quantity</td>';
-											echo '<td></td>';											
+											echo '<td></td>';
 										}
-										
+
 									?>
 							</tr>
 							<tr>
@@ -439,7 +423,7 @@
 									?>
 						</tbody>
 					</table>
-					
+
 					<div class="buttons">
 						<div class="input">
 							<button class="button green" name="update" type="submit"><span class="icon medium save"></span> Update</button>
