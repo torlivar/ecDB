@@ -21,7 +21,7 @@ class ProjAdd {
 				$sql = "UPDATE projects SET project_name = '".$name."', project_public=".$project_public.", project_url = '".$project_url."', project_desc = '".$project_desc."' WHERE project_id = ".$id." ";
 				$sql_exec = mysql_query($sql);
 
-				header("location: ".$_SERVER['REQUEST_URI']);
+				//header("location: ".$_SERVER['REQUEST_URI']);
 
 				echo '<div class="message green center">';
 				echo 'Project updated!';
