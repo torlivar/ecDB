@@ -35,6 +35,8 @@ alter table `projects` add column `project_desc` varchar(16384) NULL;
 -- new updates
 -- add primary key for category head, data
 alter table category_head add constraint primary key (id);
+alter table category_head change column `id` int(11) NOT NULL AUTO_INCREMENT;
+
 alter table data add constraint primary key (id);
 INSERT INTO `category_head` (`id`, `name`)  VALUES (9, 'Clocks');
 

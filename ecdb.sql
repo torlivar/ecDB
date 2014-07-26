@@ -1,34 +1,10 @@
--- phpMyAdmin SQL Dump
--- version 3.4.9
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 11, 2013 at 11:42 PM
--- Server version: 5.5.20
--- PHP Version: 5.3.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `ecdb_database`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category_head`
---
-
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -53,11 +29,6 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (14, 'Display'),
 (17, 'Miscellaneous');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `category_sub`
---
 
 DROP TABLE IF EXISTS `category_sub`;
 CREATE TABLE `category_sub` (
@@ -203,12 +174,6 @@ INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('
 INSERT INTO `ecdb`.`category_sub` (`id`, `category_id`, `subcategory`) VALUES ('132', '13', 'Precision');
 
 
--- --------------------------------------------------------
-
---
--- Table structure for table `data`
---
-
 DROP TABLE IF EXISTS `data`;
 CREATE TABLE IF NOT EXISTS `data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -237,13 +202,8 @@ CREATE TABLE IF NOT EXISTS `data` (
   `price` varchar(11) NOT NULL,
   KEY `Id` (`id`),
   KEY `owner` (`owner`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `members`
---
 
 DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
@@ -258,21 +218,13 @@ CREATE TABLE IF NOT EXISTS `members` (
   `currency` varchar(3) NOT NULL DEFAULT 'USD',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
---
--- Dumping data for table `members`
---
 
 INSERT INTO `members` (`member_id`, `firstname`, `lastname`, `login`, `mail`, `passwd`, `admin`, `measurement`, `currency`, `reg_date`) VALUES
 (1, 'Admin', 'Admin', 'admin', 'admin@127.0.0.1', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 'USD', '2014-07-18 23:34:32');
 
 
--- --------------------------------------------------------
-
---
--- Table structure for table `members_stats`
---
 
 DROP TABLE IF EXISTS `members_stats`;
 CREATE TABLE IF NOT EXISTS `members_stats` (
@@ -283,11 +235,6 @@ CREATE TABLE IF NOT EXISTS `members_stats` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
--- --------------------------------------------------------
-
---
--- Table structure for table `projects`
---
 
 DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
@@ -302,11 +249,6 @@ CREATE TABLE IF NOT EXISTS `projects` (
   KEY `project_owner` (`project_owner`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `projects_data`
---
 
 DROP TABLE IF EXISTS `projects_data`;
 CREATE TABLE IF NOT EXISTS `projects_data` (
@@ -321,12 +263,6 @@ CREATE TABLE IF NOT EXISTS `projects_data` (
   KEY `component_id` (`projects_data_component_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_options`
---
 
 DROP TABLE IF EXISTS `admin_options`;
 CREATE TABLE IF NOT EXISTS `admin_options` (
@@ -347,7 +283,3 @@ INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('register_tab_s
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('pubcomponents_tab_show', '0');
 -- donation tab, if your running a public site, maybe leave this on
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('donate_tab_show', '1');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
