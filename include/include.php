@@ -34,8 +34,10 @@ class ShowComponents {
 		}
 
 
+		echo $GetDataComponentsAll;
 		$sql_exec = mysql_Query($GetDataComponentsAll);
-		while($showDetails = mysql_fetch_array($sql_exec)) {
+		while($showDetails = mysql_fetch_array($sql_exec))
+		{
 			echo "<tr>";
 
 			echo '<td class="edit"><a href="edit_component.php?edit=';
@@ -50,27 +52,17 @@ class ShowComponents {
 			echo "</a></td>";
 
 			echo "<td>";
-
-				if ($showDetails['category'] < 999) {
-					$head_cat_id = substr($showDetails['category'], -3, 1);
-				}
-				else {
-					$head_cat_id = substr($showDetails['category'], -4, 2);
-				}
 				$subcatid = $showDetails['category'];
 
-				$CategoryName = "SELECT * FROM category_head WHERE id = ".$head_cat_id."";
+				$CategoryName = "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$subcatid ."";
 				$sql_exec_catname = mysql_Query($CategoryName);
+				$showDetailsCat = mysql_fetch_array($sql_exec_catname);
 
-				while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
-					$catname = $showDetailsCat['name'];
-				}
-
-			echo "<a href='category.php?cat=$head_cat_id'>$catname</a>";
+			echo "<a href='category.php?cat=".$showDetailsCat['cid']."'>".$showDetailsCat['h']."</a>";
 			echo "</td>";
 
 			echo "<td>";
-			$package = $showDetails['package'];
+				$package = $showDetails['package'];
 				if ($package == ""){
 					echo "-";
 				}
@@ -80,7 +72,7 @@ class ShowComponents {
 			echo "</td>";
 
 			echo "<td>";
-			$pins = $showDetails['pins'];
+				$pins = $showDetails['pins'];
 				if ($pins == ""){
 					echo "-";
 				}
@@ -90,33 +82,32 @@ class ShowComponents {
 			echo "</td>";
 
 			echo '<td>';
-			$image = $showDetails['url1'];
-			if ($image==""){
-				echo "-";
-			}
-
-			else{
-				echo '<a class="thumbnail" href="';
-				echo $image;
-				echo '"><span class="icon medium picture"></span><span class="imgB"><img src="';
-				echo $image;
-				echo '" /></span></a></td>';
-			}
+				$image = $showDetails['url1'];
+				if ($image==""){
+					echo "-";
+				}
+				else
+				{
+					echo '<a class="thumbnail" href="';
+					echo $image;
+					echo '"><span class="icon medium picture"></span><span class="imgB"><img src="';
+					echo $image;
+					echo '" /></span></a></td>';
+				}
 
 			echo '<td>';
-			$datasheet = $showDetails['datasheet'];
-			if ($datasheet==""){
-				echo "-";
-			}
-
-			else{
-				echo '<a href="';
-				echo $datasheet;
-				echo '"  target="_blank"><span class="icon medium document"></span></a></td>';
-			}
+				$datasheet = $showDetails['datasheet'];
+				if ($datasheet==""){
+					echo "-";
+				}
+				else{
+					echo '<a href="';
+					echo $datasheet;
+					echo '"  target="_blank"><span class="icon medium document"></span></a></td>';
+				}
 
 			echo "<td>";
-			$smd = $showDetails['smd'];
+				$smd = $showDetails['smd'];
 				if ($smd == "No"){
 					echo '<span class="icon medium checkboxUnchecked"></span>';
 				}
@@ -126,7 +117,7 @@ class ShowComponents {
 			echo "</td>";
 
 			echo "<td>";
-			$price = $showDetails['price'];
+				$price = $showDetails['price'];
 				if ($price == ""){
 					echo "-";
 				}
@@ -136,7 +127,7 @@ class ShowComponents {
 			echo "</td>";
 
 			echo "<td>";
-			$quantity = $showDetails['quantity'];
+				$quantity = $showDetails['quantity'];
 				if ($quantity == ""){
 					echo "-";
 				}
@@ -145,17 +136,17 @@ class ShowComponents {
 				}
 			echo "</td>";
 
-			$comment = $showDetails['comment'];
-			if ($comment==""){
-				echo '<td class="comment"><div>';
-				echo "-";
-				echo '</span></div></td>';
-			}
-			else{
-				echo '<td class="comment"><div><span class="icon medium spechBubbleSq"></span><span class="comment">';
-				echo nl2br($showDetails['comment']);
-				echo '</span></div></td>';
-			}
+				$comment = $showDetails['comment'];
+				if ($comment==""){
+					echo '<td class="comment"><div>';
+					echo "-";
+					echo '</span></div></td>';
+				}
+				else{
+					echo '<td class="comment"><div><span class="icon medium spechBubbleSq"></span><span class="comment">';
+					echo nl2br($showDetails['comment']);
+					echo '</span></div></td>';
+				}
 			echo "</tr>";
 		}
 	}
@@ -166,14 +157,11 @@ class ShowComponents {
 
 		$owner = $_SESSION['SESS_MEMBER_ID'];
 
-		if(isset($_GET['cat'])) {
-
+		if(isset($_GET['cat']))
+		{
 			$cat = (int)$_GET['cat'];
-			$subcatfrom = $cat*100;
-			$subcatto = $subcatfrom+99;
 
-
-			$CategoryName = "SELECT * FROM category_sub WHERE id = ".$cat."";
+			$CategoryName = "SELECT * FROM category_sub WHERE category_id = ".$cat."";
 			$sql_exec_catname = mysql_Query($CategoryName);
 
 			if(isset($_GET['by'])) {
@@ -189,19 +177,20 @@ class ShowComponents {
 				}
 
 				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category BETWEEN ".$subcatfrom." AND ".$subcatto." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category BETWEEN ".$subcatfrom." AND ".$subcatto." AND owner = ".$owner." ORDER by ".$by." ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
 				}
 				else {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category BETWEEN ".$subcatfrom." AND ".$subcatto." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 				}
 			}
 			else {
-				$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category BETWEEN ".$subcatfrom." AND ".$subcatto." AND owner = ".$owner." ORDER by name ASC";
+				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
+			echo $ComponentsCategory;
 			$sql_exec_component = mysql_Query($ComponentsCategory);
 
 			while ($showDetails = mysql_fetch_array($sql_exec_component)) {
@@ -224,7 +213,7 @@ class ShowComponents {
 				$sql_exec_catname = mysql_Query($CategoryName);
 
 				while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
-					$catname = $showDetailsCat['name'];
+					$catname = $showDetailsCat['subcategory'];
 				}
 
 				echo "<a href='category.php?subcat=$subcatid'>$catname</a>";
@@ -320,8 +309,8 @@ class ShowComponents {
 		}
 
 
-		if(isset($_GET['subcat'])) {
-
+		if(isset($_GET['subcat']))
+		{
 			$subcat = (int)$_GET['subcat'];
 
 			$CategoryName = "SELECT * FROM category_sub WHERE id = ".$subcat."";
@@ -340,17 +329,17 @@ class ShowComponents {
 				}
 
 				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category = ".$subcat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category = ".$subcat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
 				}
 				else {
-					$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
 				}
 			}
-			else{
-				$ComponentsCategory = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE category = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+			else {
+				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
 			$sql_exec_component = mysql_Query($ComponentsCategory);
@@ -370,7 +359,7 @@ class ShowComponents {
 
 				echo "<td>";
 					while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
-						$catname = $showDetailsCat['name'];
+						$catname = $showDetailsCat['subcategory'];
 					}
 					echo $catname;
 				echo "</td>";
@@ -464,10 +453,12 @@ class ShowComponents {
 			}
 		}
 	}
-	public function Search() {
 
-		if(isset($_GET['q'])) {
+	public function Search()
+	{
 
+		if(isset($_GET['q']))
+		{
 			require_once('include/login/auth.php');
 			include('include/mysql_connect.php');
 
@@ -492,24 +483,29 @@ class ShowComponents {
 					$by			=	strip_tags(mysql_real_escape_string($_GET["by"]));
 					$order_q	=	strip_tags(mysql_real_escape_string($_GET["order"]));
 
-					if($order_q == 'desc' or $order_q == 'asc'){
+					if($order_q == 'desc' or $order_q == 'asc')
+					{
 						$order = $order_q;
 					}
-					else{
+					else
+					{
 						$order = 'asc';
 					}
 
-					if($by == 'price' or $by == 'pins' or $by == 'quantity') {
+					if($by == 'price' or $by == 'pins' or $by == 'quantity')
+					{
 						$SearchQuery = "SELECT * FROM data WHERE (name LIKE'%$find%' OR package LIKE'%$find%' OR manufacturer LIKE'%$find%' OR pins LIKE'%$find%' OR location LIKE'%$find%' OR comment LIKE'%$find%') AND owner = $owner ORDER by $by +0 $order";
 					}
 					elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd' or $by =='manufacturer') {
 						$SearchQuery = "SELECT * FROM data WHERE (name LIKE'%$find%' OR package LIKE'%$find%' OR manufacturer LIKE'%$find%' OR pins LIKE'%$find%' OR location LIKE'%$find%' OR comment LIKE'%$find%') AND owner = $owner ORDER by $by $order";
 					}
-					else {
+					else
+					{
 						$SearchQuery = "SELECT * FROM data WHERE (name LIKE'%$find%' OR package LIKE'%$find%' OR manufacturer LIKE'%$find%' OR pins LIKE'%$find%' OR location LIKE'%$find%' OR comment LIKE'%$find%') AND owner = $owner ORDER by name ASC";
 					}
 				}
-				else{
+				else
+				{
 					$SearchQuery = "SELECT * FROM data WHERE (name LIKE'%$find%' OR package LIKE'%$find%' OR manufacturer LIKE'%$find%' OR pins LIKE'%$find%' OR location LIKE'%$find%' OR comment LIKE'%$find%') AND owner = $owner ORDER by name ASC";
 				}
 
@@ -536,19 +532,15 @@ class ShowComponents {
 					echo "</a></td>";
 
 					echo "<td>";
-						if ($showDetails['category'] < 999) {
-							$head_cat_id = substr($showDetails['category'], -3, 1);
-						}
-						else {
-							$head_cat_id = substr($showDetails['category'], -4, 2);
-						}
-						$subcatid = $showDetails['category'];
+						$head_cat_id = $showDetails['category'];
 
-						$CategoryName = "SELECT * FROM category_head WHERE id = ".$head_cat_id."";
+						$CategoryName = "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."";
+						//$CategoryName = "SELECT * FROM category_head WHERE id = ".$head_cat_id."";
 						$sql_exec_catname = mysql_Query($CategoryName);
 
-						while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
-							$catname = $showDetailsCat['name'];
+						while($showDetailsCat = mysql_fetch_array($sql_exec_catname))
+						{
+							$catname = $showDetailsCat['h'];
 						}
 
 					echo $catname;

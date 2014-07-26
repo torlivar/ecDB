@@ -107,7 +107,7 @@
 						echo '</a> / ';
 
 						echo '<a href="category.php?subcat=';
-						echo $executesql_head_catname['sid'];
+						echo $executesql_head_catname['csid'];
 						echo '"> ';
 						echo $executesql_head_catname['s'];
 					?>

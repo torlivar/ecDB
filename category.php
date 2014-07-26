@@ -1,6 +1,7 @@
 <?php
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
+	include('include/mysql_connect.php');
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -67,16 +68,16 @@
 								&by=name&order=
 								<?php	if(isset($_GET['order'])) {
 											$order = $_GET['order'];
-											if ($order == 'asc') {	
-												echo 'desc'; 
-											} 
-											else { 
-												echo 'asc'; 
-											} 
-										} 
+											if ($order == 'asc') {
+												echo 'desc';
+											}
+											else {
+												echo 'asc';
+											}
+										}
 										else {
-											echo 'desc'; 
-										} 
+											echo 'desc';
+										}
 								?>
 								">Name</a></th>
 

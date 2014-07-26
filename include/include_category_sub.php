@@ -7,33 +7,35 @@ class NameSub {
 		include('include/mysql_connect.php');
 		$owner = $_SESSION['SESS_MEMBER_ID'];
 
-		if(isset($_GET['cat'])) {
-			$cat = (int)$_GET['cat'];
-		}
-		if(isset($_GET['subcat'])) {
-			$subcat = (int)$_GET['subcat'];
-
-			if ($subcat < 999) {
-				$cat = substr($subcat, -3, 1);
-			}
-			else {
-				$cat = substr($subcat, -4, 2);
-			}
+		if(isset($_GET['cat']))
+		{
+			$cat = intval($_GET['cat']);
 		}
 
-		$subcatfrom = $cat*100;
-		$subcatto = $subcatfrom+99;
+		if(isset($_GET['subcat']))
+		{
+			// convert subcat to cat
+			$subcat = intval($_GET['subcat']);
+			$SubCategoryName = "SELECT category_id FROM category_sub WHERE id = ".$subcat."";
+			$sql_exec_subcatname = mysql_Query($SubCategoryName);
+			$ShowDetailsSubCatname = mysql_fetch_array($sql_exec_subcatname);
+			$cat = $ShowDetailsSubCatname["category_id"];
+		}
 
-		$SubCategoryName = "SELECT * FROM category_sub WHERE id BETWEEN ".$subcatfrom." AND ".$subcatto." ORDER by name ASC";
+		$SubCategoryName = "SELECT * FROM category_sub WHERE category_id = ".$cat." ORDER by subcategory ASC";
 		$sql_exec_subcatname = mysql_Query($SubCategoryName);
 
-		while ($ShowDetailsSubCatname = mysql_fetch_array($sql_exec_subcatname)) {
+		while ($ShowDetailsSubCatname = mysql_fetch_array($sql_exec_subcatname))
+		{
 			echo '<li>';
 			echo '<a href="category.php?subcat=';
 			echo $ShowDetailsSubCatname['id'];
 			echo '" ';
-			if(isset($_GET['subcat'])) {
-				if ($ShowDetailsSubCatname['id'] == $subcat) {
+
+			if(isset($_GET['subcat']))
+			{
+				if ($ShowDetailsSubCatname['id'] == $subcat)
+				{
 					echo 'class="selected"';
 				}
 			}
@@ -48,7 +50,7 @@ class NameSub {
 			}
 
 			echo '>';
-				echo $ShowDetailsSubCatname['name'];
+				echo $ShowDetailsSubCatname['subcategory'];
 			echo '</a></li> ';
 		}
 	}

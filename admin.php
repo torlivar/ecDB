@@ -12,7 +12,7 @@
 	}
 
 	$executesql = array();
-	$executesql['opt_show_blog_tab'] = $opt_blog_tab_show;
+	$executesql['opt_blog_tab_show'] = $opt_blog_tab_show;
 	$executesql['opt_blog_tab_title'] = $opt_blog_tab_title;
 	$executesql['opt_blog_tab_url'] = $opt_blog_tab_url;
 	$executesql['opt_register_tab_show'] = $opt_register_tab_show;
@@ -63,13 +63,13 @@
 					</ul>
 				</div>
 
-				<?php
+				<form class="globalForms noPadding" action="" method="post">
+					<?php
 					include('include/include_admin_settings.php');
 					$AdminSettings = new Admin;
 					$AdminSettings->Settings();
-				?>
+					?>
 
-				<form class="globalForms noPadding" action="" method="post">
 					<table class="globalTables leftAlign noHover" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
@@ -86,23 +86,23 @@
 								Show Blog Tab
 							</td>
 							<td>
-								<select name="opt_show_blog_tab">
+								<select name="opt_blog_tab_show">
 									<option value="0"
 									<?php
-										if(!isset($_POST['submit']) && $executesql['opt_show_blog_tab'] == '0') {
+										if(!isset($_POST['submit']) && $executesql['opt_blog_tab_show'] == '0') {
 											echo 'selected';
 										}
-										if(isset($_POST['submit']) && $_POST['opt_show_blog_tab'] == '0') {
+										if(isset($_POST['submit']) && $_POST['opt_blog_tab_show'] == '0') {
 											echo 'selected';
 										}
 									?>
 									>No</option>
 									<option value="1"
 									<?php
-										if(!isset($_POST['submit']) && $executesql['opt_show_blog_tab'] == '1') {
+										if(!isset($_POST['submit']) && $executesql['opt_blog_tab_show'] == '1') {
 											echo 'selected';
 										}
-										if(isset($_POST['submit']) && $_POST['opt_show_blog_tab'] == '1') {
+										if(isset($_POST['submit']) && $_POST['opt_blog_tab_show'] == '1') {
 											echo 'selected';
 										}
 									?>
