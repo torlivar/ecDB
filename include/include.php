@@ -34,7 +34,6 @@ class ShowComponents {
 		}
 
 
-		echo $GetDataComponentsAll;
 		$sql_exec = mysql_Query($GetDataComponentsAll);
 		while($showDetails = mysql_fetch_array($sql_exec))
 		{
