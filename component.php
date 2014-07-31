@@ -401,6 +401,23 @@
 								<td></td>
 							</tr>
 							<tr>
+								<td class="boldText">Bin Location</td>
+								<td>
+									<?php
+										if ($executesql['bin_location'] == "") {
+											echo "-";
+										}
+										else {
+											echo $executesql['bin_location'];
+										}
+									?>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
 								<td class="boldText">Datasheet</td>
 								<td>
 									<?php

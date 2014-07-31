@@ -216,7 +216,7 @@ else
 										else {
 											echo 'asc';
 										}
-									?>">Quantity in stock</a>
+									?>">Qty in stock</a>
 								</th>
 								<th>
 									<a href="?proj_id=<?php echo $project_id; ?>&by=order_quantity&order=<?php
@@ -232,7 +232,7 @@ else
 										else {
 											echo 'asc';
 										}
-									?>">Quantity on order</a>
+									?>">Qty on order</a>
 								</th>
 
 								<th>
@@ -249,7 +249,24 @@ else
 										else {
 											echo 'asc';
 										}
-									?>">Quantity in project</a>
+									?>">Qty in project</a>
+								</th>
+
+								<th>
+									<a href="?proj_id=<?php echo $project_id; ?>&by=bin_location&order=<?php
+										if(isset($_GET['order'])){
+											$order = $_GET['order'];
+											if ($order == 'asc'){
+												echo 'desc';
+											}
+											else {
+												echo 'asc';
+											}
+										}
+										else {
+											echo 'asc';
+										}
+									?>">Bin#</a>
 								</th>
 							</tr>
 						</thead>

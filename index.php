@@ -160,6 +160,9 @@
 								?>">Quantity</a>
 							</th>
 							<th>
+								Bin#
+							</th>
+							<th>
 								Comment
 							</th>
 						</tr>

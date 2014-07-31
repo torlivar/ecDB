@@ -76,3 +76,6 @@ delete from projects_data where projects_data_owner_id = (select member_id from 
 delete from projects where project_owner = (select member_id from members where login = 'demo');
 delete from members where login = 'demo';
 
+-- ---------------
+alter table `data` add column `bin_location` varchar(64) NOT NULL default "";
+

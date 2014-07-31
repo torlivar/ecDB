@@ -70,7 +70,7 @@ table.globalTables{width:100%; position:relative;}
             table.globalTables tbody tr td.edit{padding-left:3px;}
                 table.globalTables tbody tr td.edit a{visibility:hidden;}
                     table.globalTables tbody tr:hover td.edit a{visibility:visible;}
-div#header{width:900px;margin:0 auto 15px auto;height:100px;position:relative;}
+div#header{width:1000px;margin:0 auto 15px auto;height:100px;position:relative;}
 	div#header span.userInfo{color:#666;font-size:12px;text-shadow:0 1px 0 #fff;position:absolute;top:0px;right:0;}
 		div#header span.userInfo a{color:#000;text-decoration:none;}
 	div#header div.searchContent{position:absolute;font-size:12px;top:55px;right:0;color:#666;padding:3px;width:230px;background-color:#fff;border-bottom:2px solid #ccc;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;}
@@ -105,7 +105,7 @@ div.logoWrapper{position:absolute;top:10px;left:0;}
 	.shre.medium{background-position:-96px -104px;}
 .blIcon{background:url("../img/ecdbSpriteV1.png") no-repeat 0 -168px;width:77px;height:25px;display:inline-block;border:none;margin-bottom:-8px;}
 .packageImage{position:absolute;top:170px;right:115px;}
-div#menu{width:870px;padding:0 8px;margin:auto;}
+div#menu{width:970px;padding:0 8px;margin:auto;}
 	div#menu ul{list-style:none;}
 		div#menu ul li{list-style:none;display:inline-block;}
 			div#menu ul li a{
@@ -193,9 +193,9 @@ div.subSubMenu{border-bottom:3px dotted #565656;margin:0 0 10px 0;}
 body{color: #000;margin:0;letter-spacing:0.2px;padding:0;border-top:10px solid #74839C;background-color:#f6f6f6;font: normal 12px "Century Gothic", arial, sans-serif;}
 h1{font-size:16px;color:#333;font-weight:normal;padding:0 0 20px 0;}
 h2{font-size:14px;color:#333;font-weight:normal;padding:0 0 20px 0;}
-div#wrapper{padding:10px;width:900px;margin:auto;}
+div#wrapper{padding:10px;width:1000px;margin:auto;}
 ul.error{list-style:none;}
-div#content{background-color:#fff;position:relative;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;border-bottom:2px solid #ccc;width:870px;margin:0 auto 0 auto;padding:15px 15px 35px 15px;}
+div#content{background-color:#fff;position:relative;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;border-bottom:2px solid #ccc;width:970px;margin:0 auto 0 auto;padding:15px 15px 35px 15px;}
 	div#projDesc{padding:0 30px 30px 30px;}
 	div#projDesc p{padding:0px 0px 10px 0px;}
 	div#projDesc h1{padding:10px 0px 0px 0px;font-weight:bold;}
@@ -205,7 +205,7 @@ div#content{background-color:#fff;position:relative;border-radius:6px;-moz-borde
 	div#projDesc h5{padding:10px 0px 0px 0px;font-weight:bold;}
 	div#projDesc ul{padding:0px 0px 10px 20px}
 
-div#copyText{width:880px;font-size:11px;margin:10px auto 30px auto;padding:0 10px 0 10px;color:#444;height:50px;overflow:auto;line-height:20px;}
+div#copyText{width:980px;font-size:11px;margin:10px auto 30px auto;padding:0 10px 0 10px;color:#444;height:50px;overflow:auto;line-height:20px;}
 	div#copyText div.leftBox{float:left;height:50px;}
 		div#copyText div.leftBox .stats{color:#7f7f7f;text-shadow:0 1px 0 #fff;}
 	div#copyText div.rightBox{float:right;text-align:right;}

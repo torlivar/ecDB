@@ -20,17 +20,17 @@ class ShowComponents {
 			}
 
 			if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 			}
 			elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE owner = ".$owner." ORDER by ".$by." ".$order."";
+				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ".$by." ".$order."";
 			}
 			else {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE owner = ".$owner." ORDER by name ASC";
+				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by name ASC";
 			}
 		}
 		else {
-			$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment FROM data WHERE owner = ".$owner." ORDER by name ASC";
+			$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by name ASC";
 		}
 
 
@@ -134,6 +134,17 @@ class ShowComponents {
 					echo $quantity;
 				}
 			echo "</td>";
+				echo '<td>';
+				$bin_location = $showDetails['bin_location'];
+				if ($bin_location == "")
+				{
+					echo "-";
+				}
+				else
+				{
+					echo $bin_location;
+				}
+				echo '</td>';
 
 				$comment = $showDetails['comment'];
 				if ($comment==""){
@@ -704,6 +715,9 @@ class ShowComponents {
 			$url3				=	strip_tags(mysql_real_escape_string($_POST['url3']));
 			$url4				=	strip_tags(mysql_real_escape_string($_POST['url4']));
 
+			$bin_location		=	strip_tags(mysql_real_escape_string($_POST['bin_location']));
+
+
 
 			if ($name == '') {
 				echo '<div class="message red">';
@@ -772,9 +786,9 @@ class ShowComponents {
 			}
 			else {
 				if(isset($_POST['submit'])) {
-					$sql="INSERT into data (owner, name, manufacturer, package, pins, smd, quantity, location, scrap, width, height, depth, weight, datasheet, comment, category, url1, url2, url3, url4, price, public, order_quantity)
+					$sql="INSERT into data (owner, name, manufacturer, package, pins, smd, quantity, location, scrap, width, height, depth, weight, datasheet, comment, category, url1, url2, url3, url4, price, public, order_quantity, bin_location)
 					VALUES
-					('$owner', '$name', '$manufacturer', '$package', '$pins', '$smd', '$quantity', '$location', '$scrap', '$width', '$height', '$depth', '$weight', '$datasheet', '$comment', '$category', '$url1', '$url2', '$url3', '$url4', '$price', '$public', '$order_quantity')";
+					('$owner', '$name', '$manufacturer', '$package', '$pins', '$smd', '$quantity', '$location', '$scrap', '$width', '$height', '$depth', '$weight', '$datasheet', '$comment', '$category', '$url1', '$url2', '$url3', '$url4', '$price', '$public', '$order_quantity', '$bin_location')";
 
 					$sql_exec = mysql_query($sql) or die(mysql_error());
 					$component_id = mysql_insert_id();
@@ -824,7 +838,7 @@ class ShowComponents {
 
 				if(isset($_POST['update'])) {
 					$sql = "UPDATE data SET
-					name = '$name', manufacturer = '$manufacturer', package = '$package', pins = '$pins', smd = '$smd', quantity = '$quantity', location = '$location',	scrap = '$scrap', width = '$width', height = '$height', depth = '$depth', weight = '$weight', datasheet = '$datasheet', comment = '$comment', category = '$category', url1 = '$url1', url2 = '$url2',  url3 = '$url3', url4 = '$url4', price = '$price', public = '$public', order_quantity = '$order_quantity'	WHERE id = '$id'";
+					name = '$name', manufacturer = '$manufacturer', package = '$package', pins = '$pins', smd = '$smd', quantity = '$quantity', location = '$location',	scrap = '$scrap', width = '$width', height = '$height', depth = '$depth', weight = '$weight', datasheet = '$datasheet', comment = '$comment', category = '$category', url1 = '$url1', url2 = '$url2',  url3 = '$url3', url4 = '$url4', price = '$price', public = '$public', order_quantity = '$order_quantity', bin_location = '$bin_location'	WHERE id = '$id'";
 
 					$sql_exec = mysql_query($sql);
 

@@ -145,8 +145,16 @@ class ProjectShow {
 				else{
 					echo $quantity;
 				}
+			echo "</td>";
 
-
+			echo "<td>";
+				$bin_location = $showDetails['bin_location'];
+				if ($bin_location == ""){
+					echo "-";
+				}
+				else{
+					echo $bin_location;
+				}
 			echo "</td>";
 
 			echo "</tr>";
