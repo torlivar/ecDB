@@ -1,20 +1,11 @@
 README
 ====
-Welcome, this is a fork of Nils' original ecDB project with many small changes and fixes
+Welcome, this is a fork of Nils' original ecDB project with a great many changes and fixes.
 
 # What is ecDB
 
-[ecDB.net](http://www.ecdb.net) is basically a place where you, as an electronics hobbyist (or professional) can add your own components 
-to your personal database to keep track of what components you own, where they are, how many you own and so on. 
-
-## Who and Why
-
-ecDB is created by [Nils Fredriksson](http://nilsf.se) aka. ElectricMan, and designed by [Buildlog](http://buildlog.se). 
-
-The reason I publish the code for [ecDB.net](http://www.ecdb.net) is that I simply don't have enough time, 
-and my knowledge is not sufficient to develop [ecDB.net](http://www.ecdb.net) to the point I wish. Therefore 
-I need help from the community to make [ecDB.net](http://www.ecdb.net) better!
-
+ecDB is a small lightweight system to track your electronic components and projects, letting you know what you have,
+how much and where it is.
 
 # Changes From the Original ecDB
 
@@ -31,6 +22,10 @@ I need help from the community to make [ecDB.net](http://www.ecdb.net) better!
 * Projects now have url and markdown description
 * Project list now shows how many kits can be built from current component supply
 * Project detail now lists qty on order
+* Component bin location added to track where on your shelf they live
+* Fixed price calculations to two decimal points, no more 2.100000000000000038 weirdness
+* Great category modification (table structure cleaned up, no user space visibile)
+
 
 
 ### v0.1
@@ -48,7 +43,7 @@ Nils never versioned his code it seems, so I'm calling the original ecDB code ba
 * Apply the ecdb_database.sql to the empty database
 * Update admin password hash in database
 * Copy files to web server
-* Edit include/mysql_connect.php 
+* Edit include/mysql_connect.php
 * Login as admin and set/change any options.
 
 ## Upgrading
