@@ -25,7 +25,7 @@ how much and where it is.
 * Component bin location added to track where on your shelf they live
 * Fixed price calculations to two decimal points, no more 2.100000000000000038 weirdness
 * Great category modification (table structure cleaned up, no user space visibile)
-
+* Can quickly add/remove/update a component on a project in project view
 
 
 ### v0.1
