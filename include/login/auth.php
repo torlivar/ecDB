@@ -2,6 +2,13 @@
 	//Start session
 	session_start();
 
+	if (!isset($_SERVER['REQUEST_URI']))
+	{
+		   $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],1 );
+		   if (isset($_SERVER['QUERY_STRING'])) { $_SERVER['REQUEST_URI'].='?'.$_SERVER['QUERY_STRING']; }
+	}
+
+	$script_name = "";
 	$arrlp = explode("/", parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 	if(count($arrlp) > 0)
 	{
@@ -11,6 +18,7 @@
 	{
 		$script_name = $_SERVER["REQUEST_URI"];
 	}
+
 
 
 	//Check whether the session variable SESS_MEMBER_ID is present or not
