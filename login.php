@@ -23,8 +23,6 @@
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>ecDB - electronics component DataBase</title>
 
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-
 		<?php include_once("include/analytics.php") ?>
 
 	</head>
