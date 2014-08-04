@@ -108,7 +108,7 @@
 				<h1>
 					<?php
 						echo '<a href="category.php?cat='.$executesql_head_catname['cid'].'"> '.$executesql_head_catname['h'].'</a> / ';
-						echo '<a href="category.php?subcat='.$executesql_head_catname['sid'].'"> '.$executesql_head_catname['s'].'</a> / ';
+						echo '<a href="category.php?subcat='.$executesql_head_catname['csid'].'"> '.$executesql_head_catname['s'].'</a> / ';
 					?>
 				<a href="component.php?view=<?php echo $executesql['id']; ?>"><?php echo $executesql['name']; ?></a></h1>
 				</h1>
@@ -315,7 +315,7 @@
 								<td></td>
 							</tr>
 
-								<tr>
+							<tr>
 								<td class="boldText">
 									Bin Location
 								</td>
