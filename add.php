@@ -245,6 +245,25 @@
 								<td><img class="packageImage" border="0" src="img/boxSize.png"/></td>
 								<td></td>
 							</tr>
+
+							<tr>
+								<td class="boldText">
+									Bin Location
+								</td>
+								<td>
+									<input name="bin_location" type="text" class="medium" value="<?php if(isset($_POST['submit'])) { echo $_POST['bin_location']; } ?>" />
+								</td>
+
+								<td>
+								</td>
+
+								<td>
+								</td>
+
+								<td>
+								</td>
+							</tr>
+
 							<tr>
 								<td class="boldText">
 									Datasheet URL
