@@ -7,10 +7,10 @@ class ProjAdd {
 
 		if(isset($_POST['submit'])) {
 			$owner			=	$_SESSION['SESS_MEMBER_ID'];
-			$name 			= 	mysql_real_escape_string($_POST['name']);
-			$project_public = 	mysql_real_escape_string($_POST['project_public']);
-			$project_url 	= 	mysql_real_escape_string($_POST['project_url']);
-			$project_desc 	= 	mysql_real_escape_string($_POST['project_desc']);
+			$name 			= 	mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['name']);
+			$project_public = 	mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['project_public']);
+			$project_url 	= 	mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['project_url']);
+			$project_desc 	= 	mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['project_desc']);
 
 			$id 			= 	intval($_GET['proj_id']);
 
@@ -19,7 +19,7 @@ class ProjAdd {
 			}
 			else {
 				$sql = "UPDATE projects SET project_name = '".$name."', project_public=".$project_public.", project_url = '".$project_url."', project_desc = '".$project_desc."' WHERE project_id = ".$id." ";
-				$sql_exec = mysql_query($sql);
+				$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 
 				//header("location: ".$_SERVER['REQUEST_URI']);
 

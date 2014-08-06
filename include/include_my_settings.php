@@ -8,18 +8,18 @@ class My {
 		if(isset($_POST['submit'])) {
 			$owner				=	$_SESSION['SESS_MEMBER_ID'];
 
-			$GetDataComponent = mysql_query("SELECT passwd FROM members WHERE member_id = ".$owner."");
-			$executesql = mysql_fetch_assoc($GetDataComponent);
+			$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT passwd FROM members WHERE member_id = ".$owner."");
+			$executesql = mysqli_fetch_assoc($GetDataComponent);
 
-			$firstname			=	strip_tags(mysql_real_escape_string($_POST['firstname']));
-			$lastname			=	strip_tags(mysql_real_escape_string($_POST['lastname']));
+			$firstname			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['firstname']));
+			$lastname			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['lastname']));
 
-			$mail				=	strip_tags(mysql_real_escape_string($_POST['mail']));
-			$oldpass			=	strip_tags(mysql_real_escape_string($_POST['oldpass']));
-			$newpass			=	strip_tags(mysql_real_escape_string($_POST['newpass']));
+			$mail				=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['mail']));
+			$oldpass			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['oldpass']));
+			$newpass			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['newpass']));
 
-			$measurement		=	strip_tags(mysql_real_escape_string($_POST['measurement']));
-			$currency			=	strip_tags(mysql_real_escape_string($_POST['currency']));
+			$measurement		=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['measurement']));
+			$currency			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['currency']));
 
 			if ($firstname == '') {
 				echo '<div class="message red">';
@@ -74,11 +74,11 @@ class My {
 			else {
 				if (!empty($oldpass) && !empty($newpass)) {
 					$sql="UPDATE members SET firstname = '$firstname', lastname = '$lastname', mail = '$mail', passwd = '".md5($newpass)."', measurement = '$measurement', currency = '$currency' WHERE member_id = '$owner'";
-					$sql_exec = mysql_query($sql);
+					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 				}
 				else {
 					$sql="UPDATE members SET firstname = '$firstname', lastname = '$lastname', mail = '$mail', measurement = '$measurement', currency = '$currency' WHERE member_id = '$owner'";
-					$sql_exec = mysql_query($sql);
+					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 				}
 
 				echo '<div class="message green center">';

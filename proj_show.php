@@ -15,27 +15,27 @@
 	{
 		if(isset($_POST['submit']))
 		{
-			$project_id = mysql_real_escape_string($_GET["proj_id"]);
+			$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 			$owner = $_SESSION['SESS_MEMBER_ID'];
-			$n = strip_tags(mysql_real_escape_string($_POST["name"]));
-			$qty = intval(strip_tags(mysql_real_escape_string($_POST["quantity"])));
+			$n = strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST["name"]));
+			$qty = intval(strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST["quantity"])));
 
 			$qry = "SELECT projects_data_quantity, projects_data_id FROM `projects_data` where projects_data_owner_id = '".$owner."' and projects_data_component_id = (select id from data where owner = '".$owner."' and name ='".$n."')";
-			$sql_exec = mysql_Query($qry);
+			$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $qry);
 
-			if(mysql_num_rows($sql_exec)  > 0)
+			if(mysqli_num_rows($sql_exec)  > 0)
 			{
 				if($qty == 0)
 				{
-					while($showDetails = mysql_fetch_array($sql_exec))
+					while($showDetails = mysqli_fetch_array($sql_exec))
 					{
 						$id = $showDetails['projects_data_id'];
 						$newqty = $showDetails['projects_data_quantity'];
 					}
 
 					$sql = "delete from projects_data where projects_data_id = ".$id."";
-					mysql_Query($sql);
-					if(mysql_affected_rows() > 0)
+					mysqli_query($GLOBALS["___mysqli_ston"], $sql);
+					if(mysqli_affected_rows($GLOBALS["___mysqli_ston"]) > 0)
 					{
 						$outval = "Component removed from project.";
 						$outval_colour = "blue";
@@ -50,7 +50,7 @@
 				{
 					if($qty > 0)
 					{
-						while($showDetails = mysql_fetch_array($sql_exec))
+						while($showDetails = mysqli_fetch_array($sql_exec))
 						{
 							$id = $showDetails['projects_data_id'];
 							$newqty = $showDetails['projects_data_quantity'];
@@ -59,8 +59,8 @@
 						if($newqty != $qty)
 						{
 							$sql = "update projects_data set projects_data_quantity = ".$qty." where projects_data_id=".$id."";
-							mysql_Query($sql);
-							if(mysql_affected_rows() > 0)
+							mysqli_query($GLOBALS["___mysqli_ston"], $sql);
+							if(mysqli_affected_rows($GLOBALS["___mysqli_ston"]) > 0)
 							{
 								$outval = "Component quantity updated.";
 								$outval_colour = "green";
@@ -88,15 +88,15 @@
 			{
 				if($qty > 0)
 				{
-					$sql_exec = mysql_Query("select id from data where owner = '".$_SESSION['SESS_MEMBER_ID']."' and name ='".$n."'");
-					if(mysql_num_rows($sql_exec)  > 0)
+					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], "select id from data where owner = '".$_SESSION['SESS_MEMBER_ID']."' and name ='".$n."'");
+					if(mysqli_num_rows($sql_exec)  > 0)
 					{
-						$showDetails = mysql_fetch_array($sql_exec);
+						$showDetails = mysqli_fetch_array($sql_exec);
 						$comp_id = $showDetails['id'];
 
 						$sql = "insert into projects_data (projects_data_owner_id, projects_data_project_id, projects_data_component_id, projects_data_quantity) values(".$owner.",".$project_id.",".$comp_id.",".$qty.")";
-						mysql_Query($sql);
-						if(mysql_affected_rows() > 0)
+						mysqli_query($GLOBALS["___mysqli_ston"], $sql);
+						if(mysqli_affected_rows($GLOBALS["___mysqli_ston"]) > 0)
 						{
 							$outval = "Component added to project.";
 							$outval_colour = "green";
@@ -132,10 +132,10 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="BOM-list for project <?php
 							// Visar projektets namn.
-							$project_id = mysql_real_escape_string($_GET["proj_id"]);
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
+							$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
+							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
-							while($row = mysql_fetch_array($result))
+							while($row = mysqli_fetch_array($result))
 							{
 								echo $row['project_name'];
 							}
@@ -146,10 +146,10 @@
 		<title>Viewing project - <?php
 							// Visar projektets namn.
 							include('include/mysql_connect.php');
-							$project_id = mysql_real_escape_string($_GET["proj_id"]);
-							$result = mysql_query("SELECT project_name FROM projects WHERE project_id = ".$project_id."");
+							$project_id = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
+							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
-							while($row = mysql_fetch_array($result))
+							while($row = mysqli_fetch_array($result))
 							{
 								echo $row['project_name'];
 							}
@@ -218,11 +218,11 @@ else
 					<?php
 							// Get project name/url and description
 							include('include/mysql_connect.php');
-							$project_id = mysql_real_escape_string($_GET["proj_id"]);
+							$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 
-							$result = mysql_query("SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
+							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
 
-							while($row = mysql_fetch_array($result))
+							while($row = mysqli_fetch_array($result))
 							{
 								echo "<h1>Viewing project <strong>";
 								if(is_null($row['project_url']) == false)

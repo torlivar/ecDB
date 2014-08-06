@@ -5,16 +5,16 @@
 
 	$id 	= 	intval($_GET['proj_id']);
 
-	$GetDataProjectName = mysql_query("SELECT * FROM projects WHERE project_id = ".$id."");
-	$executesql = mysql_fetch_assoc($GetDataProjectName);
+	$GetDataProjectName = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM projects WHERE project_id = ".$id."");
+	$executesql = mysqli_fetch_assoc($GetDataProjectName);
 
 	if(isset($_POST['delete']))
 	{
 		$sqlDeleteProject = "DELETE FROM projects WHERE project_id = ".$id."";
-		$sql_exec_component_delete = mysql_query($sqlDeleteProject);
+		$sql_exec_component_delete = mysqli_query($GLOBALS["___mysqli_ston"], $sqlDeleteProject);
 
 		$sqlDeleteProject = "DELETE FROM projects_data WHERE projects_data_project_id = ".$id."";
-		$sql_exec_project_delete = mysql_query($sqlDeleteProject);
+		$sql_exec_project_delete = mysqli_query($GLOBALS["___mysqli_ston"], $sqlDeleteProject);
 
 		header("Location: proj_list.php?proj_del=1");
 		exit();
