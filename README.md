@@ -26,7 +26,7 @@ how much and where it is.
 * Fixed price calculations to two decimal points, no more 2.100000000000000038 weirdness
 * Great category modification (table structure cleaned up, no user space visibile)
 * Can quickly add/remove/update a component on a project in project view
-
+* Conversion of deprecated mysql_ driver to mysqli_ driver
 
 ### v0.1
 Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1
