@@ -6,11 +6,11 @@
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['view'];
 
-	$GetDataComponent = mysql_query("SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner."");
-	$executesql = mysql_fetch_assoc($GetDataComponent);
+	$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner."");
+	$executesql = mysqli_fetch_assoc($GetDataComponent);
 
-	$GetPersonal = mysql_query("SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
-	$personal = mysql_fetch_assoc($GetPersonal);
+	$GetPersonal = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
+	$personal = mysqli_fetch_assoc($GetPersonal);
 
 	if ($executesql['owner'] !== $owner) {
 		header("Location: error.php?id=1");
@@ -19,8 +19,8 @@
 
 	$head_cat_id = $executesql['category'];
 
-	$GetHeadCatName = mysql_query("select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."");
-	$executesql_head_catname = mysql_fetch_assoc($GetHeadCatName);
+	$GetHeadCatName = mysqli_query($GLOBALS["___mysqli_ston"], "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."");
+	$executesql_head_catname = mysqli_fetch_assoc($GetHeadCatName);
 
 	if(isset($_POST['edit'])) {
 		header("Location: edit_component.php?edit=$id");
@@ -28,10 +28,10 @@
 
 	if(isset($_POST['delete'])) {
 		$sqlDeleteComopnent = "DELETE FROM data WHERE id = ".$id." ";
-		$sql_exec_component_delete = mysql_query($sqlDeleteComopnent);
+		$sql_exec_component_delete = mysqli_query($GLOBALS["___mysqli_ston"], $sqlDeleteComopnent);
 
 		$sqlDeleteProject = "DELETE FROM projects_data WHERE projects_data_component_id = '$id'";
-		$sql_exec_project_delete = mysql_query($sqlDeleteProject);
+		$sql_exec_project_delete = mysqli_query($GLOBALS["___mysqli_ston"], $sqlDeleteProject);
 
 		header("Location: .");
 	}
@@ -45,7 +45,7 @@
 		$quantity_after		= 	$quantity_before + 1;
 
 		$sql = "UPDATE data SET quantity = '".$quantity_after."' WHERE id = ".$id." ";
-		$sql_exec = mysql_query($sql);
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
 
@@ -54,7 +54,7 @@
 		$quantity_after 	= 	$quantity_before - 1;
 
 		$sql = "UPDATE data SET quantity = '".$quantity_after."' WHERE id = ".$id." ";
-		$sql_exec = mysql_query($sql);
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
 
@@ -63,7 +63,7 @@
 		$quantity_after		= 	$quantity_before + 1;
 
 		$sql = "UPDATE data SET order_quantity = '".$quantity_after."' WHERE id = ".$id." ";
-		$sql_exec = mysql_query($sql);
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
 
@@ -72,7 +72,7 @@
 		$quantity_after 	= 	$quantity_before - 1;
 
 		$sql = "UPDATE data SET order_quantity = '".$quantity_after."' WHERE id = ".$id." ";
-		$sql_exec = mysql_query($sql);
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 		header("location: " . $_SERVER['REQUEST_URI']);
 	}
 ?>

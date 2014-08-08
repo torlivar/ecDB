@@ -14,8 +14,8 @@
 			include('include/mysql_connect.php');
 
 			$owner = $_SESSION['SESS_MEMBER_ID'];
-			$GetName = mysql_query("SELECT firstname, lastname FROM members WHERE member_id = ".$owner."");
-			$headername = mysql_fetch_assoc($GetName);
+			$GetName = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT firstname, lastname FROM members WHERE member_id = ".$owner."");
+			$headername = mysqli_fetch_assoc($GetName);
 
 			if(isset($_POST['submit']) && $script_name == 'my.php') { echo $_POST['firstname']; } else { echo $headername['firstname']; }
 			echo ' ';

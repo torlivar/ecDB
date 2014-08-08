@@ -1,37 +1,37 @@
 <?php
 class Shoplist {
 	public function ShoplistList() {
-	
+
 		require_once('login/auth.php');
 		include('mysql_connect.php');
-		
+
 		$owner = $_SESSION['SESS_MEMBER_ID'];
-		
+
 		if(isset($_GET['by'])) {
-		
+
 			$by = $_GET["by"];
 			$order = $_GET["order"];
-			
-			$bysql = mysql_real_escape_string($by);
-			$ordersql = mysql_real_escape_string($order);
-			
+
+			$bysql = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $by);
+			$ordersql = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order);
+
 			if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-			
+
 				$GetDataComponentsAll = "SELECT * FROM data WHERE owner = ".$owner." AND order_quantity > 0 ORDER by ".$bysql." +0 ".$ordersql."";
 			}
 			else {
-			
+
 				$GetDataComponentsAll = "SELECT * FROM data WHERE owner = ".$owner." AND order_quantity > 0 ORDER by ".$bysql." ".$ordersql."";
 			}
 		}
 		else {
 			$GetDataComponentsAll = "SELECT * FROM data WHERE owner = ".$owner." AND order_quantity > 0 ORDER by name ASC";
 		}
-		
-		
-		$sql_exec = mysql_Query($GetDataComponentsAll);
 
-		while($showDetails = mysql_fetch_array($sql_exec)) {
+
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
+
+		while($showDetails = mysqli_fetch_array($sql_exec)) {
 			echo "<tr>";
 
 			echo '<td class="edit"><a href="edit_component.php?edit=';
@@ -95,7 +95,7 @@ class Shoplist {
 					echo $quantity;
 				}
 			echo "</td>";
-			
+
 			echo "<td>";
 			$order_quantity = $showDetails['order_quantity'];
 				if ($order_quantity == ""){

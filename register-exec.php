@@ -11,27 +11,13 @@
 	//Validation error flag
 	$errflag = false;
 
-	//Connect to mysql server
-	$link = mysql_connect($db_host, $db_username, $db_pass);
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-
-	//Select database
-	$db = mysql_select_db($db_name);
-	if(!$db) {
-		die("Unable to select database");
-	}
-
-	mysql_set_charset('utf8');
-
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
 		if(get_magic_quotes_gpc()) {
 			$str = stripslashes($str);
 		}
-		return mysql_real_escape_string($str);
+		return (mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $str) ;
 	}
 
 	//Sanitize the POST values
@@ -95,13 +81,13 @@
 	//Check for duplicate login ID
 	if($login != '') {
 		$qry = "SELECT * FROM members WHERE login='$login'";
-		$result = mysql_query($qry);
+		$result = mysqli_query($GLOBALS["___mysqli_ston"], $qry);
 		if($result) {
-			if(mysql_num_rows($result) > 0) {
+			if(mysqli_num_rows($result) > 0) {
 				$errmsg_arr[] = 'Username already in use';
 				$errflag = true;
 			}
-			@mysql_free_result($result);
+			@((mysqli_free_result($result) || (is_object($result) && (get_class($result) == "mysqli_result"))) ? true : false);
 		}
 		else {
 			die("Query failed");
@@ -118,7 +104,7 @@
 
 	//Create INSERT query
 	$qry = "INSERT INTO members(firstname, lastname, login, mail, passwd) VALUES('$fname','$lname','$login','$mail','".md5($_POST['password'])."')";
-	$result = @mysql_query($qry);
+	$result = @mysqli_query($GLOBALS["___mysqli_ston"], $qry);
 
 	//Check whether the query was successful or not
 	if($result)

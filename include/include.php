@@ -9,8 +9,8 @@ class ShowComponents {
 
 		if(isset($_GET['by'])) {
 
-			$by			=	strip_tags(mysql_real_escape_string($_GET["by"]));
-			$order_q	=	strip_tags(mysql_real_escape_string($_GET["order"]));
+			$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
+			$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
 
 			if($order_q == 'desc' or $order_q == 'asc'){
 				$order = $order_q;
@@ -34,8 +34,8 @@ class ShowComponents {
 		}
 
 
-		$sql_exec = mysql_Query($GetDataComponentsAll);
-		while($showDetails = mysql_fetch_array($sql_exec))
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
+		while($showDetails = mysqli_fetch_array($sql_exec))
 		{
 			echo "<tr>";
 
@@ -54,8 +54,8 @@ class ShowComponents {
 				$subcatid = $showDetails['category'];
 
 				$CategoryName = "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$subcatid ."";
-				$sql_exec_catname = mysql_Query($CategoryName);
-				$showDetailsCat = mysql_fetch_array($sql_exec_catname);
+				$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
+				$showDetailsCat = mysqli_fetch_array($sql_exec_catname);
 
 			echo "<a href='category.php?cat=".$showDetailsCat['cid']."'>".$showDetailsCat['h']."</a>";
 			echo "</td>";
@@ -172,12 +172,12 @@ class ShowComponents {
 			$cat = (int)$_GET['cat'];
 
 			$CategoryName = "SELECT * FROM category_sub WHERE category_id = ".$cat."";
-			$sql_exec_catname = mysql_Query($CategoryName);
+			$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
 			if(isset($_GET['by'])) {
 
-				$by			=	strip_tags(mysql_real_escape_string($_GET["by"]));
-				$order_q	=	strip_tags(mysql_real_escape_string($_GET["order"]));
+				$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
+				$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
 
 				if($order_q == 'desc' or $order_q == 'asc') {
 					$order = $order_q;
@@ -201,9 +201,9 @@ class ShowComponents {
 			}
 
 			echo $ComponentsCategory;
-			$sql_exec_component = mysql_Query($ComponentsCategory);
+			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
 
-			while ($showDetails = mysql_fetch_array($sql_exec_component)) {
+			while ($showDetails = mysqli_fetch_array($sql_exec_component)) {
 				echo "<tr>";
 
 				echo '<td class="edit"><a href="edit_component.php?edit=';
@@ -220,9 +220,9 @@ class ShowComponents {
 				$subcatid = $showDetails['category'];
 
 				$CategoryName = "SELECT * FROM category_sub WHERE id = ".$subcatid."";
-				$sql_exec_catname = mysql_Query($CategoryName);
+				$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
-				while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
+				while($showDetailsCat = mysqli_fetch_array($sql_exec_catname)) {
 					$catname = $showDetailsCat['subcategory'];
 				}
 
@@ -324,12 +324,12 @@ class ShowComponents {
 			$subcat = (int)$_GET['subcat'];
 
 			$CategoryName = "SELECT * FROM category_sub WHERE id = ".$subcat."";
-			$sql_exec_catname = mysql_Query($CategoryName);
+			$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
 			if(isset($_GET['by'])) {
 
-				$by			=	strip_tags(mysql_real_escape_string($_GET["by"]));
-				$order_q	=	strip_tags(mysql_real_escape_string($_GET["order"]));
+				$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
+				$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
 
 				if($order_q == 'desc' or $order_q == 'asc') {
 					$order = $order_q;
@@ -352,9 +352,9 @@ class ShowComponents {
 				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
-			$sql_exec_component = mysql_Query($ComponentsCategory);
+			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
 
-			while ($showDetails = mysql_fetch_array($sql_exec_component)) {
+			while ($showDetails = mysqli_fetch_array($sql_exec_component)) {
 				echo "<tr>";
 
 				echo '<td class="edit"><a href="edit_component.php?edit=';
@@ -368,7 +368,7 @@ class ShowComponents {
 				echo "</a></td>";
 
 				echo "<td>";
-					while($showDetailsCat = mysql_fetch_array($sql_exec_catname)) {
+					while($showDetailsCat = mysqli_fetch_array($sql_exec_catname)) {
 						$catname = $showDetailsCat['subcategory'];
 					}
 					echo $catname;
@@ -474,8 +474,7 @@ class ShowComponents {
 
 			$owner = $_SESSION['SESS_MEMBER_ID'];
 
-			$query = mysql_real_escape_string($_GET['q']);
-
+			$query = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET['q']);
 			$query1 = strtoupper($query);
 			$query2 = strip_tags($query1);
 			$find = trim($query2);
@@ -490,8 +489,8 @@ class ShowComponents {
 
 
 				if (isset($_GET['by'])){
-					$by			=	strip_tags(mysql_real_escape_string($_GET["by"]));
-					$order_q	=	strip_tags(mysql_real_escape_string($_GET["order"]));
+					$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
+					$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
 
 					if($order_q == 'desc' or $order_q == 'asc')
 					{
@@ -519,15 +518,15 @@ class ShowComponents {
 					$SearchQuery = "SELECT * FROM data WHERE (name LIKE'%$find%' OR package LIKE'%$find%' OR manufacturer LIKE'%$find%' OR pins LIKE'%$find%' OR location LIKE'%$find%' OR comment LIKE'%$find%') AND owner = $owner ORDER by name ASC";
 				}
 
-				$sql_exec = mysql_query($SearchQuery);
-				$anymatches = mysql_num_rows($sql_exec);
+				$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $SearchQuery);
+				$anymatches = mysqli_num_rows($sql_exec);
 				if ($anymatches == 0) {
 					echo '<div class="message red">';
 						echo "Sorry, but we can not find an entry to match your query.";
 					echo '</div>';
 				}
 
-				while($showDetails = mysql_fetch_array($sql_exec)) {
+				while($showDetails = mysqli_fetch_array($sql_exec)) {
 					echo "<tr>";
 
 					echo '<td class="edit"><a href="edit_component.php?edit=';
@@ -546,9 +545,9 @@ class ShowComponents {
 
 						$CategoryName = "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$head_cat_id."";
 						//$CategoryName = "SELECT * FROM category_head WHERE id = ".$head_cat_id."";
-						$sql_exec_catname = mysql_Query($CategoryName);
+						$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
-						while($showDetailsCat = mysql_fetch_array($sql_exec_catname))
+						while($showDetailsCat = mysqli_fetch_array($sql_exec_catname))
 						{
 							$catname = $showDetailsCat['h'];
 						}
@@ -670,52 +669,52 @@ class ShowComponents {
 				$name = '';
 			}
 			else{
-				$name			=	strip_tags(mysql_real_escape_string($_POST['name']));
+				$name			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['name']));
 			}
 
 			if (empty($_POST['quantity'])) {
 				$quantity = 0;
 			}
 			else{
-				$quantity			=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['quantity'])));
+				$quantity			=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['quantity'])));
 			}
 
 			if (empty($_POST['category'])) {
 				$category = '';
 			}
 			else{
-				$category		=	strip_tags(mysql_real_escape_string($_POST['category']));
+				$category		=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['category']));
 			}
 
 			if (empty($_POST['project'])) {
 				$project = '';
 			}
 			else{
-				$project		=	strip_tags(mysql_real_escape_string($_POST['project']));
+				$project		=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['project']));
 			}
 
-			$comment			=	strip_tags(mysql_real_escape_string($_POST['comment']));
-			$order_quantity		=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['orderquant'])));
-			$project_quantity	=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['projquant'])));
-			$price				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['price'])));
-			$location			=	strip_tags(mysql_real_escape_string($_POST['location']));
-			$manufacturer		=	strip_tags(mysql_real_escape_string($_POST['manufacturer']));
-			$package			=	strip_tags(mysql_real_escape_string($_POST['package']));
-			$pins				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['pins'])));
-			$scrap				=	strip_tags(mysql_real_escape_string($_POST['scrap']));
-			$smd				=	strip_tags(mysql_real_escape_string($_POST['smd']));
-			$public				=	strip_tags(mysql_real_escape_string($_POST['public']));
-			$width				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['width'])));
-			$height				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['height'])));
-			$depth				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['depth'])));
-			$weight				=	str_replace(',', '.', strip_tags(mysql_real_escape_string($_POST['weight'])));
-			$datasheet			=	strip_tags(mysql_real_escape_string($_POST['datasheet']));
-			$url1				=	strip_tags(mysql_real_escape_string($_POST['url1']));
-			$url2				=	strip_tags(mysql_real_escape_string($_POST['url2']));
-			$url3				=	strip_tags(mysql_real_escape_string($_POST['url3']));
-			$url4				=	strip_tags(mysql_real_escape_string($_POST['url4']));
+			$comment			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['comment']));
+			$order_quantity		=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['orderquant'])));
+			$project_quantity	=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['projquant'])));
+			$price				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['price'])));
+			$location			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['location']));
+			$manufacturer		=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['manufacturer']));
+			$package			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['package']));
+			$pins				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['pins'])));
+			$scrap				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['scrap']));
+			$smd				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['smd']));
+			$public				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['public']));
+			$width				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['width'])));
+			$height				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['height'])));
+			$depth				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['depth'])));
+			$weight				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['weight'])));
+			$datasheet			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['datasheet']));
+			$url1				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['url1']));
+			$url2				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['url2']));
+			$url3				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['url3']));
+			$url4				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['url4']));
 
-			$bin_location		=	strip_tags(mysql_real_escape_string($_POST['bin_location']));
+			$bin_location		=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['bin_location']));
 
 
 
@@ -790,15 +789,15 @@ class ShowComponents {
 					VALUES
 					('$owner', '$name', '$manufacturer', '$package', '$pins', '$smd', '$quantity', '$location', '$scrap', '$width', '$height', '$depth', '$weight', '$datasheet', '$comment', '$category', '$url1', '$url2', '$url3', '$url4', '$price', '$public', '$order_quantity', '$bin_location')";
 
-					$sql_exec = mysql_query($sql) or die(mysql_error());
-					$component_id = mysql_insert_id();
+					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+					$component_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 
 					if (!empty($project) && !empty($project_quantity)) {
 						$proj_add="INSERT into projects_data (projects_data_owner_id, projects_data_project_id, projects_data_component_id, projects_data_quantity)
 							VALUES
 							('$owner', '$project', '$component_id', '$project_quantity')";
 
-						$sql_exec = mysql_query($proj_add);
+						$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $proj_add);
 					}
 
 					/*------------------------------------------------------------------------------------------
@@ -818,7 +817,7 @@ class ShowComponents {
 							VALUES
 							('$owner', '$project', '$component_id', '$quantity')";
 
-							$sql_exec = mysql_query($proj_add);
+							$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $proj_add);
 
 							echo 'Inserted';
 						}
@@ -829,8 +828,8 @@ class ShowComponents {
 					echo 'Component added! - <a href="component.php?view=';
 					echo $component_id;
 					echo '">View component (';
-						$result = mysql_query("SELECT name FROM data WHERE id = '$component_id'");
-						$name = mysql_fetch_array($result);
+						$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT name FROM data WHERE id = '$component_id'");
+						$name = mysqli_fetch_array($result);
 						echo $name['name'];
 					echo ')</a>';
 					echo '</div>';
@@ -840,14 +839,14 @@ class ShowComponents {
 					$sql = "UPDATE data SET
 					name = '$name', manufacturer = '$manufacturer', package = '$package', pins = '$pins', smd = '$smd', quantity = '$quantity', location = '$location',	scrap = '$scrap', width = '$width', height = '$height', depth = '$depth', weight = '$weight', datasheet = '$datasheet', comment = '$comment', category = '$category', url1 = '$url1', url2 = '$url2',  url3 = '$url3', url4 = '$url4', price = '$price', public = '$public', order_quantity = '$order_quantity', bin_location = '$bin_location'	WHERE id = '$id'";
 
-					$sql_exec = mysql_query($sql);
+					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 
 					if (!empty($project) && !empty($project_quantity)) {
 						$proj_add="INSERT into projects_data (projects_data_owner_id, projects_data_project_id, projects_data_component_id, projects_data_quantity)
 							VALUES
 							('$owner', '$project', '$id', '$project_quantity')";
 
-						$sql_exec = mysql_query($proj_add) or die(mysql_error());
+						$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $proj_add) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 						echo $project;
 						echo ' Owner ';
 						echo $owner;
@@ -863,7 +862,7 @@ class ShowComponents {
 						foreach ($proj as $quantity_proj_add){
 							$projects = array_search($quantity_proj_add, $proj);
 							$sqlDeleteProject = "DELETE FROM projects_data WHERE projects_data_component_id = '$id' AND projects_data_project_id = '$projects'";
-							$sql_exec_project_delete = mysql_query($sqlDeleteProject);
+							$sql_exec_project_delete = mysqli_query($GLOBALS["___mysqli_ston"], $sqlDeleteProject);
 
 							if ($quantity_proj_add == 0){
 								echo 'None';
@@ -873,7 +872,7 @@ class ShowComponents {
 								VALUES
 								('$owner', '$projects', '$id', '$quantity_proj_add')";
 
-								$sql_exec = mysql_query($proj_edit);
+								$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $proj_edit);
 
 								/*
 								echo 'Projid: ';

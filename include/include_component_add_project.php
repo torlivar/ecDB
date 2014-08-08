@@ -4,17 +4,17 @@ class AddMenuProj {
 
 		require_once('include/login/auth.php');
 		include('include/mysql_connect.php');
-		
+
 		$owner	=	$_SESSION['SESS_MEMBER_ID'];
-		
+
 		$ProjectNameQuery = "SELECT * FROM projects WHERE project_owner = ".$owner." ORDER by project_name ASC";
-		$sql_exec_projname = mysql_Query($ProjectNameQuery);
+		$sql_exec_projname = mysqli_query($GLOBALS["___mysqli_ston"], $ProjectNameQuery);
 
 		echo '<option class="main_category" value="">';
 		echo ' - Project - ';
 		echo '</option>';
-		
-		while ($Project = mysql_fetch_array($sql_exec_projname)) {
+
+		while ($Project = mysqli_fetch_array($sql_exec_projname)) {
 			echo '<option value="';
 			echo $Project['project_id'];
 			echo '"';
@@ -30,5 +30,5 @@ class AddMenuProj {
 			echo '</option>';
 		}
 	}
-}	
+}
 ?>

@@ -1,7 +1,7 @@
 <?php
 	//Create query
 	$qry="SELECT admin_key, admin_value FROM admin_options";
-	$result=mysql_query($qry);
+	$result=mysqli_query($GLOBALS["___mysqli_ston"], $qry);
 
 	// sane defaults
 	$opt_blog_tab_show = 0;
@@ -12,7 +12,7 @@
 	$opt_pubcomponent_tab_show = 0;
 	$opt_donate_tab_show = 1;
 
-	while ($row = mysql_fetch_assoc($result))
+	while ($row = mysqli_fetch_assoc($result))
 	{
 		if($row['admin_key'] == 'blog_tab_show')
 		{
