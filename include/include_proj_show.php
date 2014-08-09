@@ -1,7 +1,7 @@
 <?php
 class ProjectShow {
-	public function ProjectShowComponents() {
-
+	public function ProjectShowComponents()
+	{
 		require_once('login/auth.php');
 		include('mysql_connect.php');
 
@@ -157,6 +157,48 @@ class ProjectShow {
 			echo "</td>";
 
 			echo "</tr>";
+		}
+	}
+
+
+
+	public function ProjectShowComponentsBOM($out, $project_id)
+	{
+		//require_once('login/auth.php');
+		//include('mysql_connect.php');
+		$GetDataComponentsAll = "SELECT * FROM projects_data, data WHERE projects_data.projects_data_component_id = data.id AND projects_data.projects_data_project_id = ".$project_id." ORDER by name ASC";
+
+		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
+		while($showDetails = mysqli_fetch_array($sql_exec))
+		{
+			$arr = array();
+
+			$arr[] = $showDetails['name'];
+
+			$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$showDetails['category']."");
+			$showDetailsCat = mysqli_fetch_array($sql_exec_catname);
+			$catname = $showDetailsCat['h'];
+
+			$arr[] = $showDetailsCat['h']." / ".$showDetailsCat['s'];
+			$arr[] = $showDetails['manufacturer'];
+			$arr[] = $showDetails['package'];
+			$arr[] = $showDetails['projects_data_quantity'];
+			$arr[] = $showDetails['bin_location'];
+
+			//fputcsv($out, $arr, ",", "\"");
+			$first = 0;
+
+			foreach ($arr as $fields)
+			{
+				if($first > 0)
+					fwrite($out, ",");
+
+				$first += 1;
+
+				fwrite($out, '"'.str_replace('"', '""', $fields).'"');
+			}
+			fwrite($out, "\r\n");
+
 		}
 	}
 }

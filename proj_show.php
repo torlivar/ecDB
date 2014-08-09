@@ -131,7 +131,6 @@
 		<link rel="stylesheet" type="text/css" href="include/style.css" media="screen"/>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="description" content="BOM-list for project <?php
-							// Visar projektets namn.
 							$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
@@ -144,8 +143,6 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Viewing project - <?php
-							// Visar projektets namn.
-							include('include/mysql_connect.php');
 							$project_id = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name FROM projects WHERE project_id = ".$project_id."");
 
@@ -216,33 +213,32 @@ else
 ?>
 				<div id="content">
 					<?php
-							// Get project name/url and description
-							include('include/mysql_connect.php');
-							$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
+						$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 
-							$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
+						$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
 
-							while($row = mysqli_fetch_array($result))
+						while($row = mysqli_fetch_array($result))
+						{
+							echo "<h1>Viewing project <strong>";
+							if(is_null($row['project_url']) == false)
 							{
-								echo "<h1>Viewing project <strong>";
-								if(is_null($row['project_url']) == false)
-								{
-									echo "<a href=".$row['project_url'].">".$row['project_name']."</a>";
-								}
-								else
-								{
-									echo $row['project_name'];
-								}
-								echo "</strong></h1>";
-
-								if(is_null($row['project_desc']) == false)
-								{
-									echo "<div id='projDesc'>";
-									echo $Parsedown->setBreaksEnabled(true)
-											->text($row['project_desc']);
-									echo "</div>";
-								}
+								echo "<a href=".$row['project_url'].">".$row['project_name']."</a>";
 							}
+							else
+							{
+								echo $row['project_name'];
+							}
+							echo "</strong></h1>";
+
+							if(is_null($row['project_desc']) == false)
+							{
+								echo "<div id='projDesc'>";
+								echo $Parsedown->setBreaksEnabled(true)
+										->text($row['project_desc']);
+								echo "</div>";
+							}
+						}
+
 						?>
 
 					<table class="globalTables" cellpadding="0" cellspacing="0">
@@ -434,6 +430,10 @@ else
 if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 {
 ?>
+					<div>
+						&nbsp;
+					</div>
+
 					<form class="globalForms noPadding" action="" method="post" id="quickadd">
 						<table class="globalTables leftAlign noHover" cellpadding="0" cellspacing="0">
 							<tbody>
@@ -463,6 +463,15 @@ if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 <?php
 }
 ?>
+				<div>
+					&nbsp;
+				</div>
+				<form class="globalForms" method="post" action="proj_bom.php?proj_id=<?php echo $project_id;?>">
+					<div class="input">
+						<button class="button green" name="BOM" type="submit"><span class="icon medium save"></span> Export Project BOM</button>
+					</div>
+				</form>
+
 				</div>
 			<!-- END -->
 			<!-- Text outside the main content -->
