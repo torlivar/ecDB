@@ -464,11 +464,11 @@ if(isset($_SESSION['SESS_MEMBER_ID'])==true)
 }
 ?>
 				<div>
-					&nbsp;
+					<hr>
 				</div>
 				<form class="globalForms" method="post" action="proj_bom.php?proj_id=<?php echo $project_id;?>">
 					<div class="input">
-						<button class="button green" name="BOM" type="submit"><span class="icon medium save"></span> Export Project BOM</button>
+						<button class="button green" name="BOM" type="submit"><span class="icon medium save"></span> Export Project BOM (.CSV)</button>
 					</div>
 				</form>
 

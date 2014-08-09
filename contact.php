@@ -1,6 +1,8 @@
 <?php
 	require_once('include/debug.php');
 	require_once('include/login/auth.php');
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -40,7 +42,7 @@
 				<div class="loginWrapper">
 					<div class="left">
 						<h1>Contact us</h1>
-						If you have any suggestions, questions or what not. Send us an email to info@ecdb.net
+						If you have any suggestions, questions or what not. Contact through the <a href="http://github.com/stu/ecDB">ecDB GitHub Project</a>.
 					</div>
 					<div class="right"></div>
 				</div>

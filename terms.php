@@ -1,6 +1,8 @@
 <?php
 	require_once('include/debug.php');
 	require_once('include/login/auth.php');
+	require_once('include/mysql_connect.php');
+	include_once("include/include_parse_admin_options.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sv" lang="sv">
@@ -46,7 +48,7 @@
 
 					As a condition to using the services you are required to register with ecDB. By registering with ecDB you certify that you always provide valid, and updated information, you are an individual (i.e., not a corporate entity) and that you have the legal rights to enter such an agreement. The ID and password (from now referred to as "login-data") is the sole responsibility. It is required that you, as a registered ecDB user maintain the safety of your own login-data.<br /><br />
 
-					ecDB maintains the right to terminate your membership at any time, with or without motivation or warning. All members are responsible for the consequences of use of this website. In cases of conflict with one or more non-members or members, will ecDB not be liable for any damages caused, in the current situation or future, resulting from the conflict.<br /><br />
+					The System owner maintains the right to terminate your membership at any time, with or without motivation or warning. All members are responsible for the consequences of use of this website. In cases of conflict with one or more non-members or members, will ecDB not be liable for any damages caused, in the current situation or future, resulting from the conflict.<br /><br />
 
 					As a registered ecDB user you warrant and agree to the fact that you will not contribute any content that (a) infringes, violates or otherwise interferes with any copyright or trademark of another party, (b) reveal any trade secret, unless you own the trade secret or has the owner’s permission to post it, (c) infringes any intellectual property right of another or the privacy or publicity rights of another, (d) is libelous, defamatory, abusive, threatening, harassing, hateful, offensive or otherwise violates any law or right of any third party.<br /><br />
 
@@ -57,11 +59,7 @@
 
 					<h2>4. Ownership</h2>
 
-					It is strictly forbidden to copy, distribute, or modify any material from ecDB. You may print material for private use. For all other use requires permission from ecDB.<br /><br />
-
-					<h2>5. Site Terms of Use Modifications</h2>
-
-					ecDB may revise these terms of use at any time without notice. By using ecDB you are agreeing to be bound by the then current version of these Terms and Conditions of Use.<br /><br />
+					This project is open source, have at it!<br /><br />
 
 					<h2>Privacy Policy</h2>
 
