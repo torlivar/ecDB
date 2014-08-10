@@ -43,7 +43,6 @@
 
 	//Create query
 	$qry="SELECT * FROM members WHERE login='$login' AND passwd='".md5($_POST['password'])."'";
-	echo "x=".$qry;
 
 	$result=mysqli_query($GLOBALS["___mysqli_ston"], $qry);
 
@@ -54,6 +53,7 @@
 		{
 			//Login Successful
 			session_regenerate_id();
+
 			$member = mysqli_fetch_assoc($result);
 			$_SESSION['SESS_MEMBER_ID'] = $member['member_id'];
 			$_SESSION['SESS_FIRST_NAME'] = $member['firstname'];
