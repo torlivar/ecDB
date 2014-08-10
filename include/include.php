@@ -33,7 +33,6 @@ class ShowComponents {
 			$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by name ASC";
 		}
 
-
 		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
 		while($showDetails = mysqli_fetch_array($sql_exec))
 		{
@@ -200,7 +199,6 @@ class ShowComponents {
 				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
-			echo $ComponentsCategory;
 			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
 
 			while ($showDetails = mysqli_fetch_array($sql_exec_component)) {
