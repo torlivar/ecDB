@@ -6,11 +6,11 @@
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['edit'];
 
-	$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM data WHERE id = ".$id." AND owner = ".$owner."");
-	$executesql = mysqli_fetch_assoc($GetDataComponent);
+	$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM data WHERE id = ".$id."");
+	$executesql = mysqli_fetch_array($GetDataComponent);
 
 	$GetPersonal = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT currency, measurement FROM members WHERE member_id = ".$owner."");
-	$personal = mysqli_fetch_assoc($GetPersonal);
+	$personal = mysqli_fetch_array($GetPersonal);
 
 	if ($executesql['owner'] !== $owner) {
 		header("Location: error.php?id=2");
@@ -20,8 +20,6 @@
 
 	$GetHeadCatName = mysqli_query($GLOBALS["___mysqli_ston"], "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$cat_id."");
 	$executesql_head_catname = mysqli_fetch_assoc($GetHeadCatName);
-
-	$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
 
 	if(isset($_POST['delete']))
 	{
