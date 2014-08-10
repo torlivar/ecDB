@@ -193,20 +193,9 @@
 										}
 									?>
 								</td>
-								<td class="boldText">
-									Public
+								<td>
 								</td>
 								<td>
-									<?php
-										if(isset($_POST['submit']) && $_POST['public'] == 'No'){
-											echo '<input type="radio" name="public" value="Yes" /> Yes ';
-											echo '<input type="radio" name="public" value="No" checked="checked"  /> No';
-										}
-										else{
-											echo '<input type="radio" name="public" value="Yes" checked="checked" /> Yes ';
-											echo '<input type="radio" name="public" value="No" /> No';
-										}
-									?>
 								</td>
 							</tr>
 							<tr>

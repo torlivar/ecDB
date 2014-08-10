@@ -23,7 +23,7 @@ INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('blog_tab_url',
 -- enable register button as public or not
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('register_tab_show', '1');
 -- public components tab, not working so lets hide it
-INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('pubcomponents_tab_show', '0');
+--INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('pubcomponents_tab_show', '0');
 -- donation tab, if your running a public site, maybe leave this on
 INSERT INTO `admin_options` (`admin_key`, `admin_value`) VALUES ('donate_tab_show', '1');
 
@@ -78,4 +78,6 @@ delete from members where login = 'demo';
 
 -- ---------------
 alter table `data` add column `bin_location` varchar(64) NOT NULL default "";
+
+alter table `data` drop column `public`;
 

@@ -302,16 +302,9 @@
 										}
 									?>
 								</td>
-								<td class="boldText">Public</td>
 								<td>
-									<?php
-										if ($executesql['public'] == "Yes") {
-											echo '<span class="icon medium checkboxChecked"></span>';
-										}
-										else {
-											echo '<span class="icon medium checkboxUnchecked"></span>';
-										}
-									?>
+								</td>
+								<td>
 								</td>
 							</tr>
 							<tr>

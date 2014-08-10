@@ -206,20 +206,9 @@
 										}
 									?>
 								</td>
-								<td class="boldText">
-									Public
+								<td>
 								</td>
 								<td>
-									<?php
-										if($executesql['public'] == 'Yes'){
-											echo '<input type="radio" name="public" value="Yes" checked="checked" /> Yes ';
-											echo '<input type="radio" name="public" value="No" /> No';
-										}
-										else{
-											echo '<input type="radio" name="public" value="Yes" /> Yes ';
-											echo '<input type="radio" name="public" value="No" checked="checked" /> No';
-										}
-									?>
 								</td>
 							</tr>
 							<tr>
@@ -257,6 +246,25 @@
 								<td><img class="packageImage" border="0" src="img/boxSize.png"/></td>
 								<td></td>
 							</tr>
+
+							<tr>
+								<td class="boldText">
+									Bin Location
+								</td>
+								<td>
+									<input name="bin_location" type="text" class="medium" value="<?php echo $executesql['bin_location']; ?>" />
+								</td>
+
+								<td>
+								</td>
+
+								<td>
+								</td>
+
+								<td>
+								</td>
+							</tr>
+
 							<tr>
 								<td class="boldText">
 									Datasheet URL

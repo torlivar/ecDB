@@ -28,6 +28,7 @@ how much and where it is.
 * Can quickly add/remove/update a component on a project in project view
 * Conversion of deprecated mysql_ driver to mysqli_ driver
 * Exporting BOM of project
+* 'public' components totally removed.
 
 ### v0.1
 Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1
