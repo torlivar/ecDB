@@ -28,13 +28,31 @@
 	</head>
 	<body>
 		<div id="wrapper">
+<?php
+if(isset($_SESSION['SESS_MEMBER_ID'])==true)
+{
+?>
+			<!-- Header -->
+			<?php include 'include/header.php'; ?>
+			<!-- END -->
+			<!-- Main menu -->
+			<?php include 'include/menu.php'; ?>
+			<!-- END -->
+<?php
+}
+else
+{
 
-			<?php require_once("include/logo_wrapper.php"); ?>
+			include_once("include/include_parse_admin_options.php");
+			require_once("include/logo_wrapper.php");
+			?>
 
 			<!-- Main menu -->
 			<?php $selected_menu = "Login"; include_once('include/include_main_menu.php'); ?>
 			<!-- END -->
-
+<?php
+}
+?>
 			<!-- Main content -->
 			<div id="content">
 				<div>

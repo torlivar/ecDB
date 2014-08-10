@@ -18,26 +18,30 @@
 	<body>
 		<div id="wrapper">
 <?php
-				if(isset($_SESSION['SESS_MEMBER_ID'])){
-					echo '<!-- Header -->';
-						include 'include/header.php';
-					echo '<!-- END -->';
+if(isset($_SESSION['SESS_MEMBER_ID'])==true)
+{
+?>
+			<!-- Header -->
+			<?php include 'include/header.php'; ?>
+			<!-- END -->
+			<!-- Main menu -->
+			<?php include 'include/menu.php'; ?>
+			<!-- END -->
+<?php
+}
+else
+{
 
-					echo '<!-- Main menu -->';
-						include 'include/menu.php';
-					echo '<!-- END -->';
-				}
-				else {
-					echo '<!-- Header -->';
-						include 'include/header_public.php';
-					echo '<!-- END -->';
-
-					echo '<!-- Main menu -->';
-						include 'include/menu_public.php';
-					echo '<!-- END -->';
-				}
+			include_once("include/include_parse_admin_options.php");
+			require_once("include/logo_wrapper.php");
 			?>
-			<!-- Main content -->
+
+			<!-- Main menu -->
+			<?php $selected_menu = "About"; include_once('include/include_main_menu.php'); ?>
+			<!-- END -->
+<?php
+}
+?>
 			<div id="content">
 				<div class="loginWrapper">
 					<div class="left">
