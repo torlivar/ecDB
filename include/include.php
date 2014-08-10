@@ -703,7 +703,6 @@ class ShowComponents {
 			$pins				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['pins'])));
 			$scrap				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['scrap']));
 			$smd				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['smd']));
-			$public				=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['public']));
 			$width				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['width'])));
 			$height				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['height'])));
 			$depth				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['depth'])));
@@ -785,9 +784,9 @@ class ShowComponents {
 			}
 			else {
 				if(isset($_POST['submit'])) {
-					$sql="INSERT into data (owner, name, manufacturer, package, pins, smd, quantity, location, scrap, width, height, depth, weight, datasheet, comment, category, url1, url2, url3, url4, price, public, order_quantity, bin_location)
+					$sql="INSERT into data (owner, name, manufacturer, package, pins, smd, quantity, location, scrap, width, height, depth, weight, datasheet, comment, category, url1, url2, url3, url4, price, order_quantity, bin_location)
 					VALUES
-					('$owner', '$name', '$manufacturer', '$package', '$pins', '$smd', '$quantity', '$location', '$scrap', '$width', '$height', '$depth', '$weight', '$datasheet', '$comment', '$category', '$url1', '$url2', '$url3', '$url4', '$price', '$public', '$order_quantity', '$bin_location')";
+					('$owner', '$name', '$manufacturer', '$package', '$pins', '$smd', '$quantity', '$location', '$scrap', '$width', '$height', '$depth', '$weight', '$datasheet', '$comment', '$category', '$url1', '$url2', '$url3', '$url4', '$price', '$order_quantity', '$bin_location')";
 
 					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql) or die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 					$component_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
@@ -837,7 +836,7 @@ class ShowComponents {
 
 				if(isset($_POST['update'])) {
 					$sql = "UPDATE data SET
-					name = '$name', manufacturer = '$manufacturer', package = '$package', pins = '$pins', smd = '$smd', quantity = '$quantity', location = '$location',	scrap = '$scrap', width = '$width', height = '$height', depth = '$depth', weight = '$weight', datasheet = '$datasheet', comment = '$comment', category = '$category', url1 = '$url1', url2 = '$url2',  url3 = '$url3', url4 = '$url4', price = '$price', public = '$public', order_quantity = '$order_quantity', bin_location = '$bin_location'	WHERE id = '$id'";
+					name = '$name', manufacturer = '$manufacturer', package = '$package', pins = '$pins', smd = '$smd', quantity = '$quantity', location = '$location',	scrap = '$scrap', width = '$width', height = '$height', depth = '$depth', weight = '$weight', datasheet = '$datasheet', comment = '$comment', category = '$category', url1 = '$url1', url2 = '$url2',  url3 = '$url3', url4 = '$url4', price = '$price', order_quantity = '$order_quantity', bin_location = '$bin_location'	WHERE id = '$id'";
 
 					$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 
