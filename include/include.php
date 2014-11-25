@@ -114,7 +114,7 @@ class ShowComponents {
 				}
 			echo "</td>";
 
-			echo "<td>";
+			echo "<td class='priceCol'>";
 				$price = $showDetails['price'];
 				if ($price == ""){
 					echo "-";
@@ -186,17 +186,17 @@ class ShowComponents {
 				}
 
 				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
 				}
 				else {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 				}
 			}
 			else {
-				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
+				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
 			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
@@ -281,7 +281,7 @@ class ShowComponents {
 					}
 				echo "</td>";
 
-				echo "<td>";
+				echo "<td class='priceCol'>";
 				$price = $showDetails['price'];
 					if ($price == ""){
 						echo "-";
@@ -300,6 +300,18 @@ class ShowComponents {
 						echo $quantity;
 					}
 				echo "</td>";
+
+				echo '<td>';
+				$bin_location = $showDetails['bin_location'];
+				if ($bin_location == "")
+				{
+					echo "-";
+				}
+				else
+				{
+					echo $bin_location;
+				}
+				echo '</td>';
 
 				$comment = $showDetails['comment'];
 				if ($comment == ""){
@@ -337,17 +349,17 @@ class ShowComponents {
 				}
 
 				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
 				}
 				else {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
 				}
 			}
 			else {
-				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
 			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
@@ -426,7 +438,7 @@ class ShowComponents {
 					}
 				echo "</td>";
 
-				echo "<td>";
+				echo "<td class='priceCol'>";
 				$price = $showDetails['price'];
 					if ($price == ""){
 						echo "-";
@@ -445,6 +457,18 @@ class ShowComponents {
 						echo $quantity;
 					}
 				echo "</td>";
+
+				echo '<td>';
+				$bin_location = $showDetails['bin_location'];
+				if ($bin_location == "")
+				{
+					echo "-";
+				}
+				else
+				{
+					echo $bin_location;
+				}
+				echo '</td>';
 
 				$comment = $showDetails['comment'];
 				if ($comment == ""){
@@ -618,7 +642,7 @@ class ShowComponents {
 						}
 					echo "</td>";
 
-					echo "<td>";
+					echo "<td  class='priceCol'>";
 					$price = $showDetails['price'];
 						if ($price == ""){
 							echo "-";
@@ -883,7 +907,7 @@ class ShowComponents {
 							}
 						}
 					}
-					header("location: " . $_SERVER['REQUEST_URI']);
+					//header("location: " . $_SERVER['REQUEST_URI']);
 				}
 			}
 		}
