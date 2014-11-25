@@ -719,7 +719,7 @@ class ShowComponents {
 			$order_quantity		=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['orderquant'])));
 			$project_quantity	=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['projquant'])));
 			$price				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['price'])));
-			$location			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['location']));
+			$location			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['bin_location']));
 			$manufacturer		=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['manufacturer']));
 			$package			=	strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['package']));
 			$pins				=	str_replace(',', '.', strip_tags( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['pins'])));

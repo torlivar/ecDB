@@ -204,7 +204,7 @@
 									Location
 								</td>
 								<td>
-									<input name="location" type="text" class="medium" value="<?php echo $executesql['bin_location']; ?>" id="bin_location" />
+									<input name="bin_location" type="text" class="medium" value="<?php echo $executesql['bin_location']; ?>" id="bin_location" />
 								</td>
 								<td class="boldText">
 									Price
@@ -409,6 +409,7 @@
 										$MenuProj = new EditProj;
 										$MenuProj->MenuProj();
 									?>
+
 						</tbody>
 					</table>
 

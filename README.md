@@ -29,6 +29,10 @@ how much and where it is.
 * Conversion of deprecated mysql_ driver to mysqli_ driver
 * Exporting BOM of project
 * 'public' components totally removed.
+* Cleaned up location field
+* Pushed bin location down to component + sub level.
+* Minor price css tweaks
+* Projects now show up when viewing a component
 
 ### v0.1
 Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1

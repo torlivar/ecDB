@@ -429,6 +429,48 @@
 								<td></td>
 								<td></td>
 							</tr>
+
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr>
+								<td class="boldText">Projects</td>
+							<?php
+								$Echo = "SELECT projects_data_component_id FROM projects_data WHERE projects_data_component_id = ".$id."; ";
+								$sql_echo = mysqli_query($GLOBALS["___mysqli_ston"], $Echo);
+
+								if (mysqli_num_rows($sql_echo) == 0) {
+									echo '<td></td>';
+									echo '<td></td>';
+									echo '<td></td>';
+									echo '<td></td>';
+									echo '<td></td>';
+								}
+								else {
+									echo '<td class="boldText">Project</td>';
+									echo '<td class="boldText">Quantity</td>';
+									echo '<td></td>';
+									echo '<td></td>';
+									echo '<td></td>';
+								}
+							?>
+							</tr>
+
+							<tr>
+								<td></td>
+								<?php
+									include('include/include_component_edit_project_edit.php');
+									$MenuProj = new EditProj;
+									$MenuProj->ComponentProj($id);
+								?>
+							</tr>
+
 						</tbody>
 					</table>
 				</div>
