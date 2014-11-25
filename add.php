@@ -139,7 +139,7 @@
 									Location
 								</td>
 								<td>
-									<input name="location" id="location" class="medium" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['location']; } ?>" />
+									<input name="bin_location" id="bin_location" class="medium" type="text" value="<?php if(isset($_POST['submit'])) { echo $_POST['bin_location']; } ?>" />
 								</td>
 								<td class="boldText">
 									Price
@@ -233,24 +233,6 @@
 								</td>
 								<td><img class="packageImage" border="0" src="img/boxSize.png"/></td>
 								<td></td>
-							</tr>
-
-							<tr>
-								<td class="boldText">
-									Bin Location
-								</td>
-								<td>
-									<input name="bin_location" type="text" class="medium" value="<?php if(isset($_POST['submit'])) { echo $_POST['bin_location']; } ?>" />
-								</td>
-
-								<td>
-								</td>
-
-								<td>
-								</td>
-
-								<td>
-								</td>
 							</tr>
 
 							<tr>
