@@ -1,7 +1,7 @@
 <div id="copyText">
     <div class="leftBox">
         <div>© 2010 - <?php echo date('Y'); ?> ecDB - Created by <a href="http://nilsf.se">Nils Fredriksson</a> - <a href="contact.php">Contact us</a> - <a href="terms.php">Terms & Privacy</a> - <a href="about.php">About</a></div>
-<?php if($_SESSION['SESS_IS_ADMIN'] == 1) { ?>
+<?php if(isset($_SESSION['SESS_IS_ADMIN']) && $_SESSION['SESS_IS_ADMIN'] == 1 ) { ?>
         <div class="stats">
             <?php include_once('include/mysql_connect.php'); ?>
 
