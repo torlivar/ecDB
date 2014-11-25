@@ -100,7 +100,7 @@ class ProjectShow {
 				}
 			echo "</td>";
 
-			echo "<td>";
+			echo "<td class='priceCol'>";
 				$price = $showDetails['price'];
 				if ($price == ""){
 					echo "-";
