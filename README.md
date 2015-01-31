@@ -33,6 +33,7 @@ how much and where it is.
 * Pushed bin location down to component + sub level.
 * Minor price css tweaks
 * Projects now show up when viewing a component
+* Dont show component bin# when not project owner
 
 ### v0.1
 Nils never versioned his code it seems, so I'm calling the original ecDB code base version 0.1

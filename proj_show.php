@@ -215,7 +215,7 @@ else
 					<?php
 						$project_id =  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 
-						$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name, project_desc, project_url FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
+						$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_name, project_desc, project_url, project_owner FROM projects WHERE project_id = ".$project_id." ".$pub_proj);
 
 						while($row = mysqli_fetch_array($result))
 						{
@@ -237,6 +237,8 @@ else
 										->text($row['project_desc']);
 								echo "</div>";
 							}
+
+							$project_owner_id = $row['project_owner'];
 						}
 
 						?>
@@ -390,6 +392,9 @@ else
 									?>">Qty in project</a>
 								</th>
 
+								<? if(isset($_SESSION['SESS_MEMBER_ID']) && $_SESSION['SESS_MEMBER_ID'] == $project_owner_id )
+								{
+								?>
 								<th>
 									<a href="?proj_id=<?php echo $project_id; ?>&by=bin_location&order=<?php
 										if(isset($_GET['order'])){
@@ -406,6 +411,9 @@ else
 										}
 									?>">Bin#</a>
 								</th>
+								<?
+								}
+								?>
 							</tr>
 						</thead>
 						<tbody>

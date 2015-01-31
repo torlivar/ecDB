@@ -7,6 +7,10 @@ class ProjectShow {
 
 		$project_id = (int)mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["proj_id"]);
 
+		$project_owner_idRow = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT project_owner FROM projects WHERE project_id = ".$project_id."");
+		$project_owner_id = mysqli_fetch_assoc($project_owner_idRow);
+		$project_owner_id = $project_owner_id['project_owner'];
+
 		if(isset($_GET['by']))
 		{
 			$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
@@ -146,15 +150,18 @@ class ProjectShow {
 				}
 			echo "</td>";
 
-			echo "<td>";
-				$bin_location = $showDetails['bin_location'];
-				if ($bin_location == ""){
-					echo "-";
+				if(isset($_SESSION['SESS_MEMBER_ID']) && trim($_SESSION['SESS_MEMBER_ID']) == $project_owner_id )
+				{
+					echo "<td>";
+						$bin_location = $showDetails['bin_location'];
+						if ($bin_location == ""){
+							echo "-";
+						}
+						else{
+							echo $bin_location;
+						}
+					echo "</td>";
 				}
-				else{
-					echo $bin_location;
-				}
-			echo "</td>";
 
 			echo "</tr>";
 		}
