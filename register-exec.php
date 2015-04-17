@@ -17,7 +17,7 @@
 		if(get_magic_quotes_gpc()) {
 			$str = stripslashes($str);
 		}
-		return (mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $str) ;
+		return (mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $str)) ;
 	}
 
 	//Sanitize the POST values
