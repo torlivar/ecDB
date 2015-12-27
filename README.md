@@ -9,6 +9,13 @@ how much and where it is.
 
 # Changes From the Original ecDB
 
+### v0.3
+* Cleaned footer up display
+* Fixed license display
+* Fixed category sorting on several pages.
+* Widened the main table display
+* Added a list users function under admin
+
 ### v0.2
 * Fixed mysql connection
 * Removed Demo user, demo parts and project from new installs

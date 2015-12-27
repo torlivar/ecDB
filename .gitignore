@@ -1,14 +1,5 @@
-############
-## Windows
-############
-
-# Windows image file caches
+*.bak
 Thumbs.db
-
-# Folder config file
 Desktop.ini
-
-# MySQL Config files
 include/mysql_connect.php
-include/login/config.php
-/nbproject/private/
+

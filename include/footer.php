@@ -1,6 +1,9 @@
+<?php
+	include_once("include/version.php");
+?>
 <div id="copyText">
     <div class="leftBox">
-        <div>© 2010 - <?php echo date('Y'); ?> ecDB - Created by <a href="http://nilsf.se">Nils Fredriksson</a> - <a href="contact.php">Contact us</a> - <a href="terms.php">Terms & Privacy</a> - <a href="about.php">About</a></div>
+        <div><?php echo "version ".$ECDB_VERSION; ?> - <a href="contact.php">Contact us</a> - <a href="terms.php">Terms & Privacy</a> - <a href="about.php">About</a></div>
 <?php if(isset($_SESSION['SESS_IS_ADMIN']) && $_SESSION['SESS_IS_ADMIN'] == 1 ) { ?>
         <div class="stats">
             <?php include_once('include/mysql_connect.php'); ?>
@@ -17,6 +20,6 @@
 <?php } ?>
     </div>
     <div class="rightBox">
-        Design by <a href="http://www.buildlog.eu"><span class="blIcon"></span></a>
+        Under Creative Commons License - Attribution, NonCommercial, ShareAlike 3.0 Unported License
     </div>
 </div>

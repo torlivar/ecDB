@@ -343,7 +343,7 @@ else
 									?>">Price</a>
 								</th>
 								<th>
-									<a href="?proj_id=<?php echo $project_id; ?>&by=quantity&order=<?php
+									<a href="?proj_id=<?php echo $project_id; ?>&by=stock_quantity&order=<?php
 										if(isset($_GET['order'])){
 											$order = $_GET['order'];
 											if ($order == 'asc'){

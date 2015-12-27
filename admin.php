@@ -54,10 +54,24 @@
 
 						<div class="buttons">
 							<div class="input">
+								<table>
+								<tr>
+
+								<td>
 								<form action="register.php" method="get">
 									<button class="button green" type="submit"><span class="icon medium pencil"></span> Add New User</button>
 								</form>
+								</td>
+
+								<td>
+								<form action="admin_list_users.php" method="get">
+									<button class="button green" type="submit"><span class="icon medium user"></span> List Users</button>
+								</form>
+								</td>
+
+								</tr>
 							</div>
+
 						</div>
 					</ul>
 				</div>

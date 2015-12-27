@@ -14,7 +14,6 @@
 		<link rel="apple-touch-icon" href="img/apple.png" />
 		<title>Home - ecDB</title>
 		<?php include_once("include/analytics.php") ?>
-
 	</head>
 	<body>
 		<div id="wrapper">

@@ -1,14 +1,16 @@
 <?php
 class ShowComponents {
-	public function Index() {
-
+	public function Index()
+	{
 		require_once('login/auth.php');
 		include('mysql_connect.php');
 
 		$owner = $_SESSION['SESS_MEMBER_ID'];
+		//$qry = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ";
+		$qry = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location, c.`name` as nx, sc.subcategory as snx, sc.category_id as scid FROM data d, category c, category_sub sc WHERE owner = ".$owner." and c.id = sc.category_id and d.category = sc.id ORDER by ";
 
-		if(isset($_GET['by'])) {
-
+		if(isset($_GET['by']))
+		{
 			$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
 			$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
 
@@ -19,18 +21,26 @@ class ShowComponents {
 				$order = 'asc';
 			}
 
-			if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+			if($by == 'price' or $by == 'pins' or $by == 'quantity')
+			{
+				$GetDataComponentsAll = $qry.$by." +0 ".$order."";
 			}
-			elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ".$by." ".$order."";
+			elseif($by == 'category')
+			{
+				$GetDataComponentsAll = $qry." nx ".$order.", snx ".$order;
 			}
-			else {
-				$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by name ASC";
+			elseif($by == 'name' or $by =='package' or $by =='smd')
+			{
+				$GetDataComponentsAll = $qry.$by." ".$order."";
+			}
+			else
+			{
+				$GetDataComponentsAll = $qry." name ASC";
 			}
 		}
-		else {
-			$GetDataComponentsAll = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by name ASC";
+		else
+		{
+			$GetDataComponentsAll = $qry." name ASC";
 		}
 
 		$sql_exec = mysqli_query($GLOBALS["___mysqli_ston"], $GetDataComponentsAll);
@@ -38,9 +48,16 @@ class ShowComponents {
 		{
 			echo "<tr>";
 
-			echo '<td class="edit"><a href="edit_component.php?edit=';
-			echo $showDetails['id'];
-			echo '"><span class="icon medium pencil"></span></a></td>';
+			echo '<td class="edit">';
+			if ($owner === $_SESSION['SESS_MEMBER_ID'])
+			{
+				echo '<a href="edit_component.php?edit='.$showDetails['id'].'"><span class="icon medium pencil"></span></a>';
+			}
+			else
+			{
+				echo '&nbsp;';
+			}
+			echo '</td>';
 
 			echo '<td><a href="component.php?view=';
 			echo $showDetails['id'];
@@ -49,14 +66,8 @@ class ShowComponents {
 			echo $showDetails['name'];
 			echo "</a></td>";
 
-			echo "<td>";
-				$subcatid = $showDetails['category'];
-
-				$CategoryName = "select c.name h, c.id cid, cs.subcategory s, cs.id csid from category c, category_sub cs where c.id = cs.category_id and cs.id = ".$subcatid ."";
-				$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
-				$showDetailsCat = mysqli_fetch_array($sql_exec_catname);
-
-			echo "<a href='category.php?cat=".$showDetailsCat['cid']."'>".$showDetailsCat['h']."</a>";
+			echo "<td class='componentCol'>";
+			echo "<a href='category.php?cat=".$showDetails['scid']."'>".$showDetails['nx']." / ".$showDetails['snx']."</a>";
 			echo "</td>";
 
 			echo "<td>";
@@ -159,8 +170,9 @@ class ShowComponents {
 			echo "</tr>";
 		}
 	}
-	public function Category() {
 
+	public function Category()
+	{
 		require_once('include/login/auth.php');
 		include('include/mysql_connect.php');
 
@@ -185,17 +197,21 @@ class ShowComponents {
 					$order = 'asc';
 				}
 
-				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
+				if($by == 'price' or $by == 'pins' or $by == 'quantity')
+				{
 					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
 				}
-				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
+				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd')
+				{
 					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
 				}
-				else {
+				else
+				{
 					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 				}
 			}
-			else {
+			else
+			{
 				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
 			}
 
@@ -204,9 +220,16 @@ class ShowComponents {
 			while ($showDetails = mysqli_fetch_array($sql_exec_component)) {
 				echo "<tr>";
 
-				echo '<td class="edit"><a href="edit_component.php?edit=';
-				echo $showDetails['id'];
-				echo '"><span class="icon medium pencil"></span></a></td>';
+				echo '<td class="edit">';
+				if ($owner === $_SESSION['SESS_MEMBER_ID'])
+				{
+					echo '<a href="edit_component.php?edit='.$showDetails['id'].'"><span class="icon medium pencil"></span></a>';
+				}
+				else
+				{
+					echo '&nbsp;';
+				}
+				echo '</td>';
 
 				echo '<td><a href="component.php?view=';
 				echo $showDetails['id'];
@@ -367,9 +390,16 @@ class ShowComponents {
 			while ($showDetails = mysqli_fetch_array($sql_exec_component)) {
 				echo "<tr>";
 
-				echo '<td class="edit"><a href="edit_component.php?edit=';
-				echo $showDetails['id'];
-				echo '"><img src="img/pencil.png" alt="Edit"/></a></td>';
+				echo '<td class="edit">';
+				if ($owner === $_SESSION['SESS_MEMBER_ID'])
+				{
+					echo '<a href="edit_component.php?edit='.$showDetails['id'].'"><span class="icon medium pencil"></span></a>';
+				}
+				else
+				{
+					echo '&nbsp;';
+				}
+				echo '</td>';
 
 				echo '<td><a href="component.php?view=';
 				echo $showDetails['id'];
@@ -551,9 +581,16 @@ class ShowComponents {
 				while($showDetails = mysqli_fetch_array($sql_exec)) {
 					echo "<tr>";
 
-					echo '<td class="edit"><a href="edit_component.php?edit=';
-					echo $showDetails['id'];
-					echo '"><img src="img/pencil.png" alt="Edit"/></a></td>';
+					echo '<td class="edit">';
+					if ($owner === $_SESSION['SESS_MEMBER_ID'])
+					{
+						echo '<a href="edit_component.php?edit='.$showDetails['id'].'"><span class="icon medium pencil"></span></a>';
+					}
+					else
+					{
+						echo '&nbsp;';
+					}
+					echo '</td>';
 
 					echo '<td><a href="component.php?view=';
 					echo $showDetails['id'];

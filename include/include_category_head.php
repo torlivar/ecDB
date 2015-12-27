@@ -7,7 +7,10 @@ class NameHead {
 		include('include/mysql_connect.php');
 		$owner = $_SESSION['SESS_MEMBER_ID'];
 
-		$headcat = $_GET['cat'];
+		if(isset($_GET['cat']))
+		{
+			$headcat = intval($_GET['cat']);
+		}
 
 		if(isset($_GET['subcat']))
 		{
@@ -22,7 +25,17 @@ class NameHead {
 		$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
 		echo '<li>';
-		echo '<a href="."';
+
+		//echo '<a href="."';
+
+		//encrypt94 change - set owner in ALL link
+		echo '<a href=';
+		if(isset($_GET['owner']))
+		{
+			echo '?owner='.htmlentities($_GET['owner']);
+		}
+		echo '"';
+
 		if(empty($_GET['cat']) && empty($_GET['subcat'])) // && empty($headcat))
 		{
 			echo ' class="selected"';

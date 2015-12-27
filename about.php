@@ -55,6 +55,7 @@ else
 						<br />
 						<br />
 						<a href="img/about/index.png"><img src="img/about/index_thumbnail.png"></a>
+						<br />
 						<a href="img/about/add.png"><img src="img/about/add_thumbnail.png"></a>
 
 				</div>
