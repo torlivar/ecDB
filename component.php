@@ -459,9 +459,22 @@
 				<form class="globalForms noPadding" method="post" action="">
 					<div class="buttons">
 						<div class="input">
-							<button class="button" name="edit" type="submit"><span class="icon medium pencil"></span> Edit Component</button>
+                            <?php 
+                                $executesql['owner'] === $owner {
+                            ?>
+							     <button class="button" name="edit" type="submit"><span class="icon medium pencil"></span> Edit Component</button>
+                            <?php 
+                                }
+                            ?>
 							<button class="button" name="based" type="submit"><span class="icon medium sqPlus"></span> New based on this</button>
-							<button class="button red" name="delete" type="submit"><span class="icon medium trash"></span> Delete component</button>
+                            <?php 
+                                $executesql['owner'] === $owner {
+                            ?>							
+							     <button class="button red" name="delete" type="submit"><span class="icon medium trash"></span> Delete component</button>
+                            <?php 
+                                }
+                            ?>
+							
 						</div>
 					</div>
 				</form>
