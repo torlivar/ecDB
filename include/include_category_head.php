@@ -29,7 +29,7 @@ class NameHead {
 		//echo '<a href="."';
 
 		//encrypt94 change - set owner in ALL link
-		echo '<a href=';
+		echo '<a href="/';
 		if(isset($_GET['owner']))
 		{
 			echo '?owner='.htmlentities($_GET['owner']);
