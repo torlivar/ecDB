@@ -182,7 +182,7 @@
 								<td>
 									<?php
                                         if ($executesql['owner'] !== $owner) {
-                                            echo '<span class="other_owner">'.$executesql['firstname'].' '.$executesql['lastname'].'</span> ';
+                                            echo '<span class="other_owner">['.$executesql['firstname'].' '.$executesql['lastname'].']:</span> ';
                                         }
 										if ($executesql['bin_location'] == "") {
 											echo "-";
