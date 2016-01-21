@@ -1,11 +1,16 @@
 README
 ====
-Welcome, this is a fork of Nils' original ecDB project with a great many changes and fixes.
+Welcome, this is a fork of Stu's fork of Nils' original ecDB project with a great many changes and fixes.
 
 # What is ecDB
 
 ecDB is a small lightweight system to track your electronic components and projects, letting you know what you have,
 how much and where it is.
+
+# Changes From Stu's version
+This version is more for collaboration. All users can optionally see other users's components (but not edit). To be able to share components between friends.
+
+It is not recomended to run this version with open registration, as it is based on used with in a group of trusting friends or within an organisation.
 
 # Changes From the Original ecDB
 
