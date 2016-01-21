@@ -930,3 +930,8 @@ hr {
 .boldText {
 	font-weight: bold;
 }
+
+.other_owner {
+    font-weight: bold;
+    color: red;
+}

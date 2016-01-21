@@ -6,7 +6,7 @@
 	$owner 	= 	$_SESSION['SESS_MEMBER_ID'];
 	$id 	= 	(int)$_GET['view'];
 
-	$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM data WHERE id = ".$id);
+	$GetDataComponent = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT data.*, members.firstname, members.lastname  FROM data left join members ON data.owner = members.member_id WHERE id = ".$id);
 	$executesql = mysqli_fetch_assoc($GetDataComponent);
 
 	$GetPersonal = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT currency, measurement FROM members WHERE member_id = ".$executesql['owner']."");
@@ -181,6 +181,9 @@
 								<td class="boldText">Location</td>
 								<td>
 									<?php
+                                        if ($executesql['owner'] !== $owner) {
+                                            echo '<span class="other_owner">'.$executesql['firstname'].' '.$executesql['lastname'].'</span> ';
+                                        }
 										if ($executesql['bin_location'] == "") {
 											echo "-";
 										}
