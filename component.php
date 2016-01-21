@@ -478,42 +478,6 @@
 						</div>
 					</div>
 				</form>
-				<!--
-				<div class="componentLog">
-					<h1><span class="icon medium docLinesStright"></span> Component log <span class="text colorGray styleItalic fontSizeMedium">(last two actions)</h1>
-					<div class="logsMenu"><a>Show/Hide all</a></div>
-					<div class="logs">
-						<table class="globalTables" cellpadding="0" cellspacing="0">
-							<thead>
-								<tr>
-									<th>
-										Time
-									</th>
-									<th>
-										Action
-									</th>
-									<th>
-										Who
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>2013-02-02 00:08</td>
-									<td>Added component image</td>
-									<td>Adis</td>
-								</tr>
-								<tr>
-									<td>2013-02-02 00:08</td>
-									<td>Added component image</td>
-									<td>Adis</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="logsMenu"><a>Show/Hide all</a></div>
-				</div>
-				-->
 			</div>
 			<!-- END -->
 			<!-- Text outside the main content -->
