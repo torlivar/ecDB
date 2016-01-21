@@ -180,6 +180,7 @@ table.globalTables.noHover tbody tr:hover {
 table.globalTables td.priceCol {
 	text-align: center;
 }
+table.globalTables td.componentOwner,
 table.globalTables td.componentCol {
 	text-align: left;
 }

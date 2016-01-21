@@ -6,8 +6,10 @@ class ShowComponents {
 		include('mysql_connect.php');
 
 		$owner = $_SESSION['SESS_MEMBER_ID'];
+        $whereclause = "";
+        if (!$_SESSION['SEE_FROM_ALL']) $whereclause = "WHERE owner = ".$owner;
 		//$qry = "SELECT id, name, category, package, pins, datasheet, url1, smd, price, quantity, comment, bin_location FROM data WHERE owner = ".$owner." ORDER by ";
-		$qry = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location, c.`name` as nx, sc.subcategory as snx, sc.category_id as scid FROM data d, category c, category_sub sc WHERE owner = ".$owner." and c.id = sc.category_id and d.category = sc.id ORDER by ";
+		$qry = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location, c.`name` as nx, sc.subcategory as snx, sc.category_id as scid, CONCAT(m.firstname, ' ', m.lastname) as ownername FROM data d left join category_sub sc on d.category = sc.id left join category c on c.id = sc.category_id left join members m on d.owner = m.member_id ".$whereclause." ORDER by ";
 
 		if(isset($_GET['by']))
 		{
@@ -33,6 +35,10 @@ class ShowComponents {
 			{
 				$GetDataComponentsAll = $qry.$by." ".$order."";
 			}
+            elseif($by == 'owner')
+            {
+                $GetDataComponentsAll = $qry." ownername ".$order."";
+            }
 			else
 			{
 				$GetDataComponentsAll = $qry." name ASC";
@@ -65,6 +71,12 @@ class ShowComponents {
 
 			echo $showDetails['name'];
 			echo "</a></td>";
+            if ($_SESSION['SEE_FROM_ALL']){
+                echo '<td class="componentOwner">';
+                echo $showDetails['ownername'];
+                echo '</td>';
+                
+            }
 
 			echo "<td class='componentCol'>";
 			echo "<a href='category.php?cat=".$showDetails['scid']."'>".$showDetails['nx']." / ".$showDetails['snx']."</a>";
@@ -185,7 +197,12 @@ class ShowComponents {
 			$CategoryName = "SELECT * FROM category_sub WHERE category_id = ".$cat."";
 			$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
-			if(isset($_GET['by'])) {
+            $ownerclause = "";
+			if (!$_SESSION['SEE_FROM_ALL']) $ownerclause = " AND owner = ".$owner;
+            $ccquery = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location, CONCAT(m.firstname, ' ', m.lastname) as ownername FROM data d left join category_sub c on d.category = c.id left join members m on d.owner = m.member_id where c.category_id = ".$cat.$ownerclause;
+                
+            
+            if(isset($_GET['by'])) {
 
 				$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
 				$order_q	=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["order"]));
@@ -196,23 +213,26 @@ class ShowComponents {
 				else {
 					$order = 'asc';
 				}
-
-				if($by == 'price' or $by == 'pins' or $by == 'quantity')
+                
+                if($by == 'price' or $by == 'pins' or $by == 'quantity')
 				{
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = "".$ccquery." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd')
 				{
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
-				}
+					$ComponentsCategory = "".$ccquery." ORDER by ".$by." ".$order."";
+                }
+                elseif($by == 'owner') {
+                    $ComponentsCategory = "".$ccquery." ORDER by ownername ".$order."";
+                }
 				else
 				{
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = "".$ccquery." ORDER by name ASC";
 				}
 			}
 			else
 			{
-				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.category_id = ".$cat." AND owner = ".$owner." ORDER by name ASC";
+				$ComponentsCategory = "".$ccquery." ORDER by name ASC";
 			}
 
 			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
@@ -236,7 +256,13 @@ class ShowComponents {
 				echo '">';
 				echo $showDetails['name'];
 				echo "</a></td>";
-
+                    
+                if ($_SESSION['SEE_FROM_ALL']){
+                    echo '<td class="componentOwner">';
+                    echo $showDetails['ownername'];
+                    echo '</td>';                
+                }
+                    
 				echo "<td>";
 				$subcatid = $showDetails['category'];
 
@@ -359,6 +385,10 @@ class ShowComponents {
 			$CategoryName = "SELECT * FROM category_sub WHERE id = ".$subcat."";
 			$sql_exec_catname = mysqli_query($GLOBALS["___mysqli_ston"], $CategoryName);
 
+            $ownerclause = "";
+			if (!$_SESSION['SEE_FROM_ALL']) $ownerclause = " AND owner = ".$owner;
+            $scquery = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location, CONCAT(m.firstname, ' ', m.lastname) as ownername FROM data d left join category_sub c on d.category = c.id left join members m on d.owner = m.member_id WHERE c.id = ".$subcat.$ownerclause;
+            
 			if(isset($_GET['by'])) {
 
 				$by			=	strip_tags(mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_GET["by"]));
@@ -372,17 +402,20 @@ class ShowComponents {
 				}
 
 				if($by == 'price' or $by == 'pins' or $by == 'quantity') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." +0 ".$order."";
+					$ComponentsCategory = $scquery." ORDER by ".$by." +0 ".$order."";
 				}
 				elseif($by == 'name' or $by == 'category' or $by =='package' or $by =='smd') {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by ".$by." ".$order."";
+					$ComponentsCategory = $scquery." ORDER by ".$by." ".$order."";
 				}
+                elseif($by == 'owner') {
+                    $ComponentsCategory = $scquery." ORDER by ownername ".$order."";
+                }
 				else {
-					$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+					$ComponentsCategory = $scquery." ORDER by name ASC";
 				}
 			}
 			else {
-				$ComponentsCategory = "SELECT d.id, d.name, d.category, d.package, d.pins, d.datasheet, d.url1, d.smd, d.price, d.quantity, d.comment, d.bin_location FROM data d, category_sub c WHERE d.category = c.id and c.id = ".$subcat." AND owner = ".$owner." ORDER by name ASC";
+				$ComponentsCategory = $scquery." ORDER by name ASC";
 			}
 
 			$sql_exec_component = mysqli_query($GLOBALS["___mysqli_ston"], $ComponentsCategory);
@@ -406,6 +439,12 @@ class ShowComponents {
 				echo '">';
 				echo $showDetails['name'];
 				echo "</a></td>";
+
+                if ($_SESSION['SEE_FROM_ALL']){
+                    echo '<td class="componentOwner">';
+                    echo $showDetails['ownername'];
+                    echo '</td>';                
+                }
 
 				echo "<td>";
 					while($showDetailsCat = mysqli_fetch_array($sql_exec_catname)) {

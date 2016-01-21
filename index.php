@@ -2,6 +2,13 @@
 	require_once('include/login/auth.php');
 	require_once('include/debug.php');
 	require_once('include/mysql_connect.php');
+    
+    if (isset($_POST['showall'])) {
+        $_SESSION['SEE_FROM_ALL'] = true;
+    }
+    else if (isset($_POST['showmine'])){
+        $_SESSION['SEE_FROM_ALL'] = false;
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -57,6 +64,24 @@
 								}
 								?>">Name</a>
 							</th>
+                            <?php if ($_SESSION['SEE_FROM_ALL']) { ?>
+                            <th>
+								<a href="?by=owner&order=<?php
+								if(isset($_GET['order'])){
+									$order = $_GET['order'];
+									if ($order == 'asc'){
+										echo 'desc';
+									}
+									else {
+										echo 'asc';
+									}
+								}
+								else {
+									echo 'desc';
+								}
+								?>">Owner</a>
+							</th>
+                            <?php } ?>
 							<th>
 								<a href="?by=category&order=<?php
 								if(isset($_GET['order'])){
@@ -175,6 +200,20 @@
 					?>
 					</tbody>
 				</table>
+                <form action="" method="POST">
+                <?php
+                    if (!$_SESSION['SEE_FROM_ALL']) {
+                ?>
+                    <button class="button" name="showall" type="submit"><span class="icon medium user"></span> Show all components</button>
+                <?php
+                    } else {
+                ?>
+                    <button class="button" name="showmine" type="submit"><span class="icon medium user"></span> Show only mine</button>
+                <?php
+                    }
+                ?>
+                
+                </FORM>
 			</div>
 			<!-- END -->
 			<!-- Text outside the main content -->

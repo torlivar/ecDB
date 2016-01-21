@@ -80,7 +80,11 @@
 										}
 								?>
 								">Name</a></th>
-
+                             
+                            <?php if ($_SESSION['SEE_FROM_ALL']) { ?>
+                            <th><a href="?<?php if(isset($_GET['subcat'])) {echo 'subcat';}else {echo 'cat';} ?>=<?php if(isset($_GET['cat'])){ echo $_GET['cat'];} if(isset($_GET['subcat'])){ echo $_GET['subcat'];} ?>&by=owner&order=<?php if(isset($_GET['order'])) { $order = $_GET['order']; if ($order == 'asc') {	echo 'desc'; } else { echo 'asc'; } } else { echo 'desc'; } ?>">Owner</a></th>
+                            <?php } ?>
+                                   
 							<th><a href="?<?php if(isset($_GET['subcat'])) {echo 'subcat';}else {echo 'cat';} ?>=<?php if(isset($_GET['cat'])){ echo $_GET['cat'];} if(isset($_GET['subcat'])){ echo $_GET['subcat'];} ?>&by=category&order=<?php if(isset($_GET['order'])) { $order = $_GET['order']; if ($order == 'asc') {	echo 'desc'; } else { echo 'asc'; } } else { echo 'desc'; } ?>">Category</a></th>
 
 							<th><a href="?<?php if(isset($_GET['subcat'])) {echo 'subcat';}else {echo 'cat';} ?>=<?php if(isset($_GET['cat'])){ echo $_GET['cat'];} if(isset($_GET['subcat'])){ echo $_GET['subcat'];} ?>&by=package&order=<?php if(isset($_GET['order'])) { $order = $_GET['order']; if ($order == 'asc') {	echo 'desc'; } else { echo 'asc'; } } else { echo 'desc'; } ?>">Package</a></th>
