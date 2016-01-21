@@ -207,11 +207,15 @@
 										else {
 											echo $executesql['quantity'];
 										}
-									?>
+							           if ($executesql['owner'] === $owner) {
+                                        ?>
 									<form class="globalForms inLine" method="post" action="">
 										<button class="button white small" name="quantity_increase" type="submit"><span class="icon medium roundPlus"></span></button>
 										<button class="button white small" name="quantity_decrease" type="submit"><span class="icon medium roundMinus"></span></button>
 									</form>
+                                    <?php 
+                                       }
+                                    ?>
 								</td>
 								<td class="boldText">Price</td>
 								<td>
@@ -223,7 +227,7 @@
 											echo $executesql['price'];
 											echo ' ';
 											echo $personal['currency'];
-										}
+										}                                        
 									?>
 								</td>
 								<td class="boldText">Order quantity</td>
@@ -235,11 +239,15 @@
 										else {
 											echo $executesql['order_quantity'];
 										}
+                                        if ($executesql['owner'] === $owner) {
 									?>
 									<form class="globalForms inLine" method="post" action="">
 										<button class="button white small" name="orderquant_increase" type="submit"><span class="icon medium roundPlus"></span></button>
 										<button class="button white small" name="orderquant_decrease" type="submit"><span class="icon medium roundMinus"></span></button>
 									</form>
+                                     <?php 
+                                       }
+                                    ?>
 								</td>
 							</tr>
 							<tr>
