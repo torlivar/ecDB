@@ -19,7 +19,7 @@ class Users
 		}
 
 
-		$qry = "select * from (select m.firstname, m.lastname, m.login, m.mail, m.admin, m.reg_date, mt.members_stats_time  from members m, members_stats mt where mt.members_stats_member = m.member_id order by members_stats_time desc) as xx group by login order by ";
+		$qry = "select * from (select m.firstname, m.lastname, m.login, m.mail, m.admin, m.reg_date, mt.members_stats_time  from members m left join  members_stats mt on mt.members_stats_member = m.member_id order by members_stats_time desc) as xx group by login order by ";
 
 		if($by == 'firstname' or $by == 'lastname' or $by == 'login' )
 		{
